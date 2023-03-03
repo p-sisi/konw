@@ -118,12 +118,29 @@
                   $ touch .gitignore 
             4、创建之后，可以直接使用记事本打开，直接输入下面的规则即可，比如想忽略js文件夹中的所有内容，则在.gitignore文件中直接写
                 /js/      这样就可以了 
+                忽略node_modules、dist等文件
+                .DS_Store
+                node_modules/
+                platforms/
+                dist/
+                npm-debug.log*
+                yarn-debug.log*
+                yarn-error.log*
+                package-lock.json
+
+                # Editor directories and files
+                .idea
+                .vscode
+                *.suo
+                *.ntvs*
+                *.njsproj
+                *.sln
+
             4、常见规则写法
                 /mtk/        过滤整个文件夹
                 *.zip        过滤所有.zip 文件
                 /mtk/do.c    过滤某个具体文件
                 ！index.php   不过滤具体某个文件 -->
-
 
     <!-- vsCode文件后面字母表示的意思
          A   你本地新增的文件（服务器上没有）
@@ -135,6 +152,48 @@
          U   文件没有合并
          X   未知状态（可能是遇到git的bug了，可以向git提交bug report）-->
 
+
+    <!-- 本地完整项目上传至github
+        (1)新建好要写的项目文件，比如说我想上传一个vue项目文件vueCase，在github新建好远程仓库
+        (2)打开Git Bash，cd到vueCase目录中，例如：
+                $ cd /d/study/WebCode/program/vueCase
+        (3)初始化本地仓库，让vueCase变成git可管理的仓库（目录下多了一个.git文件说明建立本地仓库成功）
+                $ git init
+        (4)如果想忽略某个文件不上传至仓库（比如node_modules文件），参考上面知识点
+        (4)将VueCase文件夹中的所有文件从工作区（本地可见的那个目录区）加入到暂存区（看不见的那个区，在工作区与本地仓库之间）
+                $ git add .    这里提交所有文件，具体看上面知识点
+        (5)如果在add的时候出现警告LF will be replaced by CRLF the next time Git touches it，解决方法：
+                $ git config core.autocrlf false
+        (6)查看当前仓库状态，看看刚刚的add有没有添加成功，出现 on branch master no commits yet ，还列出新添加的文件则add成功
+                $ git status
+        (7)将文件从暂存区提交到本地仓库，出现create mode 。。。表示提交成功
+                $ git commit -m "注释内容"
+        (8)连接远程仓库，首先查看密钥SSH，到C盘用户目录下有没有.ssh目录，有的话看下里面有没有id_rsa和id_rsa.pub这两个文件，有就跳到下一步，没有就通过下面命令创建
+                $ ssh-keygen -t rsa -C "203915779@qq.com"   开始绑定的那个邮箱
+                    输入命令后一路回车，当上面提到的.ssh目录及文件出现后，密钥创建成功
+                    接着到github中添加密钥：点击头像右下角三角形---选择“settings”---左边导航栏选择“developer settings”----
+                                          “personal access tokens”---“tokens”---“create new tokens”---选择第一个beta---
+                                          输入名字后，把id_rsa.pub以记事本打开，复制里面所有内容到描述框中----密钥SSH即可添加成功
+                    如果想查看密钥是否真的添加成功，可以：
+                        $ cd ~/.ssh    cd到这个地址
+                        $ ls   如果出现两个文件名即成功   记得再次cd到vueCase目录下
+        (9)本地仓库与github远程仓库建立连接
+                $ git remote add origin git@github.com:p-sisi/GeneralBackManagement.git 
+                    origin后面的为远程仓库地址，打开github远程仓库，点击code，ssh地址
+                    可以查看远程仓库地址，判断是否连接成功，出现两个地址，fetch、push即为成功
+                    $ git remote -v
+        (10)连接建立之后，将本地仓库内容提交到远程仓库中，出现一堆输出，没有报错，在远程仓库刷新后可看见master分支中提交的代码即可成功
+                $ git push -u origin master   
+                    第一次提交时，可能会出现 Are you sure you want to continue connecting (yes/no)?  记住千万不要直接回车，输入yes后回车
+-->
+
+    <!-- 远程仓库资源克隆到本地---个人开发
+    (1)在github中download zip，将压缩包解压并放到你想放的目录下比如下载了Web-master项目
+    (2)打开git bash 然后cd到Web-master的目录中
+            $ cd /d/study/WebCode/otherKnowledge/Web-master
+    (3)下载的文件中是没有.git文件的，需要初始化
+            $ git init
+    (4)这个情况下是不与远程仓库建立连接的，本地仓库也是空的，想要连接提交的话看上面知识点-->
 </body>
 
 </html>
