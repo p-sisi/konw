@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 按下键盘S键时，光标直接定到搜索框中 -->
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        var search = document.querySelector('input');
+        document.addEventListener('keyup', function(e) { //用keyup的话，当键盘弹起才触发，这样s就不会写入在文本框里
+            if (e.keyCode === 83) { //注意是三个等号，不是两个当进行双等号比较时候： 先检查两个操作数数据类型，如果相同， 则进行===比较， 
+                //如果不同， 则愿意为你进行一次类型转换， 转换成相同类型后再进行比较， 而===比较时， 如果类型不同，直接就是false.
+                search.focus();
+            }
+        })
+    </script>
+</body>
+
+</html>

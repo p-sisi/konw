@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面参数传递</title>
+    <!-- 1、一个登录界面，里面有提交变淡，action提交到另一个页面（index.html）
+        2、第二个界面，可以使用第一个页面的参数，这样实现了一个数据不同页面之间的传递效果
+        3、第二个页面之所以可以使用第一个页面的数据，是利用了URL里面的location.search参数
+        4、在第二个界面中，需要把这个参数提取
+        5、第一步去掉'?'号，利用substr
+           第二步利用=号分割 键 和 值 split（’= ‘） -->
+</head>
+
+<body>
+
+    <!-- 另一个页面index.html中的代码
+    <script>
+        1、先去掉问号   substr('起始的位置',截取几个字符)，如果不写第二个参数，默认截取到最后一个字符
+        var params = location.search(1);
+        2、利用=把字符分割为数组 split('=')   ，最后等号左边的就是一个数组元素，等号右边的是一个数组元素
+        var arr = params.split('=');
+        3、在分割后的数组中找到想要的数组元素，赋值到这个界面的某些元素中，例如
+            div.innerHTML = arr[1];
+    </script>
+    -->
+    <!-- action里面的链接是我们这个表单需要提交到的地方，这里因为需要保存好数据，所以要用到表单form
+             这里的name属性一定不能忘，通过他来保存我们在这个元素中所输入的内容 -->
+    <form action="index.html">
+        用户名：<input type="text" name="uname">
+        <input type="submit" value="登录">
+    </form>
+</body>
+
+</html>

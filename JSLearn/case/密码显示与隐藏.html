@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: 300px;
+            outline: none;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .box {
+            position: relative;
+            width: 400px;
+            margin: 200px auto;
+        }
+        
+        .box label img {
+            position: absolute;
+            top: 2px;
+            right: 99px;
+            width: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <label for="">
+            <img src="/picture/hidden.png" alt="" id="pic">
+        </label>
+        <input type="password" id="password">
+    </div>
+    <script>
+        var password = document.getElementById('password');
+        var img = document.getElementById('pic');
+        var flag = 0;
+        pic.onclick = function() {
+            if (flag == 0) {
+                password.type = 'text';
+                img.src = '/picture/see.png';
+                flag = 1;
+            } else {
+                password.type = 'password';
+                img.src = '/picture/hidden.png';
+                flag = 0;
+            }
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM DOM Web API</title>
+</head>
+
+<body>
+    <!-- DOM
+            1、DOM是文档对象模型，就是把文档当做一个对象来看待，DOM的顶级对象是document，主要学习的是操作页面元素，是W3C标准 -->
+
+
+
+
+    <!-- 获取元素：
+            1、根据元素id 
+                (1).document.getElementById(‘id’)，返回的是该id的DOM元素对象所有内容
+                (2).js要写在标签的前面，才会拿到该标签或者该id
+                (3).需要用document.getElementById(‘’)来调用该方法 
+            2、根据标签名  
+                （1）document.getElementsByTagName('')- 返回的是该标签名的所有对象集合，是个伪数组
+                （2）可通过数组和下标来获取某一个元素，例如timer[1]
+                （3）element.getElementsByTagName('标签名')  可以获取标签名的子元素，先获取到该父元素，再用父元素调用getElementsByTagName方法获取子元素子元素
+                例如：ul中有五个li：var uls = document.getElementsByTagName('ul')
+                                   console.log(ul[0].getElementsByTagName('li'))  要写明想要的父元素是上面得到的伪数组中的第几个
+            3、根据类名
+                （1）document.getElementsByClassName('类名') ，返回的是某些类名集合，也是个伪数组
+            4、根据选择器
+                （1）document.querySelector('选择器')，.class #id 标签名
+                （2）例如：document.querySelector('.box1')，根据类选择器，选择符合该类型的第一个元素
+                （3）document.querySelectorAll('选择器')，返回的是该选择器选择的所有元素，伪数组
+            5、获取body元素
+                document.body，返回body元素对象
+            6、获取html元素
+                document.documentElement，返回html元素对象
+            7、复合获取
+                可以先获取父元素再获取子元素，防止获取错误
+                例如：var imgs = document.querySelector('.baidu').querySelectorAll('img');-->
+
+
+
+    <!-- 事件：js可以创建动态页面，事件是可以被js检测的行为，简单来说就是触发某种反应的触发机制
+            1、事件由三部分组成：事件源 事件类型 事件处理程序
+                （1）事件源，事件被触发的对象,
+                （2）事件类型，如何触发的，比如说
+                        鼠标左键点击（onclick）、鼠标经过（onmouseover）、鼠标离开（onmouseout）、获取鼠标焦点（onfocus）
+                        失去鼠标焦点（onblur）、鼠标移动（onmousemove）、鼠标弹起（onmouseup）、鼠标按下（onmousedown）
+                        使用鼠标右键菜单（contextmenu）、鼠标选中（selectstart）、鼠标移动（mousemove）、鼠标移动（mouseenter）
+                        鼠标离开（mouseleave）
+                        注意：
+                              mousemove和mouseenter区别：over鼠标经过自身盒子和子盒子都会触发事件
+                                                        enter鼠标只有经过自身盒子触发，就是如果父盒子上面还有一个子盒子覆盖着的话，经过子盒子不触发
+                                                        原因是enter不会冒泡，move会冒泡，mouseleave也不会冒泡
+                （3）事件处理程序，通过一个函数赋值的方式完成
+                例如：btn.onclick = function() {
+                    alert("点秋香“）；鼠标点击之后发生什么事情
+                    }
+            2、 事件执行步骤：获取事件源，注册事件（绑定事件），添加事件处理程序
+            3、当设置事件的标签相同且是同一个父元素时，可以用循环来做，注意获得的是伪数组，可以用this来代替bts[i]
+            4、注册事件
+                （1）给元素添加事件，称为注册事件或者绑定事件，有两种方式，传统方式和方法监听注册方式
+                （2）传统注册方式：利用on开头的时间onclick，<button onclick="alert('hi')"></button>、btn.onclick = function(){}
+                                  特点：注册事件的唯一性，同一个元素同一个事件只能设置一个处理函数，最后注册的处理函数将会覆盖前面注册的处理函数
+                （3）方法监听注册方式：w3c标准推荐方式，addEventListener（）方法
+                                     IE9之前的IE不支持该方法，可使用attachEvent（）
+                                     特点：同一个元素同一个事件可以注册多个监听器，按注册顺序依次执行
+                            eventTarget.addEventListener(type,listener[,useCapture])
+                                eventTarget:目标对象，就是要添加事件的对象
+                                type:事件类型，比如click、mouseover，注意这里一定不要带on，是一个字符串，需要加单引号
+                                listener:事件处理函数，事件发生时，会调用该监听函数
+                                useCapture：可选参数，是布尔值，默认false，设置事件冒泡等
+                            例如：btn[0].addEventListener('click',function(){
+                                     alert(22);
+                                 })
+                                 或者把函数function单独写在外面，该方法的第二个参数就写函数名，不需要加括号不采用匿名函数的方式
+                                 btn[0].addEventListener('click',fn);
+                                 function fn(){}
+            5、删除事件
+                （1）传统注册方式：目标对象.onclick = null
+                （2）方法监听注册方式：前提是不采用匿名函数的形式注册该事件，btn[0].removeEventListener('click',fn);  
+            6、事件对象
+                （1）event就是一个事件对象，写到监听函数中，当形参来看，function（event）
+                （2）事件对象只有有了事件才会存在，它是系统给我们自动创建的，不需要我们传递参数
+                （3）事件对象是我们事件的一系列相关数据的集合，跟事件相关的，比如鼠标点击里面就包含了鼠标的相关信息，鼠标坐标等，如果是键盘事件里面就包含了键盘事件的信息，比如判断用户按下了那个键
+                （4）事件对象的属性和方法
+                        1.event.target  获取到触发事件的对象，点击的那个对象    this  返回绑定事件的对象，就是使用addEventListener来创建事件的对象
+                        2.event.type    返回事件类型，比如click等不带on的
+                        3.event.preventDefault()  阻止默认事件，比如不让链接跳转
+                                var a = document.querySelector('a');
+                                a.addEventListener('click',function(e){
+                                    e.preventDefault();
+                                })
+                                比如禁止选中文字：
+                                document.addEventListener('selectstart',function(e){
+                                    e.preventDefault();
+                                })
+                        4.event.stopPropagation()   阻止冒泡
+                                事件冒泡：开始时由最具体的元素接收，然后逐级向上传播到DOM最顶层节点，在addEventListener方法中的第三个参数设置为false即可设置冒泡，即从son->father->body->html->document
+                                         e.addEventListener('click',function(event){},false);
+            7、事件委托
+                （1）事件委托也称为事件代理，在JQuery中称为事件委派
+                （2）原理：不是每个子节点单独设置事件监听器，而是事件监听器设置在其父节点上，然后利用冒泡原理影响设置每个子节点
+                            例如：当ul中有几个li，当点击li的时候有弹窗，可以给ul设置点击事件，就是将时间委托给父亲ul，不需要再给每个li设置事件
+                （3）作用：只操作了一次DOM，提高了程序的性能
+            8、鼠标事件对象MouseEvent
+                （1）e.clientX、e.clientY   返回鼠标点击性对于窗口可视化的XY坐标，滚动条滚动了也只是相对于当前页面而言
+                （2）e.pageX、e.pageY       返回鼠标相对于文档页面的XY坐标，滚动条会影响Y坐标
+                （3）e.screenX、e.screenY   返回鼠标现对于电脑屏幕的xy坐标
+            9、键盘事件
+                        键盘按键松开（onkeyup）、键盘按键按下（onkeydown）、键盘按键被按下（onkeypress  不识别功能键，比如ctrl shift箭头等）
+                （1）三个事件的执行顺序：keydown--keypress--keyup
+                （2）键盘事件对象keyEvent
+                        1.属性  keyCode  得到相应键的ASCII码
+                        2.keyup keydown 不区分大小写，a 和 A 都是65（A)
+                          keypress区分大小写-->
+
+
+    <!-- 操作元素
+            1、读写元素内容
+                （1）element.innerText，从起始位置到终止位置的内容，但是去除html标签，同时空格和换行也会去掉
+                        例如：var div = document.querySelector('div');
+                              div.innerText = '20220823';
+                （2）element.innerHTML，从起始位置到终止位置的内容，包括html标签，用时保留空格和换行
+                （3）二者最大的区别是innerText不识别html标签，innerHtml可以识别标签
+                       比如：div.innerText = '<strong>我是</strong>杨思远'    这样是不会进行加粗的，想要加粗就要用innerHTML
+                    二者都可以进行读写，当读时，innerText读写的是文字内容，会去掉空格和换行
+                                              innerHTML读的是所有内容，包括标签，保留原来的格式
+            2、修改元素属性
+                    直接使用获取到的元素对象点出来
+                    例如：var pic = document.getElementById('pic');
+                         pic.src = 'case1.jpg';
+            3、修改表单元素属性
+                （1）表单元素可修改的属性有：type、value、checked、selected、disabled 
+                （2）修改方法也是直接获取元素之后点出来，当属性值是布尔值的时候，不需要加单引号，比如disabled
+            4、样式属性修改
+                 修改元素的大小，颜色等
+                （1）element.style.修改的属性  例如：div.style.backgroundColor = 'pink'   采取的是驼峰命名，杠后面的字幕换乘打大写
+                        修改成的是行内样式，就是该样式写在标签里面的
+                        例如：关闭某个广告等：
+                            将g该广告的元素影藏，使用：display：none
+                 （2）element.className 类名样式操作  适用于要修改的样式较多的情况下
+                        将修改后的属性写在css中，通过给需要该样式的标签加类名来修改样式
+                        例如：pic.className = 'change'     这就给pic所获取到的标签加了‘change’的类名
+                        会覆盖之前如果存在的类名，如果想保留原先的类名，可以：pic.className = 'first change'
+                ！！！注意:判断属性值为空，则==''
+            5、获取属性值
+                （1）element.属性   例如：div.id
+                （2）element.getAttribute('属性')   例如：div.getAttribute('id')
+                二者区别：第一种用来获取内置属性值，也就是标签本身自带的属性，第二种用来获取自定义属性值，在实际开发中，经常会给标签自定义一个属性
+            6、设置属性值
+                （1） element.属性=‘值’   这样可以设置内置属性
+                （2）element.setAttribute('属性'，'值')  都可以设置，但是自定义属性多用于
+            7、移除属性
+                （1）element.removeAttribute('属性')-->
+
+
+    <!-- 创建元素innerHTML、createElement 的区别
+            1、都可以创建元素标签，innerHTML创建多个元素时的效率会高一点（不要拼接字符串，采用数组形式拼接），结构稍微复杂，createElement的结构更清晰
+            2、innerHTML是将内容写入某个DOM节点，不会导致页面全部重绘，document.write是直接将内容写入页面的内容流，但是文档流执行完毕，则它会导致页面全部重绘
+             -->
+
+
+    <!-- 排他思想：
+            1.想要用排他思想来做流水灯效果：先把会变化的元素去掉，再设置当前会变化的元素
+                例如：做流水灯变化，亮粉色背景：
+                    for(var i = 0 ; i < btns.length ; i++){
+                        btns[i].style.backgroundColor = '';
+                    }
+                    this.style.backgroundColor = 'pink';-->
+
+
+
+    <!-- tab_list切换界面案例：
+            1、tab切换栏有两个大的切换模块，一个是最上面的一行标题，可以用li来写，一个是下面的每个标题的内容，可以用div来装，一一对应
+            2、上面选项卡，当点击某一个，当前这个底色会变色，其余不变，用排他思想，修改类名的方式，li多采用for循环来做
+            3、下面模块内容写到点击事件中，因为选项卡和内容是一起变化的
+            4、给上面的tab_list里面所有的li添加自定义属性，属性值从0开始编号，例如：index="0" 
+            5、当我们点击tab_list里面的li，让tab_con里面对应序号里面的内容显示，其余隐藏，采用排他思想
+
+            var tab_list = document.querySelector('.tab_list')   
+            var lis = tab_list.querySelectorAll('li')    获取选项卡中所有的li，伪数组
+            var items = document.querySelector('.item');   //获取选项卡对应的内容的伪数组
+            for(var i = 0; i < lis.length ; i++) {   //循环选项卡
+                lis[i].setAttribute('index',i);      //给选项卡设置自定义属性index
+                lis.onclick = function () {        //选项啦点击事件
+                    for (var i = 0; i < lis.length ; i++ ) {
+                        lis[i].className = '';       //拍【排他思想，所有人清楚class这个类
+                    }
+                    this.className = 'current';      //留下自己设置这个类
+                    var index = this.getAttribute('index');      //获得当前所点击的选项卡的index值
+                    for(var i = 0; i < items.length; i++) {      //排他思想，先将选项卡内容全部设置隐藏
+                        items[i].style.display = 'none';
+                    }
+                    items[index].style.display = 'block';        //再让第index个选项卡内容显示出来
+                }
+            }-->
+
+
+    <!-- 自定义属性
+        1、设置自定义属性：element.setAttribute('属性名','属性值')
+        2、获得自定义属性值：element.getAttribute('属性名')
+        3、移除自定义属性：element.removeAttribute('属性名') 
+        4、自定义属性是指元素本身不自带的属性，自带的属性叫内置属性
+        5、目的：为了保存并使用数据，有些数据可以保存到页面中而不用保存到数据库中
+        6、命名规则：H5中规定自定义属性要以“date-”开头作为属性名-->
+
+
+
+    <!-- 节点
+            1、利用节点层级关系获取元素，逻辑性比较强，操作更简单，但是兼容性较差
+            2、概述：网页中的所有内容都是节点（标签、属性、文本、注释等），在DOM中，节点使用node来表示
+                    元素节点 nodeType为1
+                    属性节点 nodeType为2
+                    文本节点 nodeType为3 （包括换行、空格等）
+            3、节点基本属性：nodeType（节点类型）、nodeName（节点名称）、nodeValue（节点值）
+            4、DOM树可以把节点划分为不同的层级关系，常见的是父子兄层级关系
+                （1）父节点：parentNode       例如：.box的父亲是div，即可使用box.parentNode就可以拿到父节点
+                （2）子节点：childNodes（标准）    会获取父亲的所有子节点，包括元素节点和文本节点（像是那些元素标签的换行等）
+                            children（非标准）     获取父亲的所有子元素节点，只有元素节点，推荐使用这个，各个浏览器支持
+                    第一个子节点：firstChild       获取第一个子节点，会是文本节点或者元素节点
+                    第一个子元素节点：firstElementChild   获取第一个子元素节点
+                    最后一个子元素节点：lastElementChild   获取最后一个子元素节点
+                    注意：最后这两种子元素获取方法，有兼容性问题，ie9以上的浏览器才支持
+                （3）实际开发中获取子元素节点：
+                        父节点.children[i]   采用这种下标的形式获取子节点
+                            第一个子元素节点   父节点.children[0];
+                            最后一个子元素节点  父节点.children[父节点.children.length - 1]
+                （4）兄弟节点：nextSibling     获取下一个兄弟节点，包含元素节点或者文本节点等
+                              previousSibling 获取上一个兄弟节点，包含元素节点或者文本节点
+                              nextElementSibling      获取下一个兄弟元素节点
+                              previousElementSibling  获取上一个兄弟元素节点
+                              上面两个获取元素节点的方法会有兼容性问题，ie9以上支持
+            5、创建元素节点
+                （1）document.createElement('标签名')    例如: var tr = document.createElement('tr');
+            6、添加节点
+                （1）node.appendChild(child)   node是父级，child是子级，是想添加的结点名，成为该父亲最后面的孩子
+                （2）node.insertBefore(child,指定元素)    将该节点插入到父亲里面的指定元素的前面
+                        例如：ul里已经有一个li
+                            ul.insertBefore(li,ul.children[0])
+            7、删除节点
+                （1）父亲节点.removeChild（child）    通过父元素删除元素
+                （2） 删除所有节点 ，例如删除tbody中的所有节点：tbody.innerHTML = ''
+            8、复制节点
+                （1）需要克隆的节点.cloneNode();
+                        例如：ul中有几个li，想克隆第一个li
+                            var ul = document.querySelector('ul');
+                           var liLi =  ul.children[0].cloneNode();   //将复制的节点存起来，后续放到想要放的地方
+                （2）如果括号中的参数为空或者false，则为浅拷贝，只复制标签，不复制标签中的内容
+                    如果为true，则为深拷贝，复制全部内容          
+         -->
+
+
+
+    <!-- window
+            1、window对象是浏览器的顶级对象，具有双重角色
+            2、他是JS访问浏览器窗口的一个接口
+            3、他是一个全局对象，定义在全剧终作用域中的变量、函数都会变成window对象的属性和方法
+                    在调用的时候会省略window -->
+
+
+    <!-- BOM
+            1、BOM（browserObjectModel）即浏览器对象模型，他提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是Windows
+            2、BOM是浏览器对象模型，把浏览器当做一个对象，顶级对象是window，主要学习的是浏览器窗口交互的一些对象，是浏览器产商在各自浏览器上定义的，兼容性较差-->
+
+
+    <!-- window对象事件
+            1、窗口加载事件
+                （1）window.onload = function(){}   或者   window.addEventListener("load",function(){})
+                （2）当文档内容完全加载完成会触发该事件（包括图像、脚本文件、css文件等），就调用的处理函数
+                        window.addEventListener('load',function(){
+                            var btn = document.querySelector('button');
+                            btn.addEventListener('click',function(){
+                                alert('123');
+                            })
+                        })
+                （3）有了这个事件就可以把JS代码写到页面元素的上方，但是传统注册事件只能写一次，如果有多个，咦最后一个为准，addEventListener则没有限制
+            2、窗口大小变化事件
+                （1）window.onresize = function(){}   或者   window.addEventListener("resize",function(){})
+                （2）只要窗口大小发生变化，就会触发这个事件
+                （3）我们经常利用这个事件完成响应式布局，window.innerWidth 获取当前屏幕的宽度  height 高度
+            3、定时器
+                （1）setTimeout()定时器
+                        setTimeout(调用函数function(){}，延迟的毫秒数),       在定时器到期后执行调用函数,调用函数可以直接写匿名函数，也可以函数名（不用括号）
+                （2）页面中会有很多个定时器，一般会给定时器加上标识符（名字）   var timer1 = set...
+                （3）这个调用函数，称为回调函数callback，普通函数是按照代码顺序直接调用的，，这个调用函数需要等待时间
+                （4）清除定时器setTimeout
+                        clearTimeout（定时器名字）
+                （5）setInterval（）定时器
+                        setInterval（回调函数，[间隔的毫秒数]）
+                        每隔这个时间，重复调用这个回调函数，一旦开始，无限循环
+                （6）清除定时器setInterval
+                        clearInterval（定时器名字）
+                        注意：这里容易犯作用域的错误，当定时器的名字设置为匿名函数中的局部变量时，再给元素添加事件去除定时器时，就无法调用到该定时器
+                              所以要把定时器的名字设置为全局变量，例如：var timer = null (要设置为空，不然会返回NAN) -->
+
+
+
+    <!-- location对象
+            1、location属性用于获取或设置窗体的URL（网址），并且可以用于解析URL，这个属性返回的是一个对象，所以也称为location对象
+            2、location.href    获取或设置整个URL
+               location.host    返回主机名（域名），例如item.jd.com
+               .port           返回端口号，如果未写，返回字符串，默认端口号80
+               .pathname       返回路径
+               .search          返回参数
+               .hash            返回片段，#后面的内容，常见于链接、锚点
+            3、location对象的方法
+                （1）location.assign()   跟href一样，可以跳转页面（也称为重定向页面） ，记录历史，可以后退
+                        例如:location.assign('http://www.baidu.com')
+                （2）location.replace()  替换当前页面，因为不记录历史，所以不能后退页面
+                （3）location.reload()   重新加载页面，相当于刷新按钮或者F5，如果参数为true，强制刷新 Ctrl+F5-->
+
+
+
+    <!-- webStorage
+            (1)存储内容大小一般支持5MB左右（不同浏览器可能不一样）
+            (2) 浏览器通过Window.sessionStorage和Window.localStorage 属性来实现本地存储机制
+            (3) 相关API
+                    ()xxxStorage.setItem('key','value');
+                        该方法接收一个键值对作为参数，会把键值对添加到存储中，如果键名存在，则更新其对应的值
+                    ()xxxStorage.getItem('key','value');
+                        该方法接收一个键值对作为参数，返回键名对应的值
+                    ()xxxStorage.removeItem('key','value');
+                        该方法接收一个键值对作为参数，把键名从存储中删除
+                    ()xxxStorage.clear();
+                        该方法会清空存储中的所有数据
+            (4)注意点
+                ()SessionStorage存储的内容会随着浏览器窗口的关闭而消失
+                ()LocalStorage存储的内容，需要手动清除才会消失
+                ()xxxStorage.getItem(x),如果x对应的value值获取不到，则返回null
+                ()JSON。parse（null）的结果依然是null
+                ()经常用到的JSON两个方法：JSON.stringify(value)   对象解析，将对象解析成字符串
+                                        JSON.parse(value) 字符串解析，将字符串解析成一个对象 -->
+
+
+    <!-- navigator对象 
+            1、navigator对象包含有关浏览器的信息，他有很多属性，我们最常用的是userAgren，该属性可以返回由客户机发送服务器的user-agren头部的值
+                if((navigator.userAgren.math(/(phone|pad|pod|iphone|ios|ipad|android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))){
+                    window.location.href = " 手机端的界面地址";
+                }else{
+                    window.location.href = "电脑端界面的地址";
+                }-->
+
+
+    <!-- history对象
+            1、back()   可以后退，相当于浏览器的后退
+            2、forward()前进功能，相当于浏览器的前进按钮
+            3、go（参数）    是正的则前进参数个页面，是负的则后退参数个页面 -->
+
+
+
+    <!-- this 
+            1、this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，一般情况下this的最终指向的是调用它的对象
+            2、全局作用域或者普通函数中this指向全局对象window（注意定时器里面的this指向window）
+            3、方法调用中谁调用，this指向谁
+            4、构造函数中this指向构造函数的实例-->
+
+
+
+
+    <!-- offset系列
+            1、偏移量，可以动态的获得元素距离父元素（带有定位）的位置，获得元素自身的大小（宽高），返回的数值都不带单位
+            2、元素.offsetParent   返回该元素带有定位的父元素，如果父元素没有定位则返回body
+            3、元素.offsetTop      返回元素相对带有定位的父亲的上方的偏移量
+            4、元素.offsetLeft     返回元素相对带有定位的父亲的左方的偏移量
+            5、元素.offsetWidth/Height  返回自身包括padding、边框、内容区的宽度，注意是数值不带单位 -->
+
+
+
+    <!-- offset与style的区别
+        offset                                              style
+            offset可以得到任何样式表中的值                         style只能得到行内样式表中的样式值，就是写在单独标签里的
+            offset获得的数值是没有单位的                           style.width获得的是带有单位的字符串
+            offsetWidth、Height包含padding+border+width           style.width获得不包含padding和border的值
+            offset属性是只读属性，只能获取不能赋值                  style可以获取可以赋值
+            想要获取元素大小位置，用这个                            想要给元素更改值，用这个 -->
+
+
+
+    <!-- client系列
+            1、client翻译过来就是客户端，我们使用client系列的相关属性来获取元素可视区的相关信息，通过client系列的相关属性可以动态的得到该元素的边框大小、元素大小等
+            2、元素.clientTop       返回元素上边框的大小
+            3、元素.clientLeft      返回元素左边框的大小
+            4、元素.clientWidth     返回自身包括padding、内容区的宽度，不包含边框，不带单位
+            5、元素.clientHeight    返回自身包括padding、内容区的高度，不包含边框，不带单位
+        与offset系列的区别就是是否包含有边框 -->
+
+
+
+    <!-- scroll系列
+            1、scroll翻译过来就是滚动的，我们使用scroll系列的相关属性可以动态的得到该元素的大小、滚动距离等
+            2、元素.scrollTop      返回被卷去的侧距离，不带单位，就是不在盒子内，看不到的上面那部分长度
+            3、元素/scrollLeft     返回被卷去的左侧距离，不带单位
+            4、元素.scrollWidth    返回自身实际的宽度，不含边框，不带单位
+            5、元素.scrollHeight   返回自身实际的高度，不含边框，不带单位
+            6、注意点：
+                （1）跟client区别就是scroll是实际的大小，包括了超出的部分
+                （2）如果浏览器的高或宽不足以显示整个页面时，会自动出现滚动条，滚动条在滚动时会触发onscroll事件 -->
+
+
+    <!-- 三大系列总结
+            offset系列经常用于获取元素位置 offsetLeft、offsetTop
+            client系列经常用于获取元素大小 clientWidth、clientHeight
+            scroll系列经常用于获取滚动距离 scrollTop、scrollLeft
+        注意页面的滚动距离是通过pageXOffset和Y -->
+
+
+    <!-- 立即执行函数
+            (function(a,b) {函数体})(1,2)   或  (function(a,b){}(1,2))     创建一个独立的作用域
+            不需要调用，立马能够自己执行的 ，也可以传递参数进去
+            第一种写法：粉红色括号用于传递函数的形参，而最外面的括号用于传入实参-->
+
+
+    <!-- 物理像素比
+            devicePixelRatio    当是1的时候说明是在pc端，2是移动端 -->
+
+
+
+
+    <!-- 动画
+            1、原理：通过定时器setInterval（）不断移动盒子位置
+            2、先获得盒子当前位置（offsetLeft等），让盒子在当前位置加上1个移动距离，利用定时器不断重复这个操作，最后加一个结束定时器的条件(结束动画的本质)
+            3、注意：此元素需要添加定位，才能使用element.style.left等
+            4、动画函数封装：
+                    function animate(obj,target,callback){
+                        //obj目标对象    target目标位置     callback 回调函数
+                        clearInterval(obj.timer);      //先清楚了定时器，再重新设置定时器，排他思想，防止类似于每点一次按钮都会有一个定时器开始进程
+                        obj.timer = setInterval(function() {
+                            if (obj.offsetLeft > target) {
+                                clearInterval(obj.timer);
+                                //回调函数写在定时器结束里面,调用函数，在使用时，给这里传一个匿名函数，例如animate（span，800，function（）{}）
+                                if(callback) {
+                                    callback();
+                                }
+                            }
+                            obj.style.left = obj.offsetLeft + 1 + 'px';
+                        }, 15)
+                    } 
+                （1）如果多个元素都使用同一个动画函数，每次都要var声明一个定时器，会浪费了内存，我们可以给不同的元素使用不同的定时器（自己专门用自己的定时器）
+                     核心原理；JS是一门动态语言，可以很方便的给当前对象添加属性
+                              var obj = {};
+                              obj.name = 'andy';      像这样给对象设置属性并赋值
+                    回调函数在动画结束之后再执行的
+            5、缓动动画
+                    原理：让元素运动速度有所变化，让盒子每次移动的距离慢慢变小，速度就会慢慢落下来
+                          核心算法：（目标值 - 现在的位置）/10 作为每次移动的距离步长
+                          停止条件：让当前盒子位置等于目标位置就停止定时器
+                          步长值写到定时器里面,其余的代码与上面示例一样，但是我们需要对步长值向上取整，因为如果出现了小叔的话，最后可能会到不了目标位置                          
+                          步长的算法是可以实现倒退的，但是取整的话需要向下取整，因为结果是个负数
+                          添加的代码：var step = (target - obj.offsetLeft) / 10 
+                                     step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                                    这样不管是向前还是向后运动，都可以实现缓动画添加的代码：var step = Math.ceil((target - obj.offsetLeft) / 10 )
+
+            6、节流阀
+                    防止轮播图按钮连续点击造成播放过快
+                    目的：当上一个函数动画内容执行完毕，再去执行下一个函数动画，让时间无法连续触发
+                    核心实现思路：利用回调函数，添加一个变量来控制，锁住函数和解锁函数
+                    全局设置一个变量 var flag = true;在动画函数中添加这个代码
+                    if (flag) {
+                        flag = false;
+                                //关闭水龙头
+                    }
+                    利用回调函数  动画执行完毕， flag = true   打开水龙头
+                    
+
+                    -->
+</body>
+
+</html>

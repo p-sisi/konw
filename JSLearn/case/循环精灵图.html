@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 要求：精灵图是有规律的也就是图之间的间隔和图片的大小都是一样的，所呈现的画面也是一样的 -->
+    <div class="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        var lis = document.querySelectorAll('li'); //获取装精灵图的所有的li
+        for (var i = 0; i < lis.length; i++) { //遍历所有的li
+            //根据所给精灵图的规律，判断出每个小图片的关系，比如第一个图片的y坐标＋44就是第二个图片的y坐标
+            var index = i * 44;
+            lis[i].style.backgroundPosition = '0 -' + index + 'px';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>es6学习</title>
+</head>
+
+<body>
+    <!-- 面向对象编程介绍
+        1、编程两大思想
+            面向过程（POP）：分析出解决问题所需要的的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的依次调用就可以了
+                例子：把大象装进冰箱，第一步打开冰箱，第二步把大象放进去，第三步关闭冰箱
+            面向对象（OOP）：把事务分解成一个个对象，然后由对象之间分工与合作，以功能来划分问题，而不是步骤
+                例子：把大象装进冰箱，找出对象有大象和冰箱，大象有走进冰箱功能，冰箱有打开和关闭功能，使用大象和冰箱的功能
+                优点：灵活、代码可复用，容易维护和开发，适合多人合作的大型软件项目
+                特性：封装性、继承性、多态性
+                面向对象更贴近我们的实际生活，可以使用面向对象描述现实世界事务，但是事务分为具体事务和抽象事物
+                面向对象思维特点：
+                    (1)抽取抽象对象共用的属性和行为封装成一个类（模板）
+                    (2) 对类进行实例化，获取类的对象
+                面向对象编程我们考虑的是有哪些对象，不断的创造对象、使用对象、操作对象
+
+        2、ES6之前通过 “构造函数+原型” 实现面向对象编程
+           ES6之后通过 “类” 实现面向对象编程
+            -->
+
+
+
+    <!-- 类与对象
+            1、创建类和对象
+                class Star {
+                    constructor(){
+                        构造函数，其他方法函数也是这样创建，各个函数之间不需要添加符号
+                    }
+                };
+                new Star();
+
+            2、类constructor 构造函数
+                constructor方法用于传递参数，返回实例对象，通过new命令生成对象实例时，自动调用该方法，如果没有显示定义，类内部会自动给我们创建一个constructor
+            
+            3、继承
+                (1) extends 与java一样
+                (2) 就近原则：继承中，如果实例化子类输出一个方法，先看子类有没有这个方法，如果有就先执行子类的这个方法，如果么有就去执行父类的
+            
+            4、super关键字
+                (1) 用于访问和调用对象父类上的函数，可以调用父类的构造函数，也可以调用父类的普通函数
+                (2) super必须在子类this之前调用
+           
+            5、使用类注意事项
+                (1) 在ES6中类没有变量提升，所以必须先定义类，才能实例化对象，也就是类要写在实例化之前
+                (2) 类里面的共有属性和方法一定要加this使用
+                    class Start(){
+                        constructor(uname) {
+                            this.uname = uname;
+                        }
+                        sing (){
+                            console.log (this.uname);
+                        }
+                    }
+                (3) 类里面的方法调用这个类里面的其他方法，不需要加括号在后面，因为一加了就会马上调用了
+            
+            6、调用构造函数里面的属性方法：
+                    var that;   声明一个全局变量
+                    class tab {
+                        constructor {
+                            that = this;   在构造函数中说明that = this
+                            this.sections = this.main.querySelector('.tabCon');
+                        }
+                        updateNode() {
+                            that.sections = this.main.querySelectorAll('section');   方法中的this就可以指向构造函数中的属性
+                        }
+                    }
+            -->
+
+
+
+    <!-- 构造函数和原型
+        1、创建对象的方式：
+            (1) 对象字面量（var object = {}）
+            (2) new关键字（var object = new Object（））
+            (3) 自定义构造函数
+                function Star（uname，age）{
+                    this.uname = uname;
+                    this.age = age;
+                    this.sing()=function() {
+                        console.log('我会唱歌');
+                    }
+                }
+                var ldh = new Star（'刘德华',18）
+
+        2、构造函数之后，需要new一个对象出来，就是实例化对象，它执行时做了这些事情
+            (1) 在内存中创建一个新的空对象
+            (2) 让this指向这个新的对象
+            (3) 执行构造函数里面的代码，给这个新对象添加属性和方法
+            (4) 返回这个新对象
+
+        3、 实例成员、静态成员
+            (1) 实例成员：在构造函数内部通过this添加的，就是uname、age、sing，只能通过实例化对象来访问，ldh.uname
+            (2) 静态成员：在构造函数本身上添加的成员  Star.sex= '男',只能通过构造函数访问
+
+        4、构造函数的问题
+            (1) 构造函数容易浪费内存，当new了一个实例化对象之后，就会开辟这个实例对象的内存空间，像是uname、age，sing，
+                但是sing函数方法还会重新开辟一个内存空间，假如有100个实例化对象，就会开辟100个sing方法的内存空间
+
+        5、构造函数原型 prototype
+            (1) Star.prototype（构造函数中的显示原型属性）    ldh.__proto__（实例对象中的隐式原型属性）
+                Star.prototype和ldh.__proto__都能拿到同一个原型对象
+            (1) 构造函数通过原型分配的函数是所有对象所共享的，解决了构造函数的内存分配问题
+            (2) 每一个构造函数都有一个prototype属性，指向另一个对象，这个对象的所有属性和方法，都会被构造函数所拥有
+            (3) 通过显示原型属性操作原型对象，追加一个sing方法，把不变的方法，直接定义在prototype对象上，这样所有实例对象就可以共
+                享这些方法
+                    Star.prototype.sing = function(){
+                    }
+            (4) 一般情况下，我们把公共属性定义到构造函数里面，公共的方法放到原型对象身上
+
+        6、对象原型__proto__
+            (1) 为什么定义在原型对象身上的属性，实例对象也能使用？？
+                    对象都会有一个属性__proto__指向构造函数的prototype原型对象，就是因为他的存在，才可以调用
+            (2) 实例化对象的原型对象和构造函数的原型对象指向同一个地方
+                    console.log(ldh.__proto__ === Star.prototype)    结果true
+            (3) 方法查找规则：首先先看实例对象身上有没有sing方法，如果有就执行实例对象身上的sing方法
+                             如果没有，因为有__proto__的存在，就去构造函数原型对象prototype身上查找这个方法
+            (4) 对象原型的意义就在于为对象的查找机制提供一个方向，或者说一条路线，在实际开发中，不可以使用这个属性，他只是内部指向原型对象prototype
+            (5) 如果我们修改了原来的原型对象，给原型对象赋值的是一个对象，则必须手动的利用constructor指回原来的构造函数,就可以知道这个原型对象是哪个构造函数构造出来的
+                    Star.prototype = {
+                        constructor: STar,
+                        sing:function (){
+                            console.log('唱歌');
+                        }
+                    }
+        7、构造函数、实例对象、原型对象三者之间的关系
+            (1) 每一个构造函数（Star）里面都会有一个原型对象（Star原型对象prototype），构造函数通过Star.prototype指向原型 
+                对象；原型对象中也有一个属性叫Star.prototype.constructor，通过这个属性指回构造函数Star
+            (2) 可以通过构造函数创建一个实例对象ldh，构造函数就指向ldh
+            (3) 在实例对象中有一个对象原型ldh.__proto__，通过这个指向原型对象，这样就可以使用原型对象里的共享方法
+            (4) 实例对象中也有一个属性ldh.__proto__.constructor，通过这个属性指回构造函数Star，这个指回路线实际上是通过原型对象的路线指回的。
+
+        8、原型链
+            (1) 原型对象prototype，是一个对象，必定也会有对象原型__proto__，原型对象通过prototype.__proto__指向Object中的原型对象prototype
+                prototype.__proto__ === Object.prototype    返回true
+            (2) Object构造函数的原型对象就是Object.prototype ，Object原型对象也通过constructor 指回Object构造函数
+            (3) Object原型对象也有对象原型Object.prototype.__proto__，这个对象原型指向的是空NUll
+
+        9、js中成员查找规则---原型链
+            (1) 当访问一个对象的属性（方法）时，首先查找这个对象自身有没有该属性
+            (2) 如果没有，就去查找他的对象原型（__proto__指向的prototype原型对象上有没有）
+            (3) 如果还没有，就去查找原型对象的原型（Object的原型对象prototype）
+            (4) 以此类推，一直找到Object为止（null）
+            (5) 就近原则，先从实例对象身上开始
+
+        10、原型对象的应用————————扩展内置对象方法
+                Array.prototype.sum = function(){
+                    可以直接自定义原型对象方法
+                    var sum = 0;
+                    for(var i = 0; i < this.length; i++){
+                        sum += this[i];           这里的this都是指向实例对象，谁调用指向谁
+                    }
+                    return sum;
+                }
+            ---->
+
+
+
+
+
+
+    <!-- 继承
+        1、call方法
+            (1) 调用函数    假设有个function fn（）{} 函数，正常调用fn（），用这个方法调用fn.call（）
+            (2) 修改this指向
+                    fn函数中this指向window，现在定义了一个对象Star，这样修改this指向
+                    fn.call(Star);
+                    如果fn函数中有参数传递，则： fn.call(Star,1,2...z)
+            (3) 实现继承，如下条
+
+        2、借用父构造函数继承属性call（）方法
+            function Father(uname,age){
+                this.uname = uname;        这个this指向父构造函数的实例化对象
+                this.age = age;
+            }
+            function Son(uname,age) {
+                Father.call(this,uname,age);      this指向子构造函数的实例化对象,同时继承了父构造函数的属性
+            } 
+
+        3、借用原型对象继承方法
+            Father.prototype.money = function(){
+                console.log(10000);
+            }
+            Son.prototype = new Father();       这样写之后就可以在儿子中使用父构造函数的方法
+            Son.prototype.constructor = Son;    因为利用对象的形式修改了原型对象，所以要利用这句话指回原来的原型对象-->
+
+
+
+
+
+    <!-- 类
+            1、类的本质
+                类的本质其实是一个函数，我们可以认为是构造函数的另外一种写法。
+            2、类
+                (1) 类有原型对象prototype
+                (2) 类原型对象prototype里面有constructor 指向类本身
+                (3) 类可以通过原型对象添加方法
+                (4) 类创建的实例对象有__proto__原型，指向类的原型对象
+            上面四点与构造函数一样  -->
+
+
+
+
+    <!-- ES5新增的方法
+            1、数组方法
+                (1) 遍历（迭代）方法：forEach()  map() filter() some() every()
+                    遍历数组：arr.forEach(function(value,index,array){
+                                value是每一个数组元素是啥，index是每一个数组元素的索引号，array是这个数组是什么，可以写两个参数也行，不用的参数可以不写，这三个参数的写法一定是这样的，不能随便换单词
+                                有了这三个参数之后，可以实现想要的功能，比如每个数组元素相加，没有返回值
+                            })
+                    筛选数组元素：filter（），直接返回一个新数组
+                            arr.filter(function(value,index,array){
+                                三个参数意义同上
+                                比如返回大于20的数组元素：return value>20;  ,就可以获得一个新数组
+                            })
+                    查找元素：some（），返回值是布尔值
+                            arr.some(function(value,index,array){
+                                三个参数意义同上
+                                比如是否有大于20的数：return value > 20;
+                                如果找到了第一个满足条件的元素，就不再查找 
+                            })
+            
+            2、字符串方法
+                (1) trim（）
+                    删除一个字符串两端的空白字符，返回一个新的字符串：str.trim();
+            
+            3、定义或修改属性
+                Object.defineProperty(obj,prop,descriptor) 三个参数都必须要写
+                    obj：谁做修改
+                    prop：属性的名字
+                    descriptor：目标属性所拥有的的特性，以对象的形式来写{},，一般设置为false，指定了不可以操作
+                                value:属性值    writable：true、false是否可以重写
+                                enumerable：true、false是否能被遍历        
+                                configurable：是否可以被删除或是否可以再次修改特性
+                Object.defineProperty(obj,'price',{
+                    value:1000;      将里面的price值改为了1000
+                });  
+            4、删除对象属性
+                delete obj.price-->
+
+
+
+    <!-- 函数进阶
+            1、函数的定义
+                自定义函数（命名函数）： function fn() {};
+                函数表达式（匿名函数）: var fun =  function() {};
+                new Function('参数1','参数2','函数体')：var f = new Function();f();   不建议使用这个
+            
+            2、函数的调用
+                (1) 普通函数： fn();
+                (2) 对象的方法： var obj = {sayHi:function(){}};obj.sayHi();
+                (3) 构造函数：function Star() {}; new Star();
+                (4) 绑定事件函数： btn.onclick = function() {};
+                (5) 定时器函数：setInterval（function（） {}，1000）;定时器自动调用
+                (6) 立即执行函数： (function（） {})（）;自动调用
+                -->
+
+
+
+    <!-- this指向
+            1、普通函数：指向window
+            2、对象的方法：指向这个对象obj
+            3、构造函数：指向实例对象，原型对象中的也是指向实例对象
+            4、绑定事件函数：指向绑定事件的对象，btn这个按钮对象
+            5、定时器函数：指向window
+            6、立即执行函数：指向window
+
+            7、改变函数内部this指向
+                (1) call（）方法
+                    var obj = {
+                        name:'andy'
+                    }
+                    function fn(a,b){
+                        console.log(this);
+                    }
+                    上面代码fn函数中的this指向window，现在让他指向obj对象：fn.call（obj,a,b）;  第一个参数是让this指向谁，后面的参数是函数内部的参数
+                (2) apply（）方法
+                    这个方法中的函数参数需要放在一个数组中：fun.apply（让this指向,[函数参数1,函数参数2]）
+                    其他与call方法相同，返回值就是函数的返回值
+                    因为apply参数形式必须是个数组，所以可以利用这个做一些应用：
+                        求数组中的最大值： var arr = [1,2,3,4,5];
+                                          var max = Math.max.apply(Math,arr);
+                (3) bind（）方法
+                    参数使用与call方法一样
+                    不会调用函数，返回的是由指定的this值和初始化参数改造的原函数拷贝：
+                        var o = {
+                            name:'andy'
+                        }
+                        function fn(){
+                            console.log(this);
+                        }
+                        var fun = fn.bind(o);
+                        fun();      返回的是一个函数，需要用新的函数变量来保存后，再调用
+                    巧妙使用bind的不会马上调用函数的特性，做很多应用，比如改变定时器内部的this指向-->
+
+
+
+
+    <!-- 严格模式
+            1、消除了JS语法的一些不合理、不严谨之处，减少了一些怪异行为
+            2、消除代码运行的一些不安全之处，保证代码运行的安全
+            3、提高编译器效率，增加运行速度
+            4、禁用了在ECMAJS的未来版本中可能会定义的一些语法，为未来新版本JS做好铺垫，比如一些保留字如：clas等不能做变量名
+            5、应用：
+                (1) 为脚本开启严格模式：
+                        在script标签的第一行或者立即函数中的第一行加上："use strict";
+                (2) 为函数开启严格模式
+                        在函数中的第一行写上上面那句话
+
+            6、严格模式的变化
+                (1) 变量规定：变量必须先var声明，再使用
+                             不能删除已经声明的变量：delete x是错误的
+                (2) this指向：全局作用域中得this不再指向window，而是undefined
+                              构造函数需要new实例之后，才能使用
+                              定时器中的this还是指向window
+         -->
+
+
+
+
+
+    <!-- 高阶函数
+        1、高阶函数是对其他函数进行操作的函数，它接收函数作为参数或将函数作为返回值输出
+
+    闭包
+        1、闭包（closure）是有权访问另一个函数作用域中变量的  函数 。简单理解就是，一个作用域可以访问另一个函数内部的局部变量
+        2、所被访问的变量所在的函数就是一个闭包函数
+        3、主要作用，延伸了变量的适用范围
+            例如：3秒之后打印所有li元素里面的内容“
+                for( var i = 0; i < lis.length; i++){
+                    只要是在立即执行函数里面的函数，都能执行立即函数里面的i变量，巧用立即函数，匿名函数
+                    (function(i){
+                        setTimeout(function(){
+                            console.log(lis[i].innerHTML);
+                        },3000)
+                    })(i);
+                } -->
+
+
+
+
+    <!-- 递归函数
+        1、一个函数在内部调用其本身，这个函数就是递归函数。
+        2、注意点：作用和循环效果一样、
+                  容易发生栈溢出，所以一定要加退出条件return -->
+
+
+
+
+    <!-- 正则表达式
+        1、含义
+            是用于匹配字符串中字符组合的模式，在JS中，正则表达式也是对象
+        2、作用
+            通常用于检索、替换那些符合某个模式（规则）的文本，例如表单验证：用户表但中只允许输入英文字母、数字或者下划线。。。正则表达式也常用于过滤页面内容中的一些敏感词，或从字符串中获取我们想要的特定部分（提取）等
+        
+        3、在JS中的使用
+            (1) 利用RegExp对象来创建
+                    var regexp = new RegExp(/正则表达式/)
+            (2)利用字面量创建（常用）
+                    var regexp = /正则表达式/
+
+        4、测试
+            test（）正则对象方法，用于检测字符串是否符合该规则，该对象会返回true、false，其参数是测试字符串
+                正则表达式.test(测试的文本)     检测测试的文本是否符合我们写的正则表达式规范
+            比如 var rg = /123/ 这个表示，只要字符串里面有123，都是返回true
+
+        5、类型
+                /^123$/  ^表示开头是123，$表示结尾是123
+                /[123]/   []表示只需要包含字符串里面的1、2、3的其中一个就符合
+                /[a-z]/   -表示一个范围内
+                /[^123]/  这里的^表示的是取反，不能包含123
+                /^1*$/    *表示允许1出现0次或者多次
+                /^1+$/    +表示允许1出现1次或者多次
+                /^a{3}$/  {3}表示就是重复3次
+                /^a{3，}$/  {3，}表示就是重复3次及以上
+                /^a{3，15}$/  {3，16}表示就是重复3次到16次
+                /^[a-z]{6,16}/   表示6-16个字符
+
+                /^[123]$/    表示三选一，1/2/3才返回true
+        6、替换
+            str.replace(/andy/,'baby');
+            与普通的replace方法相同，前面是一个正则表达式，后面是替换成的字符，获得一个新的字符串
+            正则表达式参数：/正则表达式/参数
+                参数值：g   全局匹配
+                       i    忽略大小写
+                       gi   全局匹配和忽略大小写
+         -->
+</body>
+
+</html>

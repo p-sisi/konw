@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动后固定侧边栏</title>
+    <!-- 1、原先侧边栏是绝对定位，当页面滚动到一定位置，侧边栏改为固定定位
+        2、页面继续滚动，会让“返回顶部”显示出来
+        3、需要用到页面滚动事件scroll，因为是页面滚动，所以事件源是document
+        4、页面滚动到某个位置，就是判断页面被卷去的上部值（window.pageYOffset）获得，如果是被卷去的左侧（pageYOffset）
+            注意：元素被卷去的头部是element.scrollTop ，这里是页面，而不是元素 -->
+    <style>
+        .w {
+            width: 800px;
+            margin: 0 auto;
+        }
+        
+        .slider-bar {
+            position: relative;
+            float: right;
+            height: 100px;
+            width: 45px;
+            margin-right: 179px;
+            margin-top: 500px;
+            background-color: green;
+        }
+        
+        .goBack {
+            position: absolute;
+            bottom: 0;
+        }
+        
+        .header {
+            background-color: pink;
+            height: 300px;
+        }
+        
+        .banner {
+            height: 300px;
+            background-color: skyblue;
+        }
+        
+        .main {
+            height: 800px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-bar">
+        <span class="goBack">返回顶部</span>
+    </div>
+    <div class="header w">头部区域</div>
+    <div class="banner w">banner区域</div>
+    <div class="main w">主体区域</div>
+    <script>
+        var sliderBar = document.querySelector('.slider-bar');
+        var goBack = document.querySelector('.goBack');
+        document.addEventListener('scroll', function() {
+            // if (window.pageYOffset >= 500) {
+            //     sliderBar.style.position = 'fixed';
+            // }
+            // console.log(window.pageYOffset);
+        })
+    </script>
+</body>
+
+</html>

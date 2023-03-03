@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格标记应用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+
+</head>
+
+<body>
+    <TABLE border ID="Table1">
+        <CAPTION>
+            课表及课内成绩</CAPTION>
+        <TR>
+            <TH>
+                节次</TH>
+            <TH>星期一</TH>
+            <TH>星期二</TH>
+            <TH>
+                星期三</TH>
+            <TH>星期四</TH>
+            <TH>星期五</TH>
+        </TR>
+        <TR>
+            <TD>1、2</TD>
+            <TD>专业英语</TD>
+            <TD>操作系统</TD>
+            <TD>网络基础</TD>
+            <TD>专业英语</TD>
+            <TD>数据库</TD>
+        </TR>
+        <TR>
+            <TD>3、4</TD>
+            <TD>Java</TD>
+            <TD>数据库</TD>
+            <TD>实验</TD>
+            <TD>Java</TD>
+            <TD>操作系统</TD>
+        </TR>
+        <TR>
+            <TD>5、6</TD>
+            <TD>网络基础</TD>
+            <TD>实验</TD>
+            <TD>实验</TD>
+            <TD>实验</TD>
+            <TD>操作系统</TD>
+        </TR>
+        <TR>
+            <TD>成绩</TD>
+            <TD>{{score0}}</TD>
+            <TD>{{score1}}</TD>
+            <TD>{{score2}}</TD>
+            <TD>{{score3}}</TD>
+            <TD>平均成绩{{averageGrade}}</TD>
+        </TR>
+    </TABLE>
+
+    <script>
+        Vue.config, productionTip = false;
+
+        const vm = new Vue({
+            el: '#Table1',
+            data() {
+                return {
+                    score0: 78,
+                    score1: 90,
+                    score2: 86,
+                    score3: 88,
+                }
+            },
+            computed: {
+                averageGrade() {
+                    return (this.score0 + this.score1 + this.score2 + this.score3) / 4
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

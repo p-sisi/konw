@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时</title>
+    <!-- 需要定时器来自动变化（setInterval）
+        三个盒子分别存放时分秒
+        三个盒子利用innerHTML放入计算的时分秒 -->
+    <style>
+        span {
+            float: left;
+            display: block;
+            margin: 5px;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            background-color: black;
+            color: azure;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="hour">1</span>
+        <span class="minute">2</span>
+        <span class="second">3</span>
+    </div>
+    <script>
+        var hour = document.querySelector('.hour');
+        var minute = document.querySelector('.minute');
+        var second = document.querySelector('.second');
+        var inputTime = +new Date('2022-9-8 19:00:00'); //这个时间是未来的时间
+        //直接调用函数在刷新页面的时候会有空白，因为第一次执行也是间隔毫秒数，最好采取封装函数的方式，这样就可以先调用一次这个函数
+        //防止刚开始刷新页面就有空白，但是也要注意这次的调用要在设置时间之后
+        countDown();
+        //开启定时器
+        setInterval(countDown, 1000);
+
+        function countDown() {
+            var nowTime = +new Date(); //返回当前时间的总毫秒数
+            var times = (inputTime - nowTime) / 1000; //倒计时总的秒数 
+            var h = parseInt(times / 60 / 60); //计算小时，因为没有了天数，所以需要把%24给去掉
+            h = h < 10 ? '0' + h : h; //小于10时在时间前加0
+            hour.innerHTML = h;
+            var m = parseInt(times / 60 % 60); //计算分数
+            m = m < 10 ? '0' + m : m;
+            minute.innerHTML = m;
+            var s = parseInt(times % 60); //计算当前秒数
+            s = s < 10 ? '0' + s : s;
+            second.innerHTML = s;
+        }
+    </script>
+</body>
+
+</html>

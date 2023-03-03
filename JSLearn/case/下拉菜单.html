@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下拉菜单</title>
+    <!-- 1、菜单选项采用li包含a
+         2、菜单选项内容采用ul>li，在li中写内容，采取定位方式，将ul定位到对应菜单选项合适位置，刚开始，选项内容选择隐藏display:none 
+         3、循环设置鼠标经过事件：当鼠标经过第一层li里面的选项卡，li里面的第二个孩子ul显示出来，鼠标离开则隐藏-->
+
+    <script src="../jQuery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style-type: none;
+        }
+        
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .nav {
+            margin: 200px;
+        }
+        
+        .nav>li {
+            position: relative;
+            float: left;
+            width: 80px;
+            height: 41px;
+            text-align: center;
+        }
+        
+        .nav li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            line-height: 41px;
+            color: #333;
+        }
+        
+        .nav>li>a:hover {
+            background-color: #eee;
+        }
+        
+        .nav ul {
+            display: none;
+            position: absolute;
+            top: 41px;
+            left: 0;
+            width: 100%;
+            border-left: 1px solid #FECC5B;
+            border-right: 1px solid #FECC5B;
+        }
+        
+        .nav ul li {
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-bottom: 1px solid #FECC5B;
+            font-size: 14px;
+        }
+        
+        .nav ul li:hover {
+            background-color: #FFF5DA;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul class="nav">
+        <li class="float">
+            <a href="javascript:;">微博</a>
+            <ul>
+                <li>私信</li>
+                <li>评论</li>
+                <li>我</li>
+            </ul>
+        </li>
+        <li class="float">
+            <a href="javascript:;">微博</a>
+            <ul>
+                <li>私信</li>
+                <li>评论</li>
+                <li>我</li>
+            </ul>
+        </li>
+        <li class="float">
+            <a href="javascript:;">微博</a>
+            <ul>
+                <li>私信</li>
+                <li>评论</li>
+                <li>我</li>
+            </ul>
+        </li>
+        <li class="float">
+            <a href="javascript:;">微博</a>
+            <ul>
+                <li>私信</li>
+                <li>评论</li>
+                <li>我</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $(function() {
+            $(".nav>li").mouseover(function() {
+                $(this).children("ul").slideDown(200);
+            })
+            $(".nav>li").mouseout(function() {
+                $(this).children("ul").slideUp(200);
+            })
+        })
+    </script>
+</body>
+
+</html>

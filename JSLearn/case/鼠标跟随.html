@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.鼠标不断移动，采用鼠标事件：mousemove
+        2.在页面中移动，给document注册事件
+        3、图片要移动距离，且不占有位置，使用绝对定位
+        4、核心原理：每次鼠标移动，都会获得最新的鼠标坐标，把这个xy坐标作为图片的top和left值就可以移动图片 -->
+    <style>
+        img {
+            position: absolute;
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="2.png" alt="">
+    <script>
+        var img = document.querySelector('img');
+        document.addEventListener('mousemove', function(e) {
+            var x = e.pageX;
+            var y = e.pageY;
+            //如果想鼠标在图片的中间的话，就把top值和left值加上图片宽高的一半
+            img.style.top = y - 10 + 'px';
+            img.style.left = x - 25 + 'px'; //注意这里很容易错，需要加上单位px
+        });
+    </script>
+</body>
+
+</html>

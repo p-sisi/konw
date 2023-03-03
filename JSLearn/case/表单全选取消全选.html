@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 全选分析
+            1、里面的小复选框按钮的选中状态(checked)是跟着全选按钮走
+            2、checked是复选框固有属性，需要利用prop()方法获取和设置该属性，再把全选按钮状态(checked值)，赋给其他小复选框
+            3、事件选用change(),属性是否发生变化
+                $(".j-checkbox").prop("checked",$(this).prop("checked"))    j-checkbox是小复选框，该事件添加在全选按钮上
+            4、如果小复选框全被选中的话，看小复选框的个数，
+            5、:checked  查找被选中的表单元素
+                if(被选中的小复选框的个数 === 所有小复选框的个数){
+                    就要选中全选按钮
+                }else{
+                    不要选中全部按钮
+                }
+                具体代码：
+                $(".j-checkbox").change(function(){
+                    if($(".j-checkbox:checked").length === $("j-checkbox").length){
+                        $(".checkAll").prop("checked",true);
+                    }else{
+                        $(".checkAll").prop("checked",false);
+                    }
+                })
+                    -->
+    <style>
+        .wrap {
+            width: 200px;
+            margin: 0 auto;
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        #j_th {
+            background-color: aquamarine;
+        }
+        
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <table>
+            <thead id="j_th">
+                <tr>
+                    <th>
+                        <input type="checkbox" id="j_cbAll" checked="">
+                    </th>
+                    <th>商品</th>
+                    <th>价钱</th>
+                </tr>
+            </thead>
+            <tbody id="j_tb">
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>iphone</td>
+                    <td>60000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>iphone</td>
+                    <td>60000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>iphone</td>
+                    <td>60000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 获得全选按钮
+        var j_cb = document.getElementById('j_chAll');
+        //获得所有的复选框
+        var j_tbs = document.getElementById('j_tb').getElementsByTagName('input');
+        j_cb.onclick = function() {
+            console.log(this.checked);
+            // for (var i = 0; i < j_tbs.length; i++) {
+            //     j_tbs[i].checked = this.checked;
+            // }
+        }
+    </script>
+</body>
+
+</html>

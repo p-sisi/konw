@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+</head>
+
+<body>
+    <!-- javaScript库、JQuery
+            1、概念：即library，是一个封装好的特定的集合（方法和函数），从封装一大堆函数的角度理解库，就是在这个库中，封装了很多预先定义好的函数在里面
+                  比如动画animate、hide、show，比如获取元素等
+                JQuery就是封装好的原生js函数方法等，是一个快速、简洁的js库，把js中的DOM操作做了封装，我们可以快速的查询使用里面的功能
+            2、优点
+                轻量级，核心文件才几十kb，不会影响页面加载速度
+                跨浏览器兼容，基本兼容了现在主流的浏览器
+                链式编程、隐式迭代
+                对事件、样式、动画支持，大大简化了DOm操作
+                支持插件扩展开发、有着丰富的第三方插件，例如：树形菜单、日期控件、轮播图等
+                免费、开源
+            3、JQuery使用
+                官网地址：https://jquery.com/   ，使用3x版本，其他版本会兼容低版本浏览器且不再持续更新
+                jQuery文件的引用，在头部中：<script src="jQuery.min.js" ></script>
+                在jQuery中的立即执行函数，等着页面加载完毕再去执行js代码，就可以将js写在前面，代码如下：
+                    $(function(){
+                        js代码
+                    })
+            4、jQuery的顶级对象$
+                    （1）$是jQuery的别称，代码也可以相互替换，为了方便，通常直接用$
+                    （2）$是jQuery的顶级对象，相当于原生JavaScript中的window，把元素利用$包装成jQuery对象，就可以调用jQuery的方法
+            5、DOM对象  jQuery对象  区别
+                    （1）DOM对象：用原生js获取过来的对象就是DOM对象
+                            例如：var mySpan = document.querySelector('span');     在这里mySpan就是DOM对象
+                    （2）jQuery对象：用jQuery方式获取过来的对象就是jQuery对象，本质：通过$把DOM元素进行了包装
+                            例如：$('span');    在这里$('span')就是一个jQuery对象
+                    （3）jQuery对象只能使用jQuery的方法，DOM对象只能使用原生js的属性和方法
+                    （4）二者的相互转换
+                            因为原生js比jQuery更大，原生的一些属性和方法jQuery没有给我们封装，要想使用这些属性和方法需要转换才能使用
+                            DOM转jQuery：$(DOM对象)       注意不需要加引号
+                            jQuery转DOM：$('div').[index]   index就是数组的索引号
+            -->
+
+
+
+    <!-- jQuery常用API
+            1、jQuery基础选择器
+                $("选择器")  里面的选择器与css相同，注意里面是双引号
+            2、隐式迭代
+                遍历内部DOM元素（伪数组形式存储）的过程就叫做隐式迭代，就是给匹配到的所有元素进行循环遍历，执行相应的方法，而不用我们再进行循环，简化我们的操作，方便我们调用
+            3、筛选选择器
+                （1）$('li:first')   获取第一个li元素
+                （2）$('li:last')    获取最后一个li元素
+                （3）$('li:eq(index)') 或  $("ui li").eq(2)  获取到的li中，选择索引号为index的元素，索引号从0开始
+                （4）$('li:odd')     获取到的li中，选择索引号为奇数的元素
+                （5）$('li:even')    获取到的li中，选择索引号为偶数的元素
+                （6）$("li").parent();         查找最近一级父级
+                （7）$("ul").children("li")    相当于$("ul>li") 查找最近一级儿子
+                （8）$("ul").find("li")        相当于$("ul li") 查找后代，find里面没有参数，就是查找全部
+                （9）siblings()                查找兄弟节点，不包括自身
+                （10）nextAll()                查找当前元素之后所有的同辈元素
+                （11）prevAll()                查找当前元素之前所有的同辈元素
+                （12）$('div').hasClass("protected")    检查当前的元素是否含有某个特定的类，如果有，则返回true
+            4、jQuery的排他思想
+                例如：点击了按钮，变色
+                    $("button").onclick(function(){
+                        $(this).css("background","pink");                  //当前点击的按钮变色
+                        $(this).siblings("button").css("background","");   //其他按钮没有颜色
+                    }) 
+            5、jQuery的常用方法
+                show()    元素显示               hide()         元素影藏
+                index()   当前元素的索引号        change()       是否变化
+                prop("checked",checked)    获取或设置固有属性值
+                attr(属性)     设置或获取被选中属性的属性值
+            -->
+
+
+
+    <!-- jquery的样式操作
+            1、css方法
+                （1）$(this).css("color")      参数只写属性名，返回值是属性值，带单位
+                （2）$(this).css("color","red")      设置样式，值如果是数字，可以不加单位和双引号
+                （3）$(this).css("color":"red","font-size":20)   设置多个样式
+                    也可以以对象的形式设置多个样式：     $(this).css({
+                       注意：当有短杠时要用驼峰命名法         color:"red",
+                                                            fontSize:20
+                                                       })
+            2、设置类样式方法
+                （1）$("div").addClass("current")      添加类
+                （2）$("div").removeClass("current")      删除类
+                （3）$("div").toggleClass("current")      切换类
+            3、注意点：
+                    原生js中className会覆盖元素原先里面的类名
+                    jQuery里面类操作只是对指定类进行操作，不影响原先的类名-->
+
+
+
+    <!-- jQuery效果
+            1、显示隐藏效果
+                show(speed,easing,fn)   hide(speed,easing,fn)      toggle(speed,easing,fn)    切换显示、隐藏效果
+                    (1)参数都可以省略，无动画直接显示
+                    (2)speed：显示隐藏效果的速度（"slow","normal","fast"）或表示动画时长的毫秒数值
+                    (3)easing：指定切换效果，默认swing，可用参数"linear" 
+                    (4)fn：回调函数，在动画完成时执行的函数，每个元素执行一次
+            2、滑动效果
+                slideDown() 下滑动    slideUp() 上滑动    slideToggle()  上下滑动的切换
+            3、事件切换
+                hover(function({over}),function(out{}))
+                    (1)over：鼠标移到元素上要触发的函数（相当于mouseenter），可以省略
+                    (1)out：鼠标移到元素外要触发的函数（相当于mouseleave）
+                鼠标经过和离开事件，最简写法，只要out函数，调用的是切换方法slideToggle()
+            4、动画队列及其停止排队方法
+                动画或者效果一旦触发就会执行，如果多次触发，就造成多个动画或者效果排队执行
+                (1)stop()方法必须写在动画的前面，相当于停止结束上一次动画，再来执行本次动画
+                (2)stop（）方法用于停止动画或效果
+            5、淡入淡出效果
+                fadeIn()  淡入    fadeOut()  淡出   fadeToggle()淡入淡出切换
+                参数与显示隐藏一样
+                fadeTo(speed,opacity,easing,fn)    渐进方式调整到指定的不透明度
+                    opacity必须要写，取值0-1，speed也必须写
+            6、动画效果
+                animate(params,[speed],[easing],[fn])
+                    (1)params：想要更改的样式属性，以对象的形式传递，必须写，属性名可以不带引号，复合属性采用驼峰命名法
+                    (2)其他参数与上面的儿一样-->
+
+
+
+    <!-- jQuery的内容文本值
+            1、普通元素内容html()  相当于原生JS的innerHTML()
+                $("div").html()   获取元素的内容，返回div包括标签在内的所有内容
+                $("div").html("123")    设置标签的文本内容
+            2、普通元素文本内容text()   相当于原生js的innerText
+                $("div").text()      只获取元素的文本内容，设置内容在括号里面写就可以
+            3、表单的值val()   相当于原生的value这个值
+                $("div").val()   获取表单里面的内容，设置内容写在括号里面
+         -->
+
+
+
+    <!-- jQuery 操作元素
+            1、遍历元素
+                    each()  遍历元素
+                $("div").each(function(index,domEle){
+                    //第一个参数index是所遍历的元素的索引号
+                    //第二个参数是 dom 元素对象，所以不能用jQuery方法，需要转换
+                })
+            2、遍历元素
+                    $.each()   遍历任何元素、对象等
+                $.each(object,function(index,element){
+                    //第一个参数object可以是数组，可以是对象等
+                    //遍历对象时，index输出的是属性名，element输出的是属性值
+                })
+            3、创建元素
+                    $("<li></<li>")     动态的创建了li标签
+            4、添加元素
+                (1)内部添加
+                        $("ul").append(li)   将li放到ul的里面的最后一个   prepend放到最前面
+                (2)外部添加
+                        $("ul").after(ul)     将ul添加到ul的后面，同一级成为兄弟   before是前面
+            5、删除元素
+                    $("ul").remove()   删除指定的ul元素，就是自杀
+                    $("ul").empty()    删除ul的所有孩子，清空-->
+
+
+
+
+    <!-- jQuery的尺寸、位置操作
+            1、jQuery尺寸
+                    .width()/height()       获得宽度高度值，什么都不包含
+                    .innerWidth()/          包含padding
+                    .outerWidth()/          包含padding、border
+                    .outerWidth(true)/      包含padding、border、margin
+            2、jQuery位置
+                (1) offset（）设置或获取元素偏移
+                        相对于文档的偏移坐标，跟父级没有关系，返回值是一个对象，里面有left:xxpx  top:xxpx
+                        offset().left   可以获取距离文档左边的距离 
+                        设置值： offset({
+                                    top:10px,
+                                    left:10px
+                                })
+                (2) position() 获取元素偏移
+                        相对于  “带有定位”  的父级偏移坐标，如果父级没有定位，则相对于文档
+                (3) scrollTop（）/scrollLeft（）  设置或获取元素被卷去的头部和左侧
+                        页面滚动事件：$(window).scroll(function(){})
+                    -->
+
+
+
+
+    <!-- jquery 事件
+            1、单个事件注册
+                $("div").click(function(){事件}) 
+            2、多个事件注册
+                (1) $("div").on({
+                        mouseenter: function({
+                            事件
+                        }),
+                        click :function() {
+                            事件
+                        }
+                    });
+                    同一种类型的事件注册
+                    $("div").on("mouseenter mouseleave",function(){  事件})
+                (2) 0n()可以事件委派操作，事件委派的定义就是，把原来加给子元素身上的事件绑定在父元素身上，就是把事件委派给父元素
+                    $("ul").on("click","li",function(){
+                        将事件绑定在ul身上，但是是点击了li才会触发的，有点像是冒泡
+                    })
+                (3) on() 动态创建的元素，click（）没有办法绑定，on（）可以给动态生成的元素绑定事件
+                        动态创建的元素就是在后赖通过js来创建的，不是自己写在html中的
+            3、事件解绑
+                (1) off（）方法可以移除通过on（）方法添加的事件
+                        如果括号里没有参数，则移除所有事件，（“click“）是移除一个，（"click","li"）是移除事件委托
+            4、触发一次的事件
+                one()  事件只触发一次
+            5、自动触发事件
+                trigger（）  有些事件希望自动触发，比如轮播图自动播放孤功能跟右侧按钮一致，可以利用定时器自动触发右侧按钮点击事件，不必鼠标点击触发
+            6、事件对象
+                (1) 与前面知识基本保持一致，
+                (2) 阻止默认行为：event.preventDefault() 或者 return false
+                    阻止冒泡： event.stopPropagation()-->
+
+
+
+    <!-- jquery 其他方法
+            1、对象拷贝
+                如果想要把某个对象拷贝（合并）给另外一个对象使用，此时可以使用 
+                    $.extend([deep]，target,object1,[objectN])  
+                    deep：深拷贝true，浅拷贝false，默认浅
+                    target：要拷贝的目标对象
+                    object：待拷贝到第一个对象的对象
+                    拷贝会将原来的数据覆盖掉，浅拷贝会把原来复杂对象里的地址拷贝过去，如果修改拷贝目标对象那里面的复杂数据类型的数据，与原来的也会改变，因为用的是一个地址
+            2、多库共存
+                jQuery使用$作为标示符，随着jQuery的流行，其他js库也会用这$作为标识符，这样一起使用会引起冲突
+                解决方法：把jQuery里面的$符号统一改为jQuery
+            3、插件
+                jQuery的功能比较有限，想要更复杂的特效效果，可以借助于jQuery插件完成
+                这些插件也是依赖于jQuery来完成的，所以必须要先引入jQuery文件，因此也称为jQuery插件
+                下载插件的网址：http://www.htmleaf.com
+                使用方法：(1) 到网站中，下载想要的插件压缩包
+                         (2) 找到解压文件中的index.html文件，打开后查看页面源代码
+                         (3) 到解压文件中，复制css和js文件夹，粘贴到需要这个插件的文件目录下
+                         (4) 页面源代码中的link标签两个引入、内部css文件、js文件、还有html部分的代码（查看网站中的提示看复制到哪），全都复制到需要插件的文件对应位置
+            4、全屏滚动插件（fullpage.js）
+                    插件下载地址：http://www.dowebok.com/demo/2014/77/
+                使用方法：看这个地址的下面，还有参数的设置等-->
+</body>
+
+</html>

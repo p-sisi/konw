@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单注册</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+        .box1 {
+            color: brown;
+        }
+        
+        .box2 {
+            color: aquamarine;
+        }
+    </style>
+</head>
+
+<BODY bgcolor="#0099ff">
+    <FORM action="" id="root" @submit.prevent="commit">
+        <H3>新用户注册</H3>
+        姓 名：
+        <INPUT type="text" id="姓名" name="姓名" v-model="userInfo.userName">
+        <BR> 性 别：
+        <SELECT size="l" name="userSex" tabindex="5" ID="Select1" v-model="userInfo.userSex">
+            <OPTION selected value="男">男</OPTION>
+            <OPTION value="女">女</OPTION>
+        </SELECT>
+        <BR> 地 址：
+        <INPUT type="text" id="地址" name="地址" v-model="userInfo.addr">
+        <BR> 邮政编码：
+        <INPUT type="text" id="邮政编码" name="邮政编码" v-model="userInfo.mail">
+        <BR> 电 话：
+        <INPUT type="text" id="电话" name="电话" v-model="userInfo.phone">
+        <BR> 电子邮件：
+        <INPUT type="text" id="电子邮件" name="电子邮件" v-model="userInfo.e_mail">
+        <BR> 个人爱好：
+        <BR>
+        <INPUT type="checkbox" name="checkbox" value="体育" ID="Checkbox1" v-model="userInfo.hobby">体育
+        <INPUT type="checkbox" name="checkbox" value="音乐" ID="Checkbox2" v-model="userInfo.hobby">音乐
+        <BR>
+        <INPUT type="checkbox" name="checkbox" value="上网" ID="Checkbox3" v-model="userInfo.hobby">上网
+        <INPUT type="checkbox" name="checkbox" value="旅游" ID="Checkbox4" v-model="userInfo.hobby">旅游
+        <BR>
+        <BR>
+        <P>
+            <INPUT type="submit" id="commit" name="btnSub" value="注册">
+            <INPUT type="reset" Value="重写" name="B2" tabindex="9" ID="Reset1">
+        </P>
+        <div id="show">
+            <h4>用户信息</h4>
+            <div class="box1">姓名：{{userInfo.userName}}</div> 性别：{{userInfo.userSex}}
+            <br> 地址：{{userInfo.addr}}
+            <br> 邮政编码：{{userInfo.mail}}
+            <br>
+            <div class="box2">电话：{{userInfo.phone}}</div>
+            电子邮件：{{userInfo.e_mail}}
+            <br> 个人爱好：{{userInfo.hobby[0]}} {{userInfo.hobby[1]}} {{userInfo.hobby[2]}} {{userInfo.hobby[3]}}
+        </div>
+    </FORM>
+    <P align="center">
+        <A href="index.htm">返回</A>
+    </P>
+
+    <script>
+        Vue.config, productionTip = false
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    userInfo: {
+                        userName: '',
+                        userSex: '',
+                        addr: '',
+                        mail: '',
+                        phone: '',
+                        e_mail: '',
+                        hobby: [],
+                    },
+                    Info: {}
+                }
+            },
+            methods: {
+                commit() {
+                    this._data.Info = JSON.stringify(this._data.userInfo)
+                    console.log(this._data.Info);
+
+                }
+            },
+        })
+    </script>
+</BODY>
+
+</html>
