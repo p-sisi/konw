@@ -17,7 +17,7 @@
 
     <!-- vue-router的使用
         (1)vue的一个插件库，专门用来实现SPA应用
-        (2)SPA应用：整个应用只有一个完整的页面，点击页面中的导航链接不会刷新页面，智慧做页面的局部更新，数据需要通过ajax获取
+        (2)SPA应用：整个应用只有一个完整的页面，点击页面中的导航链接不会刷新页面，只会做页面的局部更新，数据需要通过ajax获取
         (3)vue-router环境配置（是一个插件，需要vue.use）
             npm i vue-router@3      3版本只在vue2中使用，4版本只在vue3中使用 
            在main.js中：  引入vue-router:  import VueRouter from 'vue-router'
@@ -242,6 +242,31 @@
                 const router = new VueRouter({
                     mode:'history'
                 })-->
+
+    <!-- element-ui中实现路由跳转
+    (1)将想要的组件UI copy到模板中，比如导航栏菜单
+    (2)在index.js路由定义中定义各路由信息
+    (3)在element-ui标签中添加 router和:default-active="this.$route.path"两个属性，比如下面的导航栏菜单：
+        <el-menu
+          router
+          :default-active="this.$route.path"
+          class="el-menu-vertical-demo">
+            <el-menu-item index="/">    菜单标题1
+                <i class="el-icon-s-home"></i>
+                <span slot="title"> 首页</span>
+            </el-menu-item>
+            ...
+        <el-menu>
+    (4)<el-menu-item>标签中，将index=" 改成你的页面路径"，路径格式与index.js文件中的path路径一样
+    (5)遇到的问题：
+        ()路由跳转之后，原来的样式（比如选中高亮）消失了，解决方法：
+            在data中定义一个变量activeRouter:''，
+              mounted() {
+                //获取地址栏中的路由，设置element-ui中的导航栏选中状态
+                this.activeRouter = window.location.pathname;
+                },
+            修改element-ui中的一个属性值：
+             :default-active="activeRouter"-->
 </body>
 
 </html>
