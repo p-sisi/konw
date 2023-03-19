@@ -105,8 +105,8 @@
                 app.listen(8000,() => {
                     console.log("服务已经启动，8000端口监听中...");
                 });
-            在控制台启动服务器：node serve
-            最终测试，在浏览器地址栏中输入 127.0.0.1:8000  或者 http://localhost:8000/ 都可以
+            在控制台启动服务器：node serve.js
+            最终测试，在浏览器地址栏中输入 127.0.0.1:8000  
         5、加入前端代码测试
             ()前端代码一般新建文件夹static中
             ()在服务器的代码中：app.use(express.static(__dirname+'/static'))
@@ -310,9 +310,9 @@
         (4) 使用通用方法发送请求
                 btn.onclick = function(){
                     axios({
-                        method:'POST',   //请求方法
-                        url:'http:127.0.0.1:8000/serve',   //url地址
-                        params:{      //url参数
+                        method:'POST',   //请求方法，不写method配置，就默认是GET请求
+                        url:'http:127.0.0.1:8000/serve',   //url地址，是一定要写的
+                        params:{      //是与请求一起发送的 URL 参数
                             vip:10,
                             level:30
                         },
@@ -320,12 +320,12 @@
                             a:100,
                             b:200
                         },
-                        data:{       //请求体参数
+                        data:{       //作为请求体被发送的数据
                             username:'admin',
                             password:'admin'
-                        }
-                    }).then(
-                        response => {    //对响应结果进行处理
+                        },
+                        timeout:10000    //超过这个时间，请求会被中断
+                    }).then(response => {    //对响应结果进行处理
                             console.log(response);
                     })
                 }
@@ -339,7 +339,26 @@
                         error => {     //请求失败了之后怎么做
                             console.log('请求失败了',error.message)     error是请求失败对象，其中的message属性才是失败信息
                         }
-                    )},-->
+                    )},
+        (6)拦截器
+            ()请求拦截器
+                axios（axios的实例）.interceptors.request.use(function (config) {
+                    // 在发送请求之前做些什么
+                    return config;
+                }, function (error) {
+                    // 对请求错误做些什么
+                    return Promise.reject(error);
+                });
+            ()添加响应拦截器
+                axios.interceptors.response.use(function (response) {
+                    // 2xx 范围内的状态码都会触发该函数。
+                    // 对响应数据做点什么
+                    return response;
+                }, function (error) {
+                    // 超出 2xx 范围的状态码都会触发该函数。
+                    // 对响应错误做点什么
+                    return Promise.reject(error);
+                });-->
 
 
 
