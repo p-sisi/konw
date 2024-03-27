@@ -453,19 +453,64 @@
                                      step = step > 0 ? Math.ceil(step) : Math.floor(step);
                                     这样不管是向前还是向后运动，都可以实现缓动画添加的代码：var step = Math.ceil((target - obj.offsetLeft) / 10 )
 
-            6、节流阀
+            6、节流阀（节流）
                     防止轮播图按钮连续点击造成播放过快
                     目的：当上一个函数动画内容执行完毕，再去执行下一个函数动画，让时间无法连续触发
                     核心实现思路：利用回调函数，添加一个变量来控制，锁住函数和解锁函数
-                    全局设置一个变量 var flag = true;在动画函数中添加这个代码
+                    全局设置一个变量 vra flag = true;在动画函数中添加这个代码
                     if (flag) {
                         flag = false;
                                 //关闭水龙头
                     }
                     利用回调函数  动画执行完毕， flag = true   打开水龙头
-                    
 
-                    -->
+                    节流：触发事件、执行任务、设置时间间隔，时间间隔内再次触发事件会被忽略
+                    写法一：
+                    function throttle(func,delay){
+                        let timer;
+                        return function(){
+                            let context = this;
+                            let args = arguments;    //增加参数给func使用
+                            if(timer){
+                                return;   //如果timer被赋值了，说明在执行任务，直接返回，不重新执行任务
+                            }
+                            timer = setTimeout(() => {
+                                func.apply(context，args) ;
+                                timer = null;   //执行完任务，将timer赋值为空  
+                            }, delay);
+                        }
+                    }
+                    btn.addEventListener('click',debounce(fun,1000))
+
+                    方法二：
+                    function throttle(func,delay){
+                        let pre = 0;
+                        return function(){
+                            let context = this;
+                            let args = arguments;
+                            let now = new Date();
+                            if(now - pre > delay){
+                                func.apply(context，args) 
+                                pre = now;
+                            }
+                        }
+                    }
+
+            7、防抖
+                n秒后在执行该事件，若在n秒内被重复触发，则重新计时
+                应用：多次点击，造成多次提交，每次点击前都重新计时
+                        function debounce(func,delay){
+                            let timer;   //闭包，因为每次都不需要重新定义延时时间，只需要初始化一次，且每次调用只是不断赋值
+                            return function (){
+                                let context = this;
+                                let args = arguments;    //增加参数给func使用
+                                clearTimeout(timer);
+                                timer = setTimeout(() => {
+                                    func.apply(context，args)    //修改this指向触发事件的DOM，原先是window
+                                }, delay);
+                            }
+                        }
+                        btn.addEventListener('click',debounce(fun,1000))-->
 </body>
 
 </html>

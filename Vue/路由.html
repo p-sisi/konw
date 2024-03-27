@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由的学习</title>
+</head>
+
+<body>
+    <!-- 路由简介
+        (1)路由就是一组key-value之间的关系，多个路由需要一个路由器管理
+        (2)在之前的页面都是使用的跳转，使用路由可以实现单个页面多个应用的效果SPA（single page web application）
+        (3)key是路径（/class），value是组件或者function-->
+
+
+    <!-- vue-router的使用
+        (1)vue的一个插件库，专门用来实现SPA应用
+        (2)SPA应用：整个应用只有一个完整的页面，点击页面中的导航链接不会刷新页面，只会做页面的局部更新，数据需要通过ajax获取
+        (3)vue-router环境配置（是一个插件，需要vue.use）
+            npm i vue-router@3      3版本只在vue2中使用，4版本只在vue3中使用 
+           在main.js中：  引入vue-router:  import VueRouter from 'vue-router'
+                          应用插件：  Vue.use(VueRouter)
+                          在下面创建vm的时候，新增一个配置项：router
+            在src中：新建文件夹router，里面新建文件index.js（该文件用于创建整个应用的路由器）
+            在index.js中：引入vue-router: import VueRouter from 'vue-router'
+                          创建并暴露路由器：  export default new VueRouter({
+                                                routes:[
+                                                {
+                                                    name:'about'     命名路由，后面但凡是路径path都可以改成名字name:'about'
+                                                    path:'/about',   key值，就是路径
+                                                    component:About  value值，就是展示这个组件
+                                                },
+                                                {},
+                                                ...
+                                                ]
+                                           })
+                          因为使用到了组件的名字，所以要引入组件：import About from '../components/About'
+            回到main.js中： 引入刚刚创建的路由器： import router from './router/index.js'
+                           创建vm增加配置项： router:router
+        (4)当路径中出现'/#/''时，表明路由器已经开始工作
+        (5)在组件中，使用到路由跳转的元素，需要使用<router-link> 标签，这个标签相当于html中的a标签
+           跳转的目标路径使用属性to，就是在原有路径上修改为to后面的路径
+                <router-link class="router" active-class="active" to="/about"> About </router-link>
+            可以给该元素添加属性active-class，表示当有人点击的时候，激活该属性值对应的样式
+            指定组件的呈现位置：
+                <router-view></router-view>
+        (6)在src中创建文件夹pages，该文件夹存放的是路由组件，比如上面提到的About.vue组件，其他的组件为一般组件，放在components
+           文件夹中
+        (7)注意点：
+                ()在router跳转的时候，组件是默认不断被挂载、销毁的
+                ()每个组件都有自己的$route属性，里面储存着自己的路由信息
+                ()整个应用只有一个router,可以通过组件的$router属性获取到，是VueRouter的一个实例对象-->
+
+
+    <!-- 嵌套（多级）路由
+        (1) 在路由的index.js中：
+                routes:[    一级路由
+                    path:'/About',
+                    component:About,
+                    children:[     二级路由，在About组件中的路由，记得引入News组件，注意这里的路径没有"/""
+                        {
+                            path:'news',
+                            component:News,
+                        },{}...
+                    ]
+                ]
+            在About嵌套二级路由的组件中： 二级路由的路径需要把上面所有级数的路径写出来，不然Vue会当成一级路径来看
+                <router-link ... to="/About/News" ...>
+                -->
+
+    <!-- 路由传参
+        (1)query传参
+            ()to的固定参数写法：当路由跳转的时候，在路径中携带参数： <router-link to="/About/News/Detail?id=666&title=你好啊！">
+              to的可变参数动态写法：
+                    <router-link :to="/About/News/Detail?id=${m.id}&title=${m.title}">  m是在detail组件中定义的数据，不要忘记给to前面加冒号
+              to的可变参数对象写法：（推荐写法）
+                    <router-link :to="{
+                        path:'/About/News/Detail',    路径照常写
+                        query:{
+                            id:m.id,
+                            title:m.title
+                        }
+                    }">
+                        {{m.title}}
+                    </router-link>
+            ()detail组件接收数据id和title： 其传递的参数，被保存在该组件特有的$route属性中，该属性里面有一个query属性
+                {{$route.query.id}}  {{$route.query.title}}
+                
+        (2)params传参
+            ()to的固定参数写法: <router-link to="/About/News/Detail/666/你好啊！">
+                    在路由器中，需要说明每个参数的名字：path:'detail/:id/:title'
+              to的可变参数写法：与query一样
+            ()detail组件接收数据id和title： 其传递的参数，被保存在该组件特有的$route属性中，该属性里面有一个params属性
+                {{$route.params.id}}  {{$route.params.title}}
+            ()注意点：使用params传参的时候，不能使用path，只能使用name
+        
+        (3)props配置项传参
+            ()对象写法，该对象中的所有key-value都以props的形式传给Deatle组件
+                在路由器中：{
+                            path:'detail/:id/:title'
+                            component:Detail,
+                            props:{id:666,title:'你好啊！'}
+                            }
+                在Detail组件中，声明接收props参数：
+                            props:['id','title']      注意要以字符串的形式，就可以在模板中{{id}}直接使用
+                ！！！该写法，query和params都能使用，但是数据写死不灵活
+
+            ()布尔值写法，若布尔值为真，就会把该路由组件收到的所有params参数，以props形式传给Detail组件
+                在路由器中：{
+                            ...
+                            props:true
+                            }
+                在Detail组件中，声明接收props参数：
+                            props:['id','title']      注意要以字符串的形式，就可以在模板中{{id}}直接使用
+                ！！！该写法，只能使用params传参生效，数据灵活，query不能使用
+            ()函数写法，同样是以props形式传递参数
+                在路由器中：{
+                            ...
+                            props($route){      回调函数
+                                return {id:$route.query.id,title:$route.query.title}
+                            }或者下面这种写法，对象解构赋值
+                            props({query:{id,title}}){      回调函数
+                                return {id,title}
+                            }
+                            }
+                在Detail组件中，声明接收props参数：
+                            props:['id','title']      注意要以字符串的形式，就可以在模板中{{id}}直接使用-->
+
+    <!-- replace属性
+        ()作用：控制路由器跳转时操作浏览器历史记录的模式
+        ()浏览器的历史记录有两种写入方式：push、replace，push是追加历史记录，形成栈，每次展示栈顶，replace是替换当前记录，默认push
+        ()router-link中有一个属性replace
+            <router-link replace ...></router-link> -->
+
+
+    <!-- 编程式路由导航
+        ()不使用router-link进行路由转换
+        ()添加点击事件，使用到一个应用独有的router，push实现增加跳转，replace是替换当前页面不保存地址
+            如:
+            pushShow(m){
+                this.$router.push({    这部分与to里面一样，使用replace就把push改就行
+                    name:'xiao',
+                    query:{
+                        id:m.id,
+                        title:m.title
+                    }
+                })
+            }
+        ()实现后退和前进
+            ()也是添加点击事件
+                back(){
+                   this.$router.back()     后退this.$router.forward()   使用go go（正数n）前进n步，负数后退
+                } -->
+
+    <!-- 缓存路由组件
+        (1)实现切换路由时，保存已输入的数据等
+        (2)在需要缓存的组件中使用标签<keep-alive>包裹，include中是需要缓存的路由组件，不写的话就默认缓存所有路由组件
+            <keep-alive include="News">
+                <router-view></router-view>
+            </keep-alive>  
+            缓存多个路由组件： :include="['News','Detail']"   加冒号是为了不让它是数组而不是字符串-->
+
+    <!-- 路由守卫
+        (1)保护路由的安全，指定的权限才能查看路由组件
+        (2)路由守卫的使用：
+            ()在创建路由时，先不马上暴露
+                const router = new VueRouter({})
+            ()在暴露前：
+                ()全局前置路由守卫
+                  在初始化时、每次路由切换之前，调用这个函数，可以是箭头或者普通函数
+                    方法一：直接根据路由路径判断是否需要鉴权
+                        router.beforeEach((to,from,next)=>{   
+                            to：你要去哪
+                            from：你来自于哪
+                            next：放行，就是可以切换
+                            if(to.path === '/home/news' || to.path === '/home/message') {  首先判断要去的路由组件时不是需要权限的
+                                if(localStorage.getItem('school')==='at'){
+                                    next()        假设在本地存储中保存了school值，只有当school的值是at的时候才会展示路由组件
+                                }else{alert('学校名不对，无权查看')}
+                            }else{
+                                next()
+                            }
+                        })
+                    方法二：在每个路由配置里的配置对象说明，该路由是否需要权限
+                        知识背景：路由组件的router中有一个配置项meta（路由元信息），里面存放各种自定义的配置
+                        在路由配置中：
+                            routes:[
+                                {
+                                    ...
+                                    meta:{isAuth:true}    一般使用isAuth表示是否需要鉴权，布尔值为false或者直接不写isAuth都是不需要鉴权
+                                }
+                            ]
+                        在路由守卫中：
+                            if(to.meta.isAuth){   //判断是否需要鉴权
+                                if(localStorage.getItem('school')==='at'){
+                                    next()        假设在本地存储中保存了school值，只有当school的值是at的时候才会展示路由组件
+                                }else{alert('学校名不对，无权查看')}
+                            }else{
+                                next()
+                            }
+                ()全局后置路由（用的吧不多）
+                  在初始化时、每次路由切换之后，调用这个函数，可以是箭头或者普通函数
+                  知识背景：想实现每切换一个路由时，网站的标题跟着变化，可以在每个路由配置的meta中配置一个属性title:'首页'
+                           这个时候就适合使用全局后置路由，只有当路由切换之后，才执行
+                    router.afterEach((to,from)=>{
+                        document.title = to.meta.title || '不切换时展示的名字'
+                    })
+                ()独享路由守卫
+                    某一个路由单独拥有的守卫，只有前置独享，没有后置独享
+                    在路由配置中：
+                     routes:[
+                                {
+                                    ...
+                                    beforeEnter:(to,from,next) => {
+                                        里面的判断与上面全局前置方法二一模一样
+                                    }
+                                }
+                            ]
+                ()组件内路由守卫
+                    在路由组件中书写的路由守卫
+                    在路由组件（例如About）中：
+                        ()在路由进入之前，即通过路由规则，进入该组件时被调用
+                            beforeRouteEnter(to,form,next){
+                                里面的判断与上面全局前置方法二一模一样
+                            }
+                        ()在路由离开之前，即通过路由规则，离开该组件时被调用
+                            beforeRouteLeave(to,form,next){
+                            
+                            }-->
+
+    <!-- history模式和hash模式
+        (1)hash模式
+            ()默认路径：localhost：80080/#/  其中第一个“/#”后面的所有路径都叫做hash（哈希）值
+            ()hash值不传给服务器，比如请求的路径是：“/About/#/a/b/c/d”  服务器收到的仍然是“/About"
+            ()路由器默认开启的是hash模式
+            ()使用hash模式，在部署到服务器上的时候，使用了路由跳转之后，执行刷新操作，界面不会出问题，如果是history模式，在
+              刷新之后，界面会不显示，就是因为进行路由跳转的之后，网址会变化，但是hash值不会当成请求资源去访问服务器
+        (2)history模式;
+            ()修改路由器的工作模式，在创建路由器时：
+                const router = new VueRouter({
+                    mode:'history'
+                })-->
+
+    <!-- element-ui中实现路由跳转
+    (1)将想要的组件UI copy到模板中，比如导航栏菜单
+    (2)在index.js路由定义中定义各路由信息
+    (3)在element-ui标签中添加 router和:default-active="this.$route.path"两个属性，比如下面的导航栏菜单：
+        <el-menu
+          router
+          :default-active="this.$route.path"
+          class="el-menu-vertical-demo">
+            <el-menu-item index="/">    菜单标题1
+                <i class="el-icon-s-home"></i>
+                <span slot="title"> 首页</span>
+            </el-menu-item>
+            ...
+        <el-menu>
+    (4)<el-menu-item>标签中，将index=" 改成你的页面路径"，路径格式与index.js文件中的path路径一样
+    (5)遇到的问题：
+        ()路由跳转之后，原来的样式（比如选中高亮）消失了，解决方法：
+            在data中定义一个变量activeRouter:''，
+              mounted() {
+                //获取地址栏中的路由，设置element-ui中的导航栏选中状态
+                this.activeRouter = window.location.pathname;
+                },
+            修改element-ui中的一个属性值：
+             :default-active="activeRouter"-->
+</body>
+
+</html>

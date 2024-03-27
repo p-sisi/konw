@@ -16,9 +16,39 @@
 </head>
 
 <body>
-    <div class="box">
+    <script>
+        function generatePascalTriangle(numRows) {
+            const result = [];
+            for (let i = 0; i < numRows; i++) {
+                const row = [];
+                for (let j = 0; j <= i; j++) {
+                    if (j === 0 || j === i) {
+                        row.push(1);
+                    } else {
+                        const prevRow = result[i - 1];
+                        const sum = prevRow[j - 1] + prevRow[j];
+                        row.push(sum);
+                    }
+                }
+                result.push(row);
+            }
+            return result;
+        }
 
-    </div>
+        function printPascalTriangle(numRows) {
+            const triangle = generatePascalTriangle(numRows);
+            const maxLength = triangle[numRows - 1][Math.floor(numRows / 2)].toString().length;
+            for (let i = 0; i < triangle.length; i++) {
+                const row = triangle[i];
+                const spaces = ' '.repeat((maxLength - row[Math.floor(i / 2)].toString().length) / 2);
+                const number = row[Math.floor(i / 2)].toString().padStart(maxLength, ' ');
+                console.log(spaces + number + spaces);
+            }
+        }
+
+        // 打印前 10 行等腰杨辉三角
+        printPascalTriangle(10);
+    </script>
 </body>
 
 </html>

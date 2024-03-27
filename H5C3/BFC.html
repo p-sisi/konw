@@ -10,21 +10,12 @@
 
 <body>
     <!-- BFC 
-        1、含义：一个BFC区域包含创建该上下文元素的所有子元素，但是不包括子元素中又创造了新的BFC区域的内部元素， 
-        例如：<div class="box1" id="HM_bfc1">
-                <div class="box2"></div>
-                <div class="box3"></div>
-                <div class="box4"></div>
-                <div class="box5" id="HM_bfc2">
-                    <div class="box6"></div>
-                    <div class="box7"></div>
-                    <div class="box8"></div>
-                </div>
-             </div>
-            .box1 是一块BFC区域，这块区域包含了box2、3、4、5，也就是box1的所有子元素，同时box1的子元素也创建了一块BFC区域，这块区域包含了box6、7、8。所以每一块BFC区域只包含了自己的子元素，不包含孙子。
-        BFC区域是相互隔绝的，互不影响
+        1、， 
+        例如：
+            
         
-        2、触发BFC
+        
+        2、
              并不是任意一个元素都可以被当做BFC，只有当这个元素符合以下条件任意之一，才可以被当做BFC
              条件：
                 （1）body根元素
@@ -37,15 +28,19 @@
         
         3、利用BFC解决问题
              （1）解决外边距塌陷问题（垂直塌陷）
-                    <div class="HM"></div>      样式：.HM { width:200px;  height:200px; background-color:red;  margin:100px;}
-                    <div class="HM"></div>    
-                这样的话，两个盒子的垂直距离是100px，而不是100+100，两段margin融合在一起了，而BFC是一个独立的区域互不影响，我们可以将这两个盒子，放到两个BFC区域中，即可解决这个问题。
+                    <div class="HM"></div>      
+                    <div class="HM"></div>
+                    样式：.HM { width:200px;  height:200px; background-color:red;  margin:100px;}    
+                这样的话，两个盒子的垂直距离是100px，而不是100+100，两段margin融合在一起了，而BFC是一个独立的区域互不影响，
+                我们可以将这两个盒子，放到两个BFC区域中，即可解决这个问题。
                 <div>    
                     <div class="HM"></div>
                 </div>   
-                <div>                           样式：.HM { width:200px;  height:200px; background-color:red;     margin:100px;
-                    <div class="HM"></div>                  overflow:hidden;}
+                <div>                           
+                    <div class="HM"></div>                 
                 </div>
+                样式：
+                .HM { width:200px;  height:200px; background-color:red;     margin:100px; overflow:hidden;}
             （2）解决包含塌陷问题
                 <div>    
                     <div class="H"></div>

@@ -5,17 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>测试案例</title>
+    <title>Document</title>
 </head>
 
 <body>
     <script>
-        function fn() {
-            let a = 2;
-            console.log(a)
-            const b = 2;
+        var name = 'global';
+        var obj = {
+            name: 'local',
+            foo: function() {
+                this.name = 'foo';
+            }.bind(window)
+        };
+        var bar = new obj.foo();
+        console.log(obj) // object对象
+        setTimeout(function() {
+            console.log(window.name); //foo obj中的foo方法改变了this指向window
+        }, 0);
 
-        }
+        console.log(bar.name); // foo2 因为
+
+        bar2 = bar;
+        var bar3 = bar2;
+
+        var bar3 = bar2 = bar;
+
+        bar2.name = 'foo2';
+
+        console.log(bar3.name); //global 
+
+        //打印结果：foo，
+        //原因：
     </script>
 </body>
 
