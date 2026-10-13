@@ -1,16 +1,14 @@
-##  八股文
-
 ## JS
 
 #### ES6新特性
 
-1、引入了**类clas**s，实现了面向对象编程；继承extend
+1、引入了**类class**，实现了面向对象编程；继承extend
 
 2、模块化开发（Module)
 
 ​	将一个文件视作一个模块，模块的功能主要由import、export组成，通过import来引入，export向外部暴露，每个模块都有自己单独的作用域。
 
-3**、箭头函数**
+3、**箭头函数**
 
 ​	可以很好的解决this指向问题等
 
@@ -55,10 +53,6 @@
 
 
 
-
-
-
-
 #### 解构赋值
 
 1、概念：通过解构赋值，将属性、值从对象、数组中提取出来，赋给其他的变量
@@ -77,21 +71,21 @@ let { foo, bar } = { bar: 'bbb' , foo: 'aaa'};
 ```
 
 ```js
-	let boy = { age: 22, B: true };
-    let { age: foo, B: bar } = boy;
-    console.log(foo); // 22
-    console.log(bar); // true
+let boy = { age: 22, B: true };
+let { age: foo, B: bar } = boy;
+console.log(foo); // 22
+console.log(bar); // true
 ```
 
 ```js
- function fetch({ name, age, like }) {
-        // 参数经历了 let { name, age, like } = option
-        console.log(name,age,like);
-    }
+function fetch({ name, age, like }) {
+     // 参数经历了 let { name, age, like } = option
+     console.log(name,age,like);
+}
 function add([x, y]) {
-	    return x + y;
-    }
-    add([1, 2]);
+	 return x + y;
+}
+add([1, 2]);
 ```
 
 4、作用用途
@@ -103,14 +97,12 @@ function add([x, y]) {
       id: 520,
       statuses: "isOK",
       data: [520, 1314]
-      };
+  };
       
-      //像下面这样写可以快速取到想要的数据
-      let { id, statuses, data: number } = jsonData;
-      console.log(id, status, number);   520, "isOK", [520, 1314]
+  //像下面这样写可以快速取到想要的数据
+  let { id, statuses, data: number } = jsonData;
+  console.log(id, status, number);   520, "isOK", [520, 1314]
   ```
-
-  
 
 - 交换变量的值：[a,b] = [b,a]
 
@@ -160,17 +152,17 @@ console.log(newArr) //[1,2,3]
 
 
 
-#### 数组常用的方法（一共有19个）
+#### 数组常用的方法
 
-1、splice() ：删除：splice（删除的起始位置index，删除个数）  返回删除的元素数组，且原数组已改变
+1、**splice()** ：删除：splice（删除的起始位置index，删除个数）  返回删除的元素数组，且原数组已改变
 
-​	   			    插入：splice（插入的起始位置index，0，插入的元素）  返回的是空数组，且原数组已改变
+​	   	     插入：splice（插入的起始位置index，0，插入的元素）  返回的是空数组，且原数组已改变
 
-​                       替换：splice（替换的起始位置index，替换的位数，替换项）
+​                        替换：splice（替换的起始位置index，替换的位数，替换项）
 
 2、push()：在原数组***末尾***添加若干元素，不生成新数组，原数组改变
 
-3、pop()：在原数组**末尾**删除若干元素。不生成新数组，原数组改变，若原数组为空，返回undefined
+3、pop()：在原数组***末尾***删除若干元素。不生成新数组，原数组改变，若原数组为空，返回undefined
 
 ​                 array.pop() 也可以获取到数组的末尾元素
 
@@ -180,7 +172,7 @@ console.log(newArr) //[1,2,3]
 
 6、concat(arr1,arr2,...)：合并多个数组，**返回新数组，原数组不变**
 
-7、join("")：将数组的每一项用指定字符连接形成一个字符串。默认连接字符为 “,” 逗号
+7、join("xxx")：将数组的每一项用指定字符连接形成一个字符串。默认连接字符为 “,” 逗号
 
 8、reverse()：将数组倒序。原数组改变。
 
@@ -200,9 +192,24 @@ function objSort (param){
 arr.sort(compare("age"))
 ```
 
-10、map(function(当前项item,当前下标index，原数组arr))：原数组的每一项执行函数后，**返回一个新的数组**。原数组不变。
+10、**map**(function(当前项item,当前下标index，原数组arr))：原数组的每一项执行函数后，**返回一个新的数组**。原数组不变。
 
-11、forEach(function(当前项value,当前下标index，原数组arr))：调用数组的每一项，并将元素传递给回调函数。forEach()**不会返回数据**没有返回值，原数组不变。
+```js
+const arr = [1,2,3];
+const newArr = arr.map( (item) => {
+   item * item;
+})
+console.log(newArr)   [1,4,9]
+```
+
+11、**forEach**(function(当前项value,当前下标index，原数组arr))：调用数组的每一项，并将元素传递给回调函数。forEach()**不会返回数据**没有返回值，原数组不变。
+
+```js
+const arr = [1,2,3];
+arr.forEach( (item) => {
+    console.log(item);    //1 2 3
+})
+```
 
 **注：**两个迭代性能差异不大，迭代都不能中断
 
@@ -214,7 +221,15 @@ arr.sort(compare("age"))
 
 ​						array.slice(0)原样输出内容，可以实现浅拷贝
 
-13、filter( () => {} )：获取数组中符合条件的元素，**组成新的数组**，原数组不变
+13、**filter**( () => {} )：获取数组中符合条件的元素，**组成新的数组**，原数组不变
+
+```js
+const arr = [1,2,3];
+const newArr = arr.fliter( (item) => {
+    item > 2;
+})
+console.log(newArr)   // 3
+```
 
 14、every(function(当前tValue,当前index,原数组arr))，对数组中的每一项进行判断，若**都**符合则返回true，否则返回false。不改变原数组。
 
@@ -231,7 +246,7 @@ var total = arr.reduce((a,b) => a+b);  //15
 
 18、findIndex()：查找元素下标。 有则返回下标，无则返回固定值-1，查找数组中的元素都是引用类型 
 
-19、find(): 查找某个指定元素， TAB_TYPE.find(item => item.label === label)
+19、**find()**: 查找某个指定元素， TAB_TYPE.find(item => item.label === label)
 
 19、includes()：判断一个数组是否包含一个指定的值，返回值是布尔值，indexOf、find、findIndex也能实现
 
@@ -245,7 +260,7 @@ var total = arr.reduce((a,b) => a+b);  //15
 
 1、**charAt（index）：**返回指定index的字符。
 
-2、**indexOf（值，开始index）**：返回指定值，从开始index之后第一次出现的位置；
+2、**indexOf（值，开始index）**：返回指定值从开始index之后第一次出现的位置；
 
 3、**LastIndexOf（值，开始index）：**返回指定值，从开始index之后最后一次出现的位置；
 
@@ -260,6 +275,8 @@ var total = arr.reduce((a,b) => a+b);  //15
 6、**split（字符串中出现的分割符，数组长度）：**将字符串按照分隔符，返回指定长度的数组；
 
 8、**trim（）**：去除字符串两端的空格，返回新字符串
+
+9、**includes（子字符串）**：返回布尔值，字符串是否包含子字符串
 
 
 
@@ -509,8 +526,8 @@ preventDefault方法、stopPropagation()
   }
   //升级版1，考虑了对象、数组类型
   function isObject(o) {
-              return Object.prototype.toString.call(o) === "[object Object]" || Object.prototype.toString.call(o) === "[object Array]"
-          }
+      return Object.prototype.toString.call(o) === "[object Object]" || 	 Object.prototype.toString.call(o) === "[object Array]"
+  }
   
   function deepClone(o) {
       if (isObject(o)) {
@@ -969,15 +986,25 @@ export { updateAvailableDomains, availableDomains, observer };
 
 - **defer**
 
-标签中的脚本会被异步下载，在***HTML解析完毕之后***，多个包含 `defer` 属性的脚本会按照它们在文档中的顺序依次执行，这确保了它们之间的执行顺序与它们在文档中的顺序一致。
+  延迟加载脚本，确保脚本在HTML文档完全解析和构建后才执行。
 
-适用于不需要立即执行的脚本，但需要按照它们在文档中的顺序执行。
+  标签中的脚本会被异步下载，在***HTML解析完毕之后***，多个包含 `defer` 属性的脚本会按照它们在文档中的顺序依次执行，这确保了它们之间的执行顺序与它们在文档中的顺序一致。
+
+  尽管脚本文件是异步下载的，但这些脚本会按照它们在文档中出现的顺序执行。。
+
+  避免脚本阻塞页面加载，提高页面加载速度和性能。
+
+使用场景：
+
+​		提高页面加载性能
+
+​		依赖DOM元素的脚本：如果脚本需要访问DOM元素，可以确保DOM元素在脚本执行时已经被解析
 
 - **async**
 
-标签中的脚本会被异步下载，***不会等待 HTML 解析***，一旦下载完成就会立即执行，不考虑它们在文档中的顺序。
+  标签中的脚本会被异步下载，***不会等待 HTML 解析***，一旦下载完成就会立即执行，不考虑它们在文档中的顺序。
 
-适用于不依赖于文档结构的脚本，可以并行下载和执行。
+  适用于不依赖于文档结构的脚本，可以并行下载和执行。适用于独立的脚本，不依赖DOM
 
 
 
@@ -1032,41 +1059,173 @@ export { updateAvailableDomains, availableDomains, observer };
   }
   ```
 
+
+
+
+#### Blob对象
+
+Blob（二进制大对象）对象是一种 JavaScript 原生对象，用于表示二进制数据。通常用于处理文件或者其他类型的二进制数据，比如图像、音频、视频等。Blob对象可以包含任意类型的二进制数据，而不限于文本数据。
+
+Blob对象的创建方式有多种，比如通过Blob构造函数、使用File对象的slice方法、使用XMLHttpRequest的responseType设置为blob等方式都可以创建Blob对象。一旦创建了Blob对象，你可以对其进行操作，比如转换为URL、读取其中的数据等。
+
+
+
+#### 枚举
+
+一般位于  **src/enums**  文件下，index文件用于导出所有的模版文件
+
+优点：使用枚举，便于后期更改对应类型参数时，
+
+- 枚举定义：**enums/goods.ts**
+
+  ```js
+  /** 售卖方式 */
+  export enum ACCOUNT_STATE_ENUM {
+      FREE = 1,  //免费
+      PAID = 2,  //付费
+      APPOINT_STU = 3,  //指定学员
+  }
+  ```
+
+- 在场景中使用
+
+  ```js
+  import { ACCOUNT_STATE_ENUM} from '@/enums';
+  paymentType: ACCOUNT_STATE_ENUM;
   
+  sale.value = ACCOUNT_STATE_ENUM.FREE
+  ```
+
+
+
+#### 类
+
+- 实例：通过创建的实例  **实例.属性/方法**  调用
+- 静态：通过类名  **类名.属性/方法**  调用
+- 私有：只能在类内部使用   **this.age**
+- 构造方法：
+  - 实例化class对象，唯一一个，在new实例化类时，自动执行
+  - 可以初始化对象的属性
+
+```js
+语法：
+class 类名（AssistantGoods） {
+    constructor(name) {      //构造方法
+        this.name = name;	 //实例属性，在实例化对象时需要传入
+    }   
+    static sex = 18;  //静态属性，不可变化
+	#age = 18;		  //私有属性，只能在类的内部调用
+    getAge() => {	  //外部访问私有属性，只能通过方法调用
+        return this.age;
+    }
+
+	fn(data: any) {	  //普通方法
+        console.log('私有属性值为this.sex')
+        return	'data为传入的参数'
+    }
+	static sfn(data: any) {		//静态方法
+       return	'data为传入的参数'
+    }
+}
+
+//实例化类
+const class1 = new AssistantGoods('第一个类')
+```
+
+- **extends**
+  - class 子类 extends 父类 {}
+  - 类的继承，子类会继承父类所有的属性很方法
+- **super**
+  - super（）：调用父类的构造方法
+  - super.属性    super.方法    调用父类的属性和方法
+- **implements**
+  - 实现了某个接口
+
+```js
+export class AssistantGoods {  
+    //初始化类具有的实例属性
+    appId: string;
+    sellType: SALES_TYPE_ENUM;
+	sellSpecifications: Array<SellSpecification>;
+    private static instance: AssistantGoods | null = null;
+
+	//构造函数，需要初始化实例属性
+    constructor() {
+        this.appId ='',
+        this.sellType = 0,
+        this.sellSpecifications =  []
+
+    	//只允许创建一个实例，不做要求则不需要
+        if (AssistantGoods.instance) {
+            return AssistantGoods.instance;
+        } else {
+            AssistantGoods.instance = this;
+        }
+    }
+    
+    // 实例方法：前端字段 -> 后端字段
+    transform(): ResponseGoodsInfo {
+        const params: any = {
+            cerate_goods_req:{
+                app_id: this.appId,
+                payment_type: this.sellType,
+                sku: this.sellSpecifications.map((specification) => ({
+                    qa_times: specification.qa_times,
+                    sku_price: parseFloat(specification.sku_price),
+                    sku_id: specification.sku_id,
+                })),
+            },
+        };
+        return params;
+    }
+
+	//后端字段 -> 前端字段
+    afterToFront(info: ResponseGoodsInfo) {
+        const {
+            app_id,
+            payment_type,
+            sku
+        } = info ;
+        this.appId = app_id,
+        this.sellSpecifications = sku
+    }
+}
+
+//创建一个响应式的该类实例
+const assistantGoods = ref<AssistantGoods>(new AssistantGoods());
+const useAssistantGoods = () => {
+    return {
+        //返回的是实例这个对象，而不是.value值，确保外部在使用这个数据时，可以响应式改变该实例的值
+        assistantGoods
+    };
+};
+
+//导出该方法，外部可以通过该方法访问到实例响应式数据
+export default useAssistantGoods;
+```
+
+- 在组件中使用该类实例
+
+```js
+import { useShopConfig } from '@/hooks/useShopConfig';
+const { shopConfig } = useShopConfig();
+
+//在组件中可以将该实例当成对象使用，调用并修改其属性和方法
+const { data: res } =  await fetchAssistantGoodsInfo(id);
+assistantGoods.value.afterToFront(res);
+```
+
+
+
+#### 监听watch
+
+见vue文件夹中vue3中watch
+
+
 
 
 
 ## CSS/HTML
-
-#### 浏览器页面渲染规则
-
-**1、构建节点树DOM tree**
-
-​		从上到下解析html文档生成节点树，也叫内容树（content tree）
-
-**2、构建CSS规则树**
-
-​		加载解析css样式
-
-**3、加载JS代码**
-
-​	包括内联和外联JS文件
-
-**4、构建渲染树( Render tree )**
-
-​	根据 DOM 树和 CSS 规则树，生成渲染树( Render tree )【渲染树：按顺序展示在屏幕上的一系列矩形，这些矩形带有字体，颜色和尺寸等视觉属性】
-
-**5、布局**
-
-​	根据渲染树将DOM树中的每一个节点布局在正确的位置
-
-**6、绘制**
-
-​	根据渲染书绘制所有节点，为每一个节点匹配上样式
-
-
-
-
 
 #### 组件库进行深度样式修改
 
@@ -1233,11 +1392,209 @@ export { updateAvailableDomains, availableDomains, observer };
 
 
 
+
+
+#### Grid
+
+- **与flex布局之间的区别**
+  - flex布局是轴线布局，是一维的
+  - grid是二维布局，将容器分成行和列，产生单元格，然后指定项目所在的单元格
+
+- **grid布局示例：**
+
+```html
+<div class="container">    //最外层为grid布局的容器
+  <div class="item"><p>1</p></div>    //grid布局的项目
+  <div class="item"><p>2</p></div>
+  <div class="item"><p>3</p></div>
+</div>
+.container {
+	display: inline-grid;  行内容器（宽度自适应）时
+	display: grid;		块级容器（宽度撑满整行时）
+}
+```
+
+！！！！注意点：
+
+使用grid布局后，float、vertical-align、column-*、display:inline-bolck、display:table-cell等设置都失效。
+
+- **划分列（grid-template-columns）**
+
+  ```css
+  //1、使用具体值，在容器内划分出三列，每列宽度为100px
+  grid-template-columns: 100px 100px 100px;
+  
+  //2、使用百分比，将容器等分为3列，每列宽度为“容器宽度/3”
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  
+  //3、使用比例
+  grid-template-columns: 1fr 2fr;         将容器分为2列，2列的比例为： 第1列：第2列=1:2
+  grid-template-columns: 150px 1fr 2fr ;	第1列宽度固定位150px，第2列的宽度是第3列的一半
+  grid-template-columns: auto 1fr 1fr;     
+  ```
+
+  一些函数设置：
+  - **minmax（min,max）**：该列的宽度在min、max之间
+
+    > 例如：grid-template-columns:  100px  200px  minmax ( 100px , 300px );
+
+  - **repeat(重复次数，重复的值**)：某个值重复几遍
+
+    > 例如：grid-template-columns:  repeat(3 , 33.33% );
+    >
+    > ​          grid-template-columns: repeat( 2,  100px 50px);  // 最终效果：100px  50px  100px  50px
+
+    
+
+    > 不确定列数：使用重复次数关键字： auto-fill  auto-fit
+    >
+    > 适用于容器大小不确定，或者自适应，但item大小确定，希望每列/行能尽可能容纳多的单元格时
+    >
+    > 1、grid-template-columns:   repeat(  auto-fill ,  100px)  ;
+    >
+    > 2、grid-template-columns:   repeat(  auto-fit ,  100px) ;
+    >
+    > ![image-20240703173734753](C:\Users\sisi\AppData\Roaming\Typora\typora-user-images\image-20240703173734753.png)
+    >
+    > 3、grid-template-columns:  repeat(  auto-fill , minmax ( 100px , 1pr ) );
+    >
+    > 无论grid容器有多宽，item都会等比例撑满整个项目，因为设置了1pr，item宽度一样，宽度为100px，最终的行列数将自动计算
+
+  - **fit-content** (值) ：宽度自适应，但不超过设定值。(只支持具体值和百分比)
+
+    grid-template-columns:  fit-content ( 100px )  fit-content( 100px )  40px  auto;
+
+  - **min-content** （值）： 一排或者一列格子中所有最小内容尺寸中最大的那个最小内容尺寸值。
+
+  - **max-content** (值)：max-content关键字和min-content关键字类似，只是最终的尺寸是最大内容宽度中最大的那一个值
+
+  - **auto** ：尺寸的上限是最大内容尺寸的最大值
+
+    
+
+- **划分行** **（ grid-template-rows）**
+
+  与列相同
+
+- **行间距 （row-gap）**
+
+  ```css
+  row-gap: 20px;    支持百分比和具体值
+  ```
+
+- **列间距 （column-gap）**
+
+  ```css
+  column-gap: 20px;	支持百分比和数值
+  ```
+
+  两个合并
+
+  ```css
+  gap: 行间距 列间距； 		支持百分比、数值、calc函数
+  只有一个值表示行列间距一样
+  ```
+
+- **指定区域（grid-template-areas）**
+
+  ```css
+  
+  ```
+
+- **网格布局顺序 （grid-auto-flow）**
+
+  ```css
+  row:   按顺序排行，行下一个排不下就下一行
+  column： 按顺序排列，列下一个放不下就下一列
+  row dense: 按顺序排行，尽可能填满，尽量不出现空格
+  column dense: 按顺序排行，尽可能填满，尽量不出现空格
+  ```
+
+  - dense：表示网格的自然排序启用“密集”打包算法，如果下一个网格较小，则查看前面是否有合适的地方放置该网格。
+
+- **item在单元格内对齐方式**
+
+  效果演示：https://demo.cssworld.cn/new/6/3-5.php
+
+  - ​	justify-items
+
+    ```css
+    1、stretch：默认值，拉伸占满整个单元格宽度
+    2、start: 对齐单元格左侧
+    3、end： 对齐单元格右侧
+    4、center：单元格水平居中
+    ```
+
+  - align-items
+
+    ```css
+    1、normal：默认值，根据使用场景不同表现为stretch或start
+    1、stretch：拉伸占满整个单元格宽度
+    2、start: 对齐单元格左侧
+    3、end： 对齐单元格右侧
+    4、center：单元格水平居中
+    5、baseline：基线对齐
+    ```
+
+  - place-items
+
+    justify-items、align-items的合并书写方式。具有兼容性，IE、Edge浏览器不支持。
+
+- **所有item在container中的对齐方式**
+
+  效果演示：https://demo.cssworld.cn/new/6/3-7.php
+
+  - justify-content（左中右）、align-content（上中下）
+
+    ```css
+    .container {
+        justify-content: 
+            normal: 默认值，与stretch效果一样
+            stretch：项目大小没有指定时，拉伸占据整个网格容器
+            start：contianer起始边框
+            end：container结束边框
+            center：container居中
+            space-around：每个item左右间隔相等，item与container之间有间隔，但item间间隔为双倍
+            space-between：item之间间隔相等，item与container之间没有间隔
+            space-evenly：item之间间隔相等，item与container之间间隔也相等
+    }
+    ```
+
+  - place-content（两个的合并方式）
+
+    
+
+- **某个item开始位置（grid-column-start、grid-row-start) **
+
+  ```css
+  .container item:first-child {
+      grid-column-start: 2;	item在第二列
+      
+      grid-column-start属性：左边框所在的垂直网格线
+      grid-column-end属性：右边框所在的垂直网格线
+      grid-row-start属性：上边框所在的水平网格线
+      grid-row-end属性：下边框所在的水平网格线
+  }
+  关键词：
+  span：表示占据单元格大小
+  grid-column-start：span 2；  某个item占据两个单元格
+  ```
+
+- **某个item在单元格内对齐方式（justify-self、align-self、place-self）**
+
+  ```css
+  .item {
+      justify-self: start;
+  }
+  ```
+
+  
+
 #### 表格实现单行双行样式不一
 
-用选择器： ：nth-child(2n){}
+用选择器： :nth-child(2n){}
 
-​					:nth-child(2n+1){}
+​		    :nth-child(2n+1){}
 
 
 
@@ -1289,7 +1646,31 @@ prefetch：利用浏览器的空闲时间加载页面加载优先级低的资源
 
 实现方式：
 
-1. vue-waterfall 组件库可以实现
+- **vue-waterfall** 组件库可以实现
+
+- **flex布局**实现
+
+```js
+<div class="container">
+   <div v-for="item in collectList" :key="item.id" class="item" id="masonry-container">
+        <img :src="`${BASE_URL}/file/images/${item.filename}`" alt="">
+   </div>
+</div>
+
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    height: 100vh; 
+    .item {
+        margin: 10px;
+        width: calc(100%/4 - 20px);
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+```
 
 
 
@@ -1297,7 +1678,7 @@ prefetch：利用浏览器的空闲时间加载页面加载优先级低的资源
 
 ES6出现的，js引擎会先编译和创建执行上下文，再按顺序执行代码
 
-1、为什么会出现？
+- 为什么会出现？
 
 在使用之前，js代码中会出现一个**变量污染**的问题，
 
@@ -1383,9 +1764,9 @@ for(var i = 0;i < 5;i++)
 
 #### 懒加载
 
-​		原理：初始时给页面上的图片的`src`设置为空值或者`javascript:;`,给图片创建一个`data-url`属性,并将图片正确的url赋值给`data-url`属性,当图片到达浏览器视窗时,将`data-url`的值赋值给`src`属性,这样就达到了懒加载的目的。
+​	原理：初始时给页面上的图片的`src`设置为空值或者`javascript:;`,给图片创建一个`data-url`属性,并将图片正确的url赋值给`data-url`属性,当图片到达浏览器视窗时,将`data-url`的值赋值给`src`属性,这样就达到了懒加载的目的。
 
-​		DOM对象中有个**dataset**属性对象，可以在该对象中存一些与该DOM对象相关的数据。 date-id="id"  是在生成dom对象时对dataset的一个初始化的动作，dataset中会存在一个id属性和age属性。这里需要注意data-仅仅是一个约定好的前缀，在生成DOM对象时所有已data-开头的属性会将其去掉前缀data-后存在dataset中
+​	DOM对象中有个**dataset**属性对象，可以在该对象中存一些与该DOM对象相关的数据。 date-id="id"  是在生成dom对象时对dataset的一个初始化的动作，dataset中会存在一个id属性和age属性。这里需要注意data-仅仅是一个约定好的前缀，在生成DOM对象时所有已data-开头的属性会将其去掉前缀data-后存在dataset中
 
 ```js
 img.src = img.dataset.src;  //核心代码
@@ -1399,8 +1780,7 @@ img.src = img.dataset.src;  //核心代码
 
 
 
-
-**如何判断元素进入可视区域**：
+#### 如何判断元素进入可视区域
 
 - **getBoundingClientRect**
 
@@ -1429,7 +1809,7 @@ console.log(clientRect);
 ````js
 //创建观察者
 const callback = (entries, observer) => {在这里实现可视区域内的操作}
-  						// 表示重叠面积占被观察者的比例，从 0 - 1 取值，1 表示完全被包含
+// 表示重叠面积占被观察者的比例，从 0 - 1 取值，1 表示完全被包含
 const observer = new IntersectionObserver(callback, {threshold: 1.0, });
 //传入被观察者
 const target = document.querySelector('.target');
@@ -1451,24 +1831,6 @@ observer.observe(target);
 **window.innerHeight**：窗口显示区的高度
 
 
-
-#### 文本换行
-
-```css
-//单行超出
-.text-ellipsis {
-  white-space: nowrap; /* 防止文本换行 */
-  overflow: hidden; /* 隐藏超出容器的文本部分 */
-  text-overflow: ellipsis; /* 使用省略号表示文本溢出 */
-}
-//多行超出，有兼容性问题，适用于webkit内核的浏览器（谷歌、safiri）和移动端
-.multi-line-ellipsis {
-  display: -webkit-box; /* 将元素属性变为webkit引擎的一部分 */
-  -webkit-line-clamp: 3; /* 指定希望显示的行数 */
-  -webkit-box-orient: vertical;  /* 文本在垂直方向上显示 */
-  overflow: hidden; /* 溢出部分隐藏 */
-}
-```
 
 
 
@@ -1579,7 +1941,7 @@ left、width和top、height相似
   线性渐变：沿着一条直线从一个颜色过渡到另一个颜色
   
   ```css
-background-color: linear-gradient(方向，颜色1，颜色2，...)
+  background-color: linear-gradient(方向，颜色1，颜色2，...)
   
   to top: 从底部到顶部
   to bottom: 从顶部到底部
@@ -1659,6 +2021,20 @@ box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 
 在css中，使用 @keyframes  规则来定义动画效果，使用 animation 来将动画应用到元素中
 
+**常见的动画制作方式**
+
+- **Png序列帧**
+
+  介绍：用css keyframes操作每一帧需要展示的图片，缺点也很明显，每一帧都是一张图片，占比较大的体积。当然也可以将图片合并成精灵图（Sprites Map），可参考这个方案，使用gka一键生成帧动画。Png也是位图，放大会失真，可以通过增大图片尺寸，避免模糊
+
+- **Gif图**
+
+  与普通图片类似，只需要引入一张图即可，但是gif图是位图，不是矢量图，放大会失真
+
+- **SVG API**
+
+  可以使用lottie-web
+
 ```css
 1、定义关键帧：每个关键帧包含了元素在某个时间点的样式
 @keyframes exampleAnimation {
@@ -1690,7 +2066,7 @@ div {
 8、play-state (可选值): 规定动画是运行还是暂停。常见的值有 running（运行）和 paused（暂停）。
 ```
 
-- 使用第三方动画库，**animate.css**
+- **使用第三方动画库，animate.css**
 
   ```js
   //1、下载资源库
@@ -1703,8 +2079,70 @@ div {
   <h1 class="animate__animated animate__bounce">An animated element</h1>
   ```
 
-- 使用**lottie**动效
+- **Lottie-web**
 
+  - **介绍**：
+  
+  ​	lottie是一个跨平台的动画库，通过AE（After Effects）制作动画，再通过AE插件（BodyMovin）导出JSON文件，最终各个终端通过解析这个JSON文件，来还原动画。
+  
+  - **整体架构**
+  
+    After Effects 动画 
+        ↓ (Bodymovin 插件)
+    JSON 描述文件
+        ↓ (Lottie 解析器)
+    各平台原生渲染
+  
+  - **JSON结构**
+  
+    前端开发者一般只需要关注图层和图层下的对应换数据的节点
+  
+    ```JSON
+    {
+      "v": "5.7.4",          // Bodymovin 版本
+      "fr": 30,              // 帧率
+      "ip": 0,               // 起始帧
+      "op": 90,              // 结束帧
+      "st": 0,				 // 开始时间
+      "w": 800,              // 宽度
+      "h": 600,              // 高度
+      "layers": [            // 图层数组
+        {
+          "ty": 1,           // 图层类型 (1: 形状层, 2: 图片层, 3: 文本层等)
+          "nm": "Layer 1",   // ！！！图层名称，开发需要关注，因为要找到这个图层替换动画中的数据
+          "ks": {            // 变换属性
+            "p": { ... },    // 位置
+            "s": { ... },    // 缩放
+            "r": { ... },    // 旋转
+            "o": { ... }     // 透明度
+          },
+          "t": {
+              "d": {
+                  "k": [
+                    {
+                      "s": {
+                        "f": "SourceHanSansSC-Medium",  // 字体
+                        "s": 54,                        // 字体大小
+                        "t": "今年，",                   // ！！文本内容，要换数据
+                        "fc": [0.125, 0.161, 0.278],    // 字体颜色
+                        "lh": 1.5,                      // 行高
+                        "ls": 0,                        // 字间距
+                        "j": 0                          // 对齐方式
+                      },
+                      "t": 0                           // 起始时间
+                    }
+                  ]
+            }
+          }
+        }
+      ],
+      "assets": [ ... ],     // 资源文件（图片等）
+      "fonts": { ... }       // 字体信息
+    }
+    ```
+  
+  - **用法**：
+  
   ```ts
   //1、找到lottie库，可用的有阿里矢量图标库中的
   
@@ -1714,28 +2152,216 @@ div {
   //3、在lottie库中下载对应动画的JSON文件，存放在项目中的静态资源文件夹中
   
   //4、在使用动效的.vue文件中
+  <div ref="animation1"></div>        //创建dom元素装载动效
+  
   import car from "../assets/images/car-loading3-data.json"   //引入下载的动效文件
   import lottie from 'lottie-web'    //引入动效资源库
   
-  <div  ref="animation1"></div>        //创建dom元素装载动效
-  
   const animation1 = ref<any>(null)  //获取DOM
+  const lottie1 = ref();
   onMounted(() => {    //一般在页面加载时触发
-      lottie.loadAnimation({
+      let data = {
           container: animation1.value,   //选择渲染DOM
-          renderer: 'svg',   //渲染格式
+          renderer: 'svg',   //渲染格式:SVG（默认）、HTML、Canvas
           loop: true,   //循环播放
           autoplay: true,   //自动播放
-          animationData: car   //要渲染的动效
+          animationData: car   //要渲染的动效，JSON文件，不是路径
+      }
+      
+      this.lottie1 = lottie.loadAnimationdata);
+      
+      //销毁动画
+      this.lottie1["addEventLister"]("complete", () => {
+          this.lottie1["destroy"]();
       })
   })
+  
+  // 控制动画开始和暂停
+  this.lottie1.play();
+  this.lottie1.pause();
+  
+  
+  // 控制播放速度
+  this.lottie1.setSpeed(2);   // 2倍速
+  this.lottie1.setDirection(-1);  // 倒放
+  
+  // 控制播放进度
+  animation.goToAndStop(30, true); // 跳转到第30帧并停止
+  animation.goToAndPlay(45, true); // 跳转到第45帧并播放
   ```
-
+  
+  - **动画钩子**
+  
+    ```vue
+    complete:   	动画播放完成
+    loopComplete:	当前循环播放完成
+    enterFrame:		播放一帧动画时触发
+    segmentStart:
+    config_ready:	初始配置完成
+    data_ready:		所有动画数据加载完成
+    DOMLoaded: 		元素已经添加到DOM节点上
+    destroy:		动画销毁
+    
+    this.lottie1.addEventListener('complete',() => {})
+    ```
+  
+  - **替换动态内容**
+  
+    ```js
+    // 1、替换文本内容：通过图层名称查找并替换文本
+    this.lottie1.addEventListener('DOMLoaded', () => {
+      const textLayer = this.lottie1.renderer.elements.find(el => 
+        el.data.nm === 'text_layer_name'
+      );
+      if (textLayer) {
+        textLayer.updateDocumentData({ t: '新文本内容' });
+      }
+    });
+    
+    // 2、替换图片：
+    // 替换图片资源
+    this.lottie1.addEventListener('config_ready', () => {
+      this.lottie1.renderer.elements.forEach(element => {
+        if (element.data.ty === 2) { // 图片图层
+          const img = new Image();
+          img.src = 'new-image.png';
+          element.img = img;
+        }
+      });
+    });
+    ```
   
 
 
+- **终端**：
+  - lottie-web
 
 
+
+
+
+
+#### 视频
+
+显示视频组件
+
+```js
+<video 
+    class="video" 
+	ref="videoRef"
+   :src="`${BASE_ERL}/file/videos/${selectedVideoData?.depositFilename}`" //资源地址
+   controls    //是否展示暂停开始等操作提示，可以使用动态:controls="isShow"
+   @play="handlePlay"	//视频播放事件
+   @pause="handlePause" //视频暂停事件
+   @timeupdate="handleTimeUpdate"> //
+</video> 
+
+const currentTime = ref(0);	//当前播放进度，视频的第xxx秒
+let timerId: number | null = null; // 定时器 ID
+const videoRef = ref(null);   //获取视频播放器DOM
+
+//暂停、开始播放资源：
+//1、获取DOM：videoRef.value.pause()暂停     videoRef.value.play()播放
+//2、触发事件：event.target.pause();暂停	  event.target.play();暂停
+
+//开始播放视频事件
+const handlePlay = async (event: any) => {
+    //event能捕捉到开始事件触发
+    console.log("视频开始播放的视频进度：",currentTime.value);
+    try {
+        const params = {
+            videoId: selectedVideoData.value.id,
+            timing: currentTime.value
+        }
+        await fetchPlayVideoResource(params);
+        // 启动定时器，每30秒发送一次检查状态接口请求
+        timerId = setInterval(watchPlayStatus, 3000);
+    } catch (error: any) {
+        if(error.message == '开始时间超过最大进度') {
+            //更新视频可播放的最大进度，后端请求失败且返回可播放最大进度
+            selectedVideoData.value.maxProgress = error.data;
+            //如果拖动进度大于了最大进度，则返回最大进度处开始播放
+            event.target.currentTime = selectedVideoData.value.maxProgress;
+        }
+        ElMessage.error(error.message);
+    }
+}
+
+//暂停播放视频事件
+const handlePause = async (event: any) => {
+     //event能捕捉到暂停事件触发
+    console.log("视频暂停播放的视频进度：",currentTime.value);
+    //暂停时，也可以让后端记录播放时长
+    try {
+        const params = {
+            videoId: selectedVideoData.value.id,
+            timing: currentTime.value
+        }
+        await fetchPauseVideoResource(params);
+        // 停止定时器
+        if (timerId !== null) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    } catch (error: any) {
+        ElMessage.error(error.message);
+    }
+}
+
+//更新视频进度
+const handleTimeUpdate = async (event:any) => {
+    currentTime.value = Math.round(event.target.currentTime);    //当前视频进度 xxx秒
+    console.log("当前进度",currentTime.value);
+}
+
+/**
+ *  检查状态接口请求，每30s检查视频播放状态，在视频开始时开始监听，在视频暂停时结束监听，反复循环
+ */
+const watchPlayStatus = async() => {
+    try {
+        const params = {
+            videoId: selectedVideoData.value.id,
+            timing: currentTime.value
+        }
+        await fetchVideoResourcePlayWatch(params);
+    } catch (error: any) {
+        ElMessage.error(error.message)
+    }
+}
+
+.video {   //设置视频播放窗口的大小
+    width: 100%;
+}
+```
+
+注意点：
+
+- 视频在**暂停**状态下拖动进度条：不会触发暂停、开始事件，会触发视频进度更新事件
+- 视频在**开始**状态下拖动进度条：鼠标按下触发暂停事件，更新进度条，松开触发开始事件，更新进度条
+- 视频拖动进度条时，按下时触发一次进度条更新，滑动暂停，但鼠标未松开也会触发进度条更新
+
+
+
+#### 焦点事件
+
+- 事件**blur**通常适用于输入框、文本域等可以获取到焦点的事件
+
+- 事件**foucsout**适用于div等没有焦点的元素
+
+  ```vue
+  <div @click="handleClickEdit" @focusout="handleBlurEdit">
+      {{ content }}
+  </div>
+  ```
+
+
+
+
+
+
+#### 实现拖拽
+
+参考用户管理系统里面的【自定义列表】
 
 
 
@@ -1956,7 +2582,7 @@ div {
 
 - **协商缓存：**命中协商缓存缓存，就用缓存内容，没有命中，就要返回资源
 
-  ​					先向服务器发送一个请求，如果资源没有发生修改，则返回一个 [304](https://so.csdn.net/so/search?q=304&spm=1001.2101.3001.7020) 状态，让浏览器使用本地的缓存副本。如果资源发生了修改，则返回修改后的资源。
+  ​	先向服务器发送一个请求，如果资源没有发生修改，则返回一个 [304](https://so.csdn.net/so/search?q=304&spm=1001.2101.3001.7020) 状态，让浏览器使用本地的缓存副本。如果资源发生了修改，则返回修改后的资源。
 
   条件：max-age过期、no -cache
 
@@ -2004,7 +2630,7 @@ Strict-Transport-Security: max-age=expireTime [; includeSubDomains] [; preload]
 
 
 
-#### localStorage、SessionStorage、cookie、session 之间有什么区别
+#### localStorage、SessionStorage、cookie、session 
 
 - localStorage、SessionStorage（两个都是web store)
 
@@ -2012,11 +2638,15 @@ Strict-Transport-Security: max-age=expireTime [; includeSubDomains] [; preload]
 
     实现永久保存，数据存储在本地硬盘，关闭浏览器还存在
 
+    清除：手动清除，代码去除、开启无痕、卸载浏览器
+
   - **sessionStorage**
 
-    临时保存，保存在session对象中，关闭浏览器就消失，不同浏览器窗口、不同标签页中数据不共享，
+    临时保存，保存在session对象中，不同浏览器窗口、不同标签页中数据不共享，
 
-    在同一个标签页下，进行刷新或者打开一个同源的网站依然存在
+    根域名相同的网站（www.baidu)共用一个sessionStorage
+
+    清除：关闭当前标签页
 
   - 二者联系：
 
@@ -2040,9 +2670,7 @@ Strict-Transport-Security: max-age=expireTime [; includeSubDomains] [; preload]
 
     - 判断用户是否登陆过，以便自动登录、记住密码
 
-    - 保存上次登录的时间等信息
-
-      
+    - 保存上次登录的时间等信
 
   - **session**：保存在服务器上，客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。用户与服务器建立连接的同时，服务器会自动为其分配一个**SessionId**，来标识用户的唯一身份，用于跟踪用户的状态和存储用户信息。不支持跨域，。
 
@@ -2052,7 +2680,7 @@ Strict-Transport-Security: max-age=expireTime [; includeSubDomains] [; preload]
     - 服务器为每个sessionID分配一块存储空间，存储用户信息
     - 用户发送请求时，会将session ID以cookie的形式发送到服务器
     - 服务器收到请求后，根据session ID 查找对话数据，会话会过期，也就是我们平时的登录过期等
-
+  
   - 二者区别：
 
     - Cookie保存在浏览器端，Session保存在服务器端；
@@ -2077,34 +2705,30 @@ Strict-Transport-Security: max-age=expireTime [; includeSubDomains] [; preload]
 
       
 
-#### web攻击：XSS、CSRF、SQL
+#### XSS、CSRF、SQL
 
-- XSS
+- **XSS**
 
   跨站脚本攻击。攻击者在Web页面里插入了恶意的Script代码，当用户浏览页面时，会遭受到到代码攻击。
 
-  主要有三种类型：
+  - 主要有三种类型：
+    - 反射型：恶意脚本作为参数放在在请求的URL中，恶意脚本被发送到服务器，并随着响应内容一起传给用户进行解析执行。
 
-  - 反射型：恶意脚本作为参数放在在请求的URL中，恶意脚本被发送到服务器，并随着响应内容一起传给用户进行解析执行。
+    - 存储型：XSS被保存到了服务器端（数据库，内存，文件系统），当其他用户访问包含这些恶意脚本的页面时，脚本被发送到他们的浏览器并执行。
 
-  - 存储型：XSS被保存到了服务器端（数据库，内存，文件系统），当其他用户访问包含这些恶意脚本的页面时，脚本被发送到他们的浏览器并执行。
+    - DOM型：修改页面的DOM结构
 
-  - DOM型：修改页面的DOM结构
-
-    举例：
+      举例：
 
     （1）在网页 input 或者 textarea 中输入 <script>alert('xss')</script>或者其他脚本。
 
-  
+  - XSS防御方法：
+    - 对用户输入的内容进行**过滤**，对所有用户提交内容进行可靠的输入验证，包括对 URL、查询关键字、POST数据等，仅接受指定长度范围内、采用适当格式、采用所预期的字符的内容提交，对其他的一律过滤。(客户端和服务器都要)，比如说用户在input框里面输入了script标签，就把他过滤掉
+    - 尽量避免直接操作HTML字符串
+    - 将包含敏感信息的cookie标记为httponly（cookie的一个属性），防止恶意脚本访问
+    - CSP：Content Security Policy内容安全策略，网站通过发送一个 CSP 头部，来告诉浏览器什么是被授权执行的与什么是需要被禁止的，就是我们能够规定，**我们的网站只接受我们指定的请求资源**，Content-Security-Policy 头部和指令。（比较新的，不是很了解）
 
-XSS防御方法：
-
-- 对用户输入的内容进行**过滤**，对所有用户提交内容进行可靠的输入验证，包括对 URL、查询关键字、POST数据等，仅接受指定长度范围内、采用适当格式、采用所预期的字符的内容提交，对其他的一律过滤。(客户端和服务器都要)，比如说用户在input框里面输入了script标签，就把他过滤掉
-  - 尽量避免直接操作HTML字符串
-  - 将包含敏感信息的cookie标记为httponly（cookie的一个属性），防止恶意脚本访问
-  - CSP：Content Security Policy内容安全策略，网站通过发送一个 CSP 头部，来告诉浏览器什么是被授权执行的与什么是需要被禁止的，就是我们能够规定，**我们的网站只接受我们指定的请求资源**，Content-Security-Policy 头部和指令。（比较新的，不是很了解）
-
-- CSRF
+- **CSRF**
 
   跨站请求伪造。伪造请求，冒充用户在站内的正常操作，就可以添加管理员之类的。
 
@@ -2114,23 +2738,31 @@ XSS防御方法：
   - 使受害者在登录的状态下去访问该网页
   - 受害者的浏览器会自动发送请求到目标网站，包含一些恶意操作，如修改密码、转账等
   - 目标网站受到请求，因为受害者处于一登录状态，已经进行了身份验证，所以服务器会将请求视为合法操作，就会去执行相应的请求操作
-  
+
   CSRF防御方法：
-  
+
   - 在请求地址中添加 token 并验证，token 可以在用户登陆后产生并放于 session 之中，然后在每次请求时把 token 从 session 中拿出，与请求中的 token 进行比对
   - 在 HTTP 头中自定义属性并验证
-  - 使用SCRF令牌，验证请求的来源和合法性，就是在每个包含敏感操作的请求中，随机生成一个与用户会话相关的SCRF令牌，由服务器去进行验证。
+  - 使用CSRF令牌，验证请求的来源和合法性，就是在每个包含敏感操作的请求中，随机生成一个与用户会话相关的SCRF令牌，由服务器去进行验证。
   - 好像这个CSP也是可以防御的，具体不是很清楚
-  
+
 - SQL注入
 
   Web 应用未对用户提交的数据做过滤或者转义，导致后端数据库服务器执行了黑客提交的 sql 语句。黑客利用 sql 注入攻击可进行拖库、植入 webshell，进而入侵服务器。
-  
-  可以执行的操作：
-  
-  - 绕过身份验证，恶意执行SELECT语句去获取用户密码等个人信息
 
-
+  - 导致的可能后果：
+  
+- 绕过身份验证，恶意执行SELECT语句去获取用户密码等个人信息
+  
+- 防范措施：
+  
+  - 后端
+  
+    1、仅授予数据库账号必要的最低权限
+  
+    2、使用ORM对象映射工具，因为大多数ORM框架支持参数化查询，有助于防止SQL注入
+  
+      
 
 #### CDN
 
@@ -2145,6 +2777,35 @@ Content Delivery Network 内容分发网络，
 域名解析，因为IP地址是一串数字，不方便记忆，DNS将域名转换成IP地址
 
 ![DNS域名解析过程](D:\sisi\Pictures\Camera Roll\DNS域名解析过程.jpg)
+
+
+
+#### 浏览器URL输入到展示流程
+
+- **URL解析**
+  - 解析URL信息：协议、域名、端口等
+  - 检查缓存：查看强缓存，如果所请求的资源在本地缓存且未过期，***直接从缓存读取，过程结束***
+  - DNS域名解析（找IP）：如果缓存未命中或者已经过期，浏览器在这步需要去找到服务器IP地址。
+- **建立连接后发送请求**
+  - TCP三次握手：获得 IP 后，浏览器会通过 TCP 协议与服务器建立可靠的连接。三次握手的过程是：客户端先发送 SYN 包，服务器收到后回复 SYN-ACK 包，客户端最后再回复 ACK 包。连接建立成功后，客户端和服务器可以开始传输数据。
+  - TLS握手：只有HTTPS协议才会需要这一步，在 TCP 连接之上，HTTPS 需要增加安全层。通过 TLS 握手（涉及证书验证、密钥交换等环节）协商出会话密钥，之后的数据传输都会被加密。
+  - 构建并发送请求：连接建立后，浏览器会构建一个 HTTP 请求报文，包含请求行（如 `GET /index.html HTTP/1.1`）、请求头（如 `Host`、`User-Agent`、`Cookie`）以及可选的请求体（如 POST 请求中的表单数据），然后通过 TCP 连接发送给服务器。
+- **服务器处理与响应**
+  - 处理请求：服务器收到请求后，会根据请求的路径和方法，由后端程序（如 Java、Node.js、Python 等）进行处理
+  - 响应：服务器将处理结果封装成 HTTP 响应报文发回客户端，包含**状态行**（如 `HTTP/1.1 200 OK` 或 `404 Not Found`）、**响应头**（如 `Content-Type`、`Cache-Control`、`Set-Cookie`）和**响应体**（即 HTML、CSS、图片等资源内容）。
+- **浏览器渲染页面**
+  - 接收数据：浏览器接收分块传输的数据包，根据 HTTP 版本和 `Connection` 头的设置，决定是保持连接（Keep-Alive）还是关闭连接（四次挥手）。
+  - HTML解析为DOM tree：从上到下接卸HTML文本中的每一个标签，一个标签创建一个DOM节点，绘制出节点树
+  - 解析CSS生成CSSOM树：在解析HTML时，遇到外部、内联样式，解析成css，构建CSSOM树。CSSOM会阻塞页面渲染
+  - 解析JS并执行：如果遇到 `<script>` 标签（特别是没有 `async` 或 `defer` 属性的），浏览器会**暂停 DOM 解析**，立即下载并执行 JavaScript 代码。因为 JS 可能会通过 `document.write()` 修改 DOM 结构，或者通过 `getComputedStyle()` 查询依赖 CSSOM 的样式。
+  - 合成渲染树（render tree）：将 DOM 树和 CSSOM 树合并，计算出每个可见节点的最终样式和内容，生成 **渲染树**。`<head>`、`<script>`、`display: none` 的元素等不会被包含在渲染树中。
+  - **布局/重排 (Layout/Reflow)**：从渲染树的根节点开始，计算每个节点在设备屏幕上的**精确几何位置**（宽度、高度、x/y坐标）。这个过程称为布局或重排。
+  - **绘制 (Paint)**：将布局阶段计算好的每个节点，按照正确的顺序（如 z-index）逐层绘制成实际的像素，这个过程称为绘制。绘制会将整个页面分成多个**图层**（类似 Photoshop 的图层概念）。
+  - **合成与显示 (Composite)**：浏览器将不同的图层按照一定顺序**合成**成一张最终的位图，然后通过 GPU 或 CPU 将页面内容显示在屏幕上。例如，`transform` 和 `opacity` 属性的动画通常不需要触发重排和重绘，只需在合成线程中高效完成。
+
+
+
+
 
 
 
@@ -2236,7 +2897,82 @@ post(url: string, data: any, config: AxiosRequestConfig = {}) {
   }
   ```
 
-  
+
+
+
+#### 发送文件请求
+
+```html
+//上传文件的DOM，可以使用原生或者组件库
+<el-upload
+   ref="uploadRef"
+   class="upload-demo"
+   drag      可拖拽上传
+   :auto-upload="false"    //不在用户选择文件之后自动上传到后端，而是手动上传
+   @change="handleChangeFile"  //用户更改文件的时候触发
+   :limit="1"     上传的文件数量
+>
+```
+
+```js
+import axios from 'axios';
+
+const uploadTaskFile = ref();    //保存File类型的用户选择的文件数据
+
+const handleChangeFile = (file: any, fileList: any) => {
+    // file 是当前选择的文件，可以通过 file.raw 获取原始的 File 对象,fileList是上传的文件列表
+    uploadTaskFile.value = file.raw; 
+};
+
+// 使用重新封装的axios请求，上传formData类型的数据
+//设置请求头，定义数据类型和身份验证
+const token = localStorage.getItem('Token');
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data', // 设置Content-Type为formData类型
+    'Authorization': `${token}`,   //身份验证token
+  }
+}
+
+const handleSubmitTask = async () => {
+    //将所有参数都放在formData类型数据中
+    let formData = new FormData();
+    //如果其他参数放在路径中，则直接这样
+    formData.append('file', uploadTaskFile.value);
+	//如果其他参数放在body中，则需要将object转换成JSON格式
+    const videoInfo = {
+        courseId: commonStore.activeClass.courseId,
+        id: 0,
+        title: inputVideoTitle.value,
+        deadTime: new Date(inputDeadTime.value).getTime(),
+        toScore: activeSelectRadio.value == '计分'? true : false
+    }
+    formData.append('request', JSON.stringify(videoInfo));
+
+    //发送请求并进行处理
+    axios.post('http://localhost:1023/homework/commitHomework', formData, config)
+        .then((response: any) => {
+            console.log('Response from server:', response.data);
+        })
+        .catch((error: any) => {
+            console.error('Error:', error);
+        });
+}
+
+const uploadRef = ref<UploadInstance>()
+
+//选择文件超出限制时，覆盖第一个文件
+const handleExceed: UploadProps['onExceed'] = (files) => {
+    uploadRef.value!.clearFiles()
+    const file = files[0] as UploadRawFile
+    file.uid = genFileId()
+    uploadRef.value!.handleStart(file)
+}
+```
+
+
+
+
 
 #### mockjs模拟
 
@@ -2306,7 +3042,7 @@ post(url: string, data: any, config: AxiosRequestConfig = {}) {
 
 
 
-**使用postman进行接口模拟**
+#### postman接口模拟
 
 使用场景：后端接口文档已出，但是接口未开发完成，前端需要使用mock数据
 
@@ -2323,16 +3059,146 @@ post(url: string, data: any, config: AxiosRequestConfig = {}) {
 
 
 
+#### 文件下载
+
+```js
+axios.get(`http://localhost:1023/file/homeworkFiles/download/${item.depositFilename}`, config)
+    .then((response: any) => {
+    	//返回的data中是一个二进制类型的文件
+         const blob = new Blob([response.data]);
+         const url = window.URL.createObjectURL(blob);
+         const link = document.createElement('a');
+         link.href = url;
+         link.setAttribute('download', item.depositFilename); // 在这里设置文件名
+         document.body.appendChild(link);
+         link.click();
+         document.body.removeChild(link);
+         ElMessage.success('下载成功');
+     })
+     .catch((error: any) => {
+    	 ElMessage.error('下载失败');
+          console.error('Error:', error);
+     });
+```
+
+
+
+#### content-Type出现自定义边界
+
+描述：上传视频资源文件时，手动指定了content-Type类型为：
+
+在发送请求时出现了content-Type为multipart/form-data; boundary=----WebKitFormBoundary7ZRn2lArx8wzkcZA的情况，导致请求状态码出现415，应该如何解决。
+
+解决办法：
+
+当你看到`Content-Type`为`multipart/form-data; boundary=----WebKitFormBoundary7ZRn2lArx8wzkcZA`时，这其实是正常的，因为这是浏览器自动为`FormData`对象生成的`boundary`值。`boundary`是`multipart/form-data`类型请求的一部分，用于分隔表单中的不同部分。
+
+出现415错误（Unsupported Media Type）通常意味着服务器不接受你发送的请求体的`Content-Type`类型。在你的情况下，你正在发送`multipart/form-data`类型的请求，这是大多数服务器用于文件上传的标准格式。
+
+```js
+// 设置请求头
+const token = localStorage.getItem('Token');
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data', // 设置Content-Type为formData类型
+    'Authorization': `${token}`, 
+  }
+}
+
+/**
+ *  上传视频资源请求
+ */
+const handleUploadVideo = () => {
+    isUploading.value = true;
+    //判断文件类型，不是mp4则解析失败
+    const isExcel = selectedVideoFile.value.type === 'video/mp4'; 
+    if (!isExcel) {
+        ElMessage.error('只能上传 mp4 格式的文件');
+        isUploading.value = false;
+        return
+    }
+    let formData = new FormData();
+    formData.append('file', selectedVideoFile.value);
+    const videoInfo = {
+        courseId: commonStore.activeClass.courseId,
+        id: 0,
+        title: inputVideoTitle.value,
+        deadTime: new Date(inputDeadTime.value).getTime(),
+        toScore: activeSelectRadio.value == '计分'? true : false
+    }
+    formData.append('request', JSON.stringify(videoInfo));
+
+    axios.post('http://localhost:1023/video/uploadVideo', formData, config)
+        .then((response: any) => {
+            isUploading.value = false;
+            ElMessage.success('上传成功')
+        })
+        .catch((error: any) => {
+            console.error('Error:', error);
+        });
+}
+```
+
+
+
+#### SSE
+
+- **概述**
+
+  SSE（Server-Sent Event）是一种服务器主动向客户端推送数据的技术，也被称为“时间流 （Event Stream）”，基于HTTP协议，利用其长连接特性，在客户端与服务器之间建立一条持久化连接，并通过这条连接实现服务器向客户端的实施数据推送。
+
+
+
+#### 浏览器保持请求
+
+在切换路由或其他情况下，当前页面的请求会在切换路由之后被停止，但我们有时候不希望浏览器停止我们的请求
+
+- Fetch  的  keepalive  标志
+
+  在使用fetch方法时，把keepalive标志设为true，即便页面被终止请求也会保持连接
+
+  ```js
+   document.getElementById('link').addEventListener('click', (e) => {
+      fetch("/log", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }, 
+        body: JSON.stringify({
+          some: "data"
+        }), 
+        keepalive: true
+      });
+    });
+  ```
+
+- Navigator.sendBeacon()  
+
+  sendBeacon（）方法专门用于发送单向请求（beacons）,	不需要浏览器响应回来
+
+  ```js
+  if(navigator.sendBeacon()) {
+    const blob = new Blob([JSON.stringify(params)], { type: 'application/json' });
+    const isSuccess =navigator.sendBeacon('/xe.ai.transformer/subtitle/save_subtitle_conf', blob);
+    if (isSuccess) {
+        console.log('保存字幕信息成功');
+    } else {
+        Message.error('智能字幕开关保存失败');
+    }
+  } 
+  ```
+
+
 
 
 
 ##  Vue
 
-#### 1、vue2、vue3的区别
+#### vue2、vue3区别
 
 - **响应式原理**
 
-  **vue2** 的[响应式](https://so.csdn.net/so/search?q=响应式&spm=1001.2101.3001.7020)原理是利⽤es5 的⼀个 API ，Object.defineProperty()（直接在一个对象上定义新的属性），对数据进⾏劫持结合发布订阅模式的⽅式来实现的。只代理对象上的某个属性，只代理对象上的某个属性，无法监听对象或数组新增、删除的元素，监听不到数组的方法。
+  **vue2** 的[响应式](https://so.csdn.net/so/search?q=响应式&spm=1001.2101.3001.7020)原理是利⽤es5 的⼀个 API ，Object.defineProperty()（直接在一个对象上定义新的属性），对数据进⾏劫持结合发布订阅模式的⽅式来实现的。只代理对象上的某个属性，无法监听对象或数组新增、删除的元素，监听不到数组的方法。
 
   理解defineProperty
 
@@ -2354,13 +3220,27 @@ post(url: string, data: any, config: AxiosRequestConfig = {}) {
 
 - **虚拟DOM不同**
 
+- **Diff算法提升**
+
+  - vue2
+
+    将template模板编译成渲染函数来返回虚拟DOM树，Vue框架通过递归遍历两个虚拟DOM树，比较每个节点上的每个属性，来确定实际DOM哪些部分需要更新。
+
+  - vue3
+
+    做静态标记（static marking）：在编译阶段对模板进行静态标记，区分静态动态节点，在diff算法中，可以跳过静态节点的比较和更新。
+
+    缓存事件处理器：vue3缓存事件处理，避免每次更新时都重新创建事件处理函数。
+
+    fragment优化：在vue2中的fragment会引入额外的虚拟DOM层级，导致Diff算法需要进行更多的比较操作，而在vue3里面，fragment内容会被被合并到父级中，减少虚拟DOM层级。
+
 - **自定义指令不同点**
 
   vue3中自定义指令钩子函数中，增加了两个参数（vnode，prenode）
 
 
 
-#### 2、data url
+#### data url
 
 Data URL由   data：MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）、数据本身  四部分组成。图片被转换成[base64](http://en.wikipedia.org/wiki/Base64)编码的字符串形式，并存储在URL中，嵌入到了页面中，与HTML成为一体。
 
@@ -2370,7 +3250,7 @@ Data URL由   data：MIME类型（表明数据类型）、base64标志位（如�
 
 
 
-#### 3、watch、computed的区别
+#### watch、computed的区别
 
 - computed能实现的，watch都能实现
 
@@ -2380,13 +3260,13 @@ Data URL由   data：MIME类型（表明数据类型）、base64标志位（如�
 
   watch不支持缓存，当监听到属性值变化时，立即执行
 
-- conputed第一次加载的时候就监听，watch第一次加载时不监听
+- computed第一次加载的时候就监听，watch第一次加载时不监听
 
 - computed一定要用return，watch不用
 
 
 
-#### 4、虚拟DOM的Diff算法
+#### 虚拟DOM的Diff算法
 
 ​	**Diff 算法**（在 Vue 里面就是叫做 patch）**通过新旧虚拟 DOM 对比**（即 patch 过程）**，找出最小变化的地方转为进行 DOM 操作**。
 
@@ -2408,7 +3288,7 @@ Data URL由   data：MIME类型（表明数据类型）、base64标志位（如�
 
 
 
-#### 5、vue2 中常见的修饰符
+#### vue2 中常见的修饰符
 
 **1、v-model**：v-model.xxx = ""
 
@@ -2433,7 +3313,7 @@ Data URL由   data：MIME类型（表明数据类型）、base64标志位（如�
 
 
 
-#### 6、父子组件的生命周期
+#### 父子组件的生命周期
 
 是一个嵌套的过程，顺序：
 
@@ -2467,39 +3347,15 @@ Data URL由   data：MIME类型（表明数据类型）、base64标志位（如�
 
 
 
-#### 7、虚拟DOM
+#### 组件间通信
 
-**1、做了什么？**
-
-虚拟DOM主要做了两件事：
-
-- 创建JS对象（虚拟节点）用来模拟真实DOM节点，该对象包含了真实DOM节点的结构和属性
-
-  ```js
-  var VNode = {
-      tag:'div',  
-      attrs:{
-          id:'wrap'
-      },
-      children:[{子元素节点跟根节点格式一样}]
-  };
-  ```
-
-- 将虚拟节点与旧虚拟节点进行比较，用来更新视图。
-
-
-
-#### 8、组件间通信
-
-vue3
+**vue3**
 
 - **父（方法）--> 子** 
 
   ```js
   
   ```
-
-  
 
 - **父（值）-->  子           defineProps**
 
@@ -2537,7 +3393,7 @@ vue3
      	});
     	//在js中使用props.xxx，并将将ref实例格式转化为对象格式
     	const formData = JSON.parse(JSON.stringify(props.fatherData));
-  </script>
+    </script>
     ```
 
     注意点：**props是只读**，不允许在子组件中修改该值，父组件动态传值，不允许调用父组件的方法
@@ -2642,7 +3498,7 @@ vue3
 
 
 
-vue2
+**vue2**
 
 - **父组件（方法）----->    子组件**    子组件触发事件且传递数据     **emit**
 
@@ -2707,7 +3563,7 @@ vue2
   </div>
   
   props: {   //接收父组件传的过来的数据，不能改变该值
-      childMessage: {
+      childMessage: {      //使用该值： this.childMessage
         type: String,
         required: true,
       },
@@ -2720,25 +3576,51 @@ vue2
   },
   ```
 
-  
-
-- **Event Bus**     多个组件间通信
+  **Event Bus**     多个组件间通信
 
   
 
 
 
-#### 9、自定义插槽
+
+#### 插槽
 
 - 作用多使用在一些类似于表格内容不只是根据data渲染的问题中、某些表格的值有特殊处理等，可以自定义内容
 - 注意点：
-  - 
+- 使用场景：当父组件希望在子组件中插入一些HTML和JS时
+- 使用：定义插槽的位置为父组件放置HTML的位置
+
+具名插槽：
+
+```js
+//定义一个子组件，子组件中有具名插槽，可以放在任意位置
+<template #reference>
+     <slot :is-expired="true"></slot>  //向父组件传递参数is-expired,值为true
+</template>
+<div>
+	<slot :is-expired="false"></slot>  //向父组件传递参数is-expired,值为false
+</div>
+
+//父组件中
+<ExpiredPopover>
+     //定义一个默认插槽，接收子组件传递的参数is-expired
+     <template #default="{ isExpired }">
+          <ss-button type="primary" :disabled="isExpired" :loading="isSaving">
+           保存
+          </ss-button>
+     </template>
+</ExpiredPopover>
+```
+
+默认插槽：
 
 
 
-#### 10、hooks
 
-​		hook是钩子的意思，也是一种函数的写法，就是  **将文件的一些单独功能的`js`代码进行抽离出来** ，放到单独的js文件中，或者说是一些可以复用的公共方法/功能。有点像vue2的mixin，但是相对 `mixins` 而言， `hooks` 更清楚复用功能代码的来源, 更清晰易懂。
+
+#### hooks
+
+​	hook是钩子的意思，也是一种函数的写法，就是  **将文件的一些单独功能的`js`代码进行抽离出来** ，放到单独的js文件中，或者说是一些可以复用的公共方法/功能。有点像vue2的mixin，但是相对 `mixins` 而言， `hooks` 更清楚复用功能代码的来源, 更清晰易懂。
 
 - **用法**
 
@@ -2770,7 +3652,7 @@ import useMousePosition from '../../hooks/useMousePosition'
 
 
 
-#### 11、路由vue-router
+#### 路由vue-router
 
 **在vue3中使用vue-router管理路由**
 
@@ -2798,6 +3680,7 @@ const routes = [
         name: 'ai-create',     //路由规则名字，用于编程式导航和组件内路由跳转
         path: '/ai-create',    //路由路径
         component: () => import('@/views/index.vue')   //该路由路径对应的组件
+        alias: '/create',	   // 路由的别名，即/create   /ai-create  都可以跳转到这
         meta: { ... }          //路由元信息，例如路由是否需要登录、权限鉴定等
     },
     {
@@ -2843,6 +3726,20 @@ app.use(router) //注册路由
 ```js
 //app.vue
 <router-view></router-view>
+```
+
+
+
+**获取当前路由**
+
+```ts
+import { useRouter } from 'vue-router';
+const route = useRouter();
+
+const currentRoute = route.currentRoute; // 获取当前路由信息
+currentRoute.path;   // 当前路径'/student/index'   不包含参数
+currentRoute.params; // 当前路由携带的参数
+currentRoute.query;  // 当前查询参数  '?xxx=xxx'
 ```
 
 
@@ -2981,45 +3878,616 @@ app.use(router) //注册路由
     ]
   ```
 
+​			
+
+#### JSX
+
+**介绍**
+
+- template
+
+  在Vue中，sfc是一个以.vue结尾的文件，包含三个语言块：<template>、<script>、<style>，是一个HTML、JS、CSS组合的组件，只能export**一个组件**
+
+  ```vue
+  <template>
+  	<div class="example">{{ msg }}</div>
+  </template>
+  <script></script>
+  <style></style>
+  ```
+
+- JSX
+
+  本身就是JS
+
+  ```jsx
+  import { defineComponent } from 'vue';
+  const App = defineComponent({
+      data() {
+          return {
+              msg: 'hello'
+          }
+      },
+      render() {
+          return (
+          	<div>{ msg }</div>
+          )
+      }
+  })
+  export default App;
+  ```
+
+- JSX使用场景
+
+  - 一个文件中写多个组件
+
+    一个.vue文件中只能写一个组件，但是在写一个完整页面的时候，会把一些小的节点片段拆分到小组件中进行复用，使用JSX的思想，这些小组件只需要写一个简单的函数组件就能完成。
+
+  ```jsx
+  const Input = (props) => <input {...props} /> 
+  export const Textarea = (props) => <Input {...props} />
+  export const Password = (props) => <Input type="password" {...props} />
+  export default Input;
+  ```
+
+
+
+
+#### umd
+
+
+
+#### echarts
+
+安装引入：
+
+```js
+1、安装包
+pnpm i echarts
+
+2、在组件中全局引入echarts（不是按需引入）  xxx.vue
+import * as echarts from 'echarts';
+
+3、在组件中定义和使用
+```
+
+- **折线图**（示例单折线图）
+
+  ```vue
+  <template>
+  	<!-- 折线图容器 -->	
+      <div id="chart-container"></div>
+  </template>
+  
+  <script setup lang="ts">
+  import { onMounted } from 'vue'
+  import * as echarts from 'echarts';
+      
+  onMounted(() => {
+      getTrendCompareData();    //获取图表数据
+      //一般要在DOM渲染后再渲染图
+      nextTick(() => {
+          var chartLine = echarts.init(document.getElementById('chart-container'));
+          chartLine.setOption(options.value);
+          //在窗口变化时，图表的大小也要跟着变化
+          window.addEventListener('resize', function() {
+              chartLine.resize();
+          });
+      })
+  })
+      
+  //图表需要的选项
+  const options = computed(() => {
+      //当前图表表示的数据含义，例如：创建直播数
+      const seriesName = selected.value.filter((key: any) => selected.value[key])
+  
+  	const options = {
+  //tooltip:hover显示的内容设置
+          tooltip: {
+              trigger: 'axis',
+              backgroundColor: 'rgba(0,0,0,0.75)',   //背景色
+              borderWidth: 0,    //边框大小
+              padding: [8, 16],  //内容的padding值
+              textStyle: {       //文本样式
+                  color: '#FFF',
+                  fontSize: 16,
+                  fontFamily: 'PingFang SC'
+              },
+              formatter: (params: any) => {    //自定义气泡显示内容
+                  let result = '';
+                  const currentXAxis = params[0].axisValue;  // 获取当前x轴对应的值
+                  params.forEach((item: any) => {
+                      result += `<div>${currentXAxis}</div>	<div>${item.marker}${$$t(item.seriesName)}：${item.value}</div>`;
+                  });
+                  return result;
+              }
+          },
+          legend: {
+              selected: {},
+              data: []
+          },
+  //grid：图表在容器中的样式
+          grid: {   
+              left: '3%',   //padding-left：3%
+              right: isMobile() ? '10%' : '4%',
+              top: '5%',
+              height: '90%',
+              containLabel: true
+          },
+  //xAxis：X轴内容
+          xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              //data: X轴显示数据，['12-01','12-02','12-03',...] 字符串数组
+              data: chartData.value.map((item: any) => item.stat_date), 
+          },
+  //yAxis：Y轴内容
+          yAxis: {
+              type: 'value',
+              axisLabel: {   //y轴内容设置
+                  formatter(value: any) {   //自定义内容格式
+                      if (seriesName === 'trendItem.viewTime') {
+                          return formatTime(value);
+                      }
+                      return value;
+                  },
+                  textStyle: {     //文本样式
+                      color: '#353535'
+                  }
+              },
+          },
+  //series：数据内容
+          series: {
+              name: seriesName,
+              type: 'line',
+              areaStyle: {},
+              color: '#ccc',    //点和线的颜色，设置方法一
+              itemStyle: {      //点和线的颜色，设置方法二
+                	color: 'red'
+              },
+              label: {          //具体数据点
+                  show: false,  //是否展示
+                  formatter: 'This is a normal label.'   //展示的内容
+              },
+              emphasis: {       //高亮（鼠标移上去）的样式
+                  itemStyle: {
+                      color: 'green'  //具体数据点的颜色
+                  },
+                  label: {      //高亮数据点内容
+                      show: true,
+                      formatter: 'This is a emphasis label.'
+                  }
+              }
+              //data：具体的数据，[2,41,56,21,...]  数组
+              data: chartData.value.map((item: any) => item[seriesType])
+          },
+      };
+      options.legend.selected = selected.value;
+      return options;
+  })
+  </script>
+  
+  <style>
+  #chart-container {    //需要定义容器的大小，否则不显示图表
+      height: 355px;
+      width: 100%;
+  }
+  </style>
+  ```
+
+
+
+#### component标签
+
+概念：<component>是一个特殊的内置组件，通过一个属性来动态地渲染不同的组件。它本质上是一个元组件，用于渲染动态组件。
+
+- **is属性**
+
+​	<component>的行为完全由is属性控制
+
+​	is  属性的值可以是一个已注册的组件名（字符串），也可以是一个组件定义（选项对象或导入的组件本身）
+
+​	主要用途和示例
+
+```vue
+// 1、在静态列表中动态切换组件（标签页、多步骤表单等）
+ <div id="app">
+    <button @click="currentTab = 'Home'">Home</button>
+    <button @click="currentTab = 'Posts'">Posts</button>
+    <button @click="currentTab = 'Archive'">Archive</button>
+
+    <!-- 动态组件区域 -->
+    <component :is="currentTab"></component>
+  </div>
+  
+currentTab: 'Home'
+// 定义子组件
+app.component('Home', {
+      template: `<div style="color: green;">Home Component Content</div>`
+ });
+app.component('Posts', {
+      template: `<div style="color: blue;">Posts Component Content</div>`
+});
+app.component('Archive', {
+      template: `<div style="color: red;">Archive Component Content</div>`
+});
+
+点击不同的按钮，currentTab 数据会变化，导致 <component :is="currentTab"> 渲染不同的组件。
+
+//2、渲染从外部传入的组件
+你可以将整个组件对象作为一个 prop 传递给另一个组件，并在其内部使用 <component :is="..."> 来渲染它。这在构建高级、灵活的组件时非常有用。
+<!-- 父组件 -->
+<template>
+  <Child :dynamic-component="MyDynamicComponent" />
+</template>
+import Child from './Child.vue';
+    
+<!-- 子组件 Child.vue -->
+<template>
+  <div>
+    <h3>Child Component</h3>
+    <!-- 渲染父组件传过来的任何组件 -->
+    <component :is="dynamicComponent"></component>
+  </div>
+</template>
+props: ['dynamicComponent'] // 接收一个组件对象作为 prop
+    
+与 <keep-alive> 结合使用
+默认情况下，当动态组件切换时，Vue 会销毁旧组件实例并创建新实例。这意味着组件的状态（如输入框中的文本、滚动位置等）会丢失。
+
+使用 <keep-alive> 内置组件包裹 <component>，可以缓存非活动组件的实例，避免重复渲染，从而保持组件状态。
+<keep-alive>
+  <component :is="currentTab"></component>
+</keep-alive>
+
+在上面的标签页例子中加上 <keep-alive> 后，你在 Posts 组件的输入框中输入文字，切换到 Home 再切回来，输入的文字依然会保留。
+
+```
+
+
+
+#### h
+
+**作用**
+
+用于创建 VNode（虚拟节点），是 Vue 渲染函数的基础。
+
+**基本语法**
+
+```
+h(tag, props, children)
+
+tag: 标签名、组件、异步组件
+props：属性对象（可选）
+children：子节点（可选）
+```
+
+**常见用法示例**
+
+- 1、创建原生HTML元素
+
+  ```js
+  // 创建一个 div 元素
+  const vnode = h('div', { class: 'container' }, 'Hello World')
+  
+  // 相当于模板：<div class="container">Hello World</div>
+  ```
+
+- 2、创建带属性的元素
+
+  ```js
+  const vnode = h('button', {
+    class: 'btn',
+    onClick: () => console.log('clicked')
+  }, '点击我')
+  ```
+
+- 3、创建组件
+
+  ```js
+  import MyComponent from './MyComponent.vue'
+  
+  const vnode = h(MyComponent, {
+    title: '组件标题',
+    onCustomEvent: (data) => console.log(data)
+  })
+  ```
+
+- 4、创建嵌套元素
+
+  ```js
+  const vnode = h('div', { class: 'parent' }, [
+    h('h1', '标题'),
+    h('p', '段落内容'),
+    h('button', { onClick: handleClick }, '按钮')
+  ])
+  ```
+
+**与传统模板语法相比**
+
+| 模板语法                                     | h 函数等效                                      |
+| :------------------------------------------- | :---------------------------------------------- |
+| `<div class="container">内容</div>`          | `h('div', { class: 'container' }, '内容')`      |
+| `<MyComponent :title="title" />`             | `h(MyComponent, { title: title })`              |
+| `<button @click="handleClick">按钮</button>` | `h('button', { onClick: handleClick }, '按钮')` |
+
+**使用场景**
+
+- **动态渲染**：根据条件动态创建不同组件
+- **高阶组件**：包装和增强现有组件
+- **渲染函数**：需要更细粒度控制渲染时
+- **JSX**：在 Vue 中使用 JSX 时（底层也是调用 h 函数）
+
+
+
+
+
+#### v-model和：value
+
+**v-model**
+
+- 双向绑定的语法糖，最主要的使用场景是表单元素
+
+  ```vue
+  <template>
+    <input v-model="message">
+    <!-- 等价于 -->
+    <input 
+      :value="message" 
+      @input="message = $event.target.value"
+    >
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        message: ''
+      }
+    }
+  }
+  </script>
+  ```
+
+- ```vue
+  父组件
+  <template>
+    	父组件中直接使用v-model会默认绑定子组件中的value的值，且无需再使用@input来处理数据变化，会默认处理input和change事件
+    	<custom-input v-model="username"/>
+    	<!-- 等价于 -->
+    	<input 
+      	:value="message" 
+      	@input="message = $event.target.value"
+    	>
+  </template>
+  
+  子组件
+  <script>
+  export default {
+    props: ['value'],  // 默认接收 value 属性
+    methods: {
+      updateValue(newValue) {
+        this.$emit('input', newValue)  // 默认发射 input 事件
+      }
+    }
+  }
+  </script>
+  ```
+
+**：value（v-bind：value）**
+
+- 单向绑定，只负责将数据传递给子组件，子组件需要props接收
+
+  ```vue
+  <template>
+    <!-- 单向数据流 -->
+    <custom-input :value="message" @input="handleInput"/>
+    <script>
+    export default {
+      methods: {
+        handleInput(value) {
+          this.message = value
+        }
+      }
+    }
+    </script>
+  </template>
+  ```
+
   
 
 
 
-## vuex
 
-#### 页面刷新之后state中数据消失
 
-**1、原因：**vuex中的数据是存储在运行内存中的，如果页面刷新了，页面会重新加载vue实例，vuex里面的数据会				 被清空。
 
-2、解决方法：
 
-- **将数据保存在浏览器缓存中sessionStore**
 
-  - 监听页面是否刷新，如果刷新了，就把state数据存储在浏览器缓存中。页面打开后，判断缓存中是否存在数据，如果存在，就直接给state赋值
 
-  - 在created生命周期函数中判断
+#### 国际化vue-i18n
 
-  - ```js
-    if (sessionStorage.getItem('store')) {
-       this.$store.replaceState(
-       		Object.assign({},this.$store.state, 
-       			JSON.parse(sessionStorage.getItem('store'))));
-    }
-     //在页面刷新时将vuex里的信息保存到sessionStorage里
-        window.addEventListener('beforeunload', () => {
-          sessionStorage.setItem('store', JSON.stringify(this.$store.state));
-        });
+vue-i18n是为vue.js开发的国际化插件
+
+**安装引入**：
+
+```bash
+pnpm i vue-i18n@10    //vue3要10版本
+```
+
+**项目中使用**：
+
+- 一般在src下新建 locales文件夹，用来配置语言文件
+
+- 在  src/locales/locale  文件夹下，新建各个语言的语言包
+
+  ```json
+  // 中文zh    繁体中文zh-tw   英文en   法语fr   俄语ru   西班牙语es  日语ja   韩语ko
+  //src/locales/locale/zh/index.json
+  {
+      "title": {
+          "live": "直播",
+          "liveData": "直播数据",
+          "liveTrend": "直播趋势",
+          "liveEffect": "直播效果"
+      },
+      "effectTable": {
+          "name": "直播名称",
+          "startTime": "直播开始时间",
+          "status": "直播状态",
+          "Visits": "访问次数",
+          "Visitors": "访问人数",
+          "Views": "观看次数",
+          "Viewers": "观看人数",
+          "viewTime": "人均观看时长",
+          "Operation": "操作"
+      },
+  }
+  其他语言包文件同理，key值各个语言包需一样
+  ```
+
+-   在  src/locales/i18n.ts  配置语言包配置信息
+
+  ```js
+  //src/locales/i18n.ts
+  import type { App } from 'vue';
+  import { createI18n, VueI18nTranslation } from 'vue-i18n';
+  
+  import en from '../locale/en/index.json'   //自定义的语言文件
+  import zh from '../locale/zh/index.json'
+  ......其他语言
+  
+  const messages = {    //i18n中的所有语言包信息，可以采用异步加载的形式
+  	en,
+  	zh,
+  	......其他语言
+  }
+  
+  type Locale = {
+      [key: string]: string | Locale
+  }
+  
+  //创建语言实例
+  export const i18n = createI18n({
+      legacy: false,  //是否使用传统API模式，false:使用Composition API模式（vue3设为false)
+  	silentTranslationWarn: true,  //抑制本地化失败警告
+      silentFallbackWarn: true, // 抑制回退失败警告
+      globalInjection: true,   // 为每个组件注入全局属性和函数，一般为false，在组件中重新引入
+  	locale: 'en',   //初始化语言
+  	fallbackLocale: 'en',   //回退语言
+  });
+  
+  export const $t: VueI18nTranslation = i18n.global.t;    //模板中使用
+  
+  export const $$t: VueI18nTranslation = i18n.global.t;    //js中使用
+  
+  export async function useI18n(app: App, en: Locale) {
+  	const lang = window.GlobalState.get('lang')   //获取当前系统的语言，例如 'zh' 中文
+  	
+  	i18n.global.locale = lang   //更新i18n的语言信息，会自动触发DOM更新
+  	app.use(i18n)    //vue示例上挂载i18n插件实例
+  
+  	i18n.global.mergeLocaleMessage('en', en)  //语言包中添加默认的语言包
+  
+      //系统切换语言后，将新语言包添加到i18n的语言包中
+  	i18n.global.mergeLocaleMessage(lang, messages[lang]);  
+  }
+  ```
+
+- 在main.ts 入口文件中初始化插件
+
+  ```ts
+  import { useI18n } from '@/i18n'
+  import en from './src/locales/loacle/en/index.json'    //传入默认语言包
+  const app = createApp(App);
+  
+  useI18n(app, en).then(() => {
+    app.mount('#app')
+  })
+  ```
+
+- 在组件中使用
+
+  ```vue
+  <template>
+  	在模板中使用
+  	<div>{{ $t("title.liveTrend") }}</div>
+  	<table-column prop="name" :label="$t('effectTable.name')" width="328">
+  </template
+          
+  <script>
+  import { $$t } from '@/locales/i18n.ts'
+      
+  //在js中使用
+  console.log($$t(item.seriesName))
+  </script>
+  ```
+
+- 技巧
+
+  - 可以巧妙的通过，设置$t中的字符串去渲染变量
+
+    ```ts
+    export const ALIVE_STATE = [
+        {
+            value: 0,
+            label: 'liveStatus.notStarted',    //在语言包中定义的数据结构，获取翻译后的文本
+            color: '#333333',
+            bgcolor: '#1472FF'
+        },
+    ];
     ```
 
-- **vuex-persist插件**
-
-  
 
 
 
-​		
+#### v-bind=“$attr"
 
-​											
+**概念**
+
+Vue3的特殊属性，包含父组件传递给子组件的所有非prop属性
+
+**主要作用**
+
+- 属性透传：将父组件的属性直接传递给孙子组件
+- 减少重复代码：中间组件无需声明所有可能的props
+- 保持灵活性：中间组件不需要知道具体传递了什么
+
+**与Vue2的区别**
+
+- Vue2：需要分开处理 `v-bind="$attrs"` 和 `v-on="$listeners"`
+- Vue 3：`$attrs` 包含所有属性和事件监听器，只需 `v-bind="$attrs"`
+
+**实际应用场景**
+
+```vue
+//  父组件
+<MyComponent 
+  :data="userData" 
+  @save="handleSave"
+  class="custom"
+  title="提示"
+/>
+
+// 子组件
+<template>
+  <Modal>
+    <ChildComponent v-bind="$attrs" /> <!-- 透传所有 -->
+  </Modal>
+</template>
+import { useAttrs } from 'vue'
+const attrs = useAttrs();
+
+console.log('父组件传递过来，放到attrs中的属性',attrs.data)
+console.log('父组件传递过来，放到attrs中的方法',attrs.onSave)   //事件都会加上on
+
+// 孙子组件ChildComponent
+```
+
+
+
+
+
+
 
 
 
@@ -3063,7 +4531,7 @@ webpack打包体积分析：webpack-bundle-analyzer
 
 ## 杂项
 
-#### 1、微前端
+#### 微前端
 
 概念：微前端就是一种多个团队独立发布功能的方式来完成web应用的技术手段，将一个庞大的应用拆分成多个小型应用，每个应用可以独立运行独立部署，降低了耦合度
 
@@ -3084,37 +4552,15 @@ webpack打包体积分析：webpack-bundle-analyzer
 
   实现路由劫持和数应用加载
 
-  
-
 - qiankun
 
-  基于aingle-spa(监控URL），提供了开箱即用的API，使用更加简单，沙箱嵌套URL，
+  基于aingle-spa(监控URL），提供了开箱即用的API，使用更加简单，沙箱嵌套URL
 
 
 
-#### 2、性能优化
+#### 前端微服务Micro-app
 
-- 加载优化（减少http请求次数）
-  - 合并图片，使用css精灵图
-  -  预加载、按需加载
-  - 多使用缓存，使用长缓存
-  - 开启gzip压缩代码
-- 图片优化
-  - 多使用PNG格式的图片，体积小
-  - 图片懒加载
-  - 避免src'属性为空
-  - 尽量避免使用 Data Url
-- SEO优化
-  -  标题字数不要太长
-  - 关键词优化
-- 渲染优化
-  - 尽量减少DOM节点
-  - 合理使用requestAnimationFrame动画代替setTimeout
-- 样式优化
-  - 避免在HTML中书写style
-  - 不滥用float
-
-​                
+**介绍**
 
 	#### 排序算法
 
@@ -3165,17 +4611,264 @@ webpack打包体积分析：webpack-bundle-analyzer
 
 
 
-## 场景题
+#### monorepo架构
+
+**介绍**：monorepo架构是一种项目代码管理方式，指单个仓库里面管理多个项目，有助于简化代码共享、版本控制、构建和部署等方面的复杂性，并提供更好的克重用性和协作性。
+
+**演变**：![image-20241012111927966](C:\Users\sisi\AppData\Roaming\Typora\typora-user-images\image-20241012111927966.png)
+
+**优点**：
+
+- 节省磁盘内存，因为多个项目在一个仓库里面，相同版本依赖提升到顶层只安装一次。
+- 代码复用性高，方便代码重构
+- 依赖调试方便，依赖包迭代场景下，使用npm link 直接使用最新版本依赖
+
+**缺点**：
+
+- 一个项目出问题，可能影响所有项目
+
+**pnpm创建monorepo过程**
+
+- 首先有一个git空白项目文件 **ai-assistant**
+
+- ./ai-assiatant根目录下：
+
+  - 执行命令  **pnpm init ** 创建 **package.json** 文件
+
+    ```json
+  在文件中添加一行，放止该仓库被发布 "private":true,
+    ```
+  
+  - 新建文件 **pnpm-workspace.yaml** 文件，启用workspace
+  
+    ```js
+    packages:
+    - 'packages/*'
+      - 'apps/*'
+    //代表整个monorepo项目具有三个工作区文件夹，分别为packages、apps文件夹
+    ```
+  
+  - 新建文件夹 **./ai-assistant/apps**  、**./ai-assistant/packages**
+  
+  - ![image-20241012163307379](C:\Users\sisi\AppData\Roaming\Typora\typora-user-images\image-20241012163307379.png)
+
+- ./ai-assistant/packages文件夹下
+
+  - 新建apis、hooks、contants等功能类文件夹
+
+  - 在新建的文件夹apis中，执行命令  **pnpm init ** 创建 **package.json** 文件，其他新建的文件夹同理
+
+  - 修改 **package.json** 文件中的 name属性，且添加一行，放止该仓库被发布 "private":true,
+
+    ```json
+    {
+      "name": "@xiaoe/apis",   指的是最后发包的名字
+      "version": "1.0.0",
+      "description": "",
+      "private":true,
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "keywords": [],
+      "author": "",
+      "license": "ISC"
+    }
+    ```
+
+  - 在新建的文件夹apis中，新建 **index.ts** 文件,   其他新建的文件夹同理
+
+    ```ts
+    import type { App } from 'vue'
+    export default {
+        install(app: App) {
+            console.log('已使用 space-play 包，但该包里什么都没有')
+        },
+        version: '1.0.0' // 这里只是作为示例，实际应该获取 package.json 里的版本
+    }
+    ```
+
+  - ![image-20241012163236398](C:\Users\sisi\AppData\Roaming\Typora\typora-user-images\image-20241012163236398.png)
+
+- 在一个项目中使用另一个项目
+
+  ```js
+  pnpm -r --filter 调用的项目路径  add  被调用的项目name属性值
+  例： pnpm -r --filter ./apps/live-yuanbao add @xiaoe/apis @xiaoe/hooks
+  ```
+
+  - 使用其他项目时，如果修改了其他项目，不需要重新执行该命令，有时候需要重新安装
+
+- ./ai-assistant/apps文件夹下
+
+  - 新建live等使用功能类文件夹的应用文件夹
+
+  - 在新建的./ai-assistant/apps /live文件夹下     pnpm init 和package.json  文件修改同理
+
+    ```json
+    {
+      "name": "@xiaoe/live-yuanbao",
+      "version": "1.0.0",
+      "description": "",
+      "main": "index.js",
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "dependencies": {
+        "@xiaoe/yuanbao-apis": "workspace:^1.0.0",
+        "@xiaoe/yuanbao-hooks": "workspace:^1.0.0"
+      }
+    }
+    ```
+
+  - 新建其他vue3项目最基本的文件
+
+    - **app.vue**
+
+      ```vue
+      <template>
+         <div>成功monorepo架构项目</div>
+      </template>
+      ```
+
+    - **index.html**
+
+      ```html
+      <html lang="en"></html>
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>直播间元宝</title>
+        </head>
+        <body>
+          <div id="app"></div>
+          <script type="module" src="./index.ts"></script>
+        </body>
+      </html>
+      ```
+
+    - **index.ts**
+
+      ```ts
+      import { createApp } from 'vue'
+      import App from './app.vue'
+      createApp(App).mount('#app')
+      ```
+
+    - **vite.config.ts**
+
+      ```ts
+      import { defineConfig } from "vite";
+      import vue from "@vitejs/plugin-vue";
+      export default defineConfig({
+        plugins: [vue()],
+      });
+      ```
+
+  - ![image-20241012163115689](C:\Users\sisi\AppData\Roaming\Typora\typora-user-images\image-20241012163115689.png)
+
+- 安装依赖
+
+  - vue、vite这两个依赖在monorepo里面的其他项目包里都会用到，所以在根目录 ./ai-assistant下安装
+
+    ```npm
+    pnpm add -w vue
+    pnpm add -w -D vite @vitejs/plugin-vue
+    ```
+
+- ./ai-assistant/apps/live/packages.json
+
+  - 添加启动命令
+
+    ```json
+    {
+        ...,
+        "scripts": {
+            "dev": "vite"
+        }
+    }
+    ```
+
+- 到这一步monprepo项目基本完成，剩下的是apps和packages文件中的填充
+
+- ./ai-assistant
+
+  - 可以配置package.json文件，默认在根目录下执行  **pnpm dev**的时候运行的apps中的项目
+
+    ```json
+    {
+        ...,
+        "scripts": {
+            "dev": "pnpm -C apps/live dev"
+        }
+    }
+    ```
+
+- 当然cd到对应的apps文件夹下的其他目录，执行 **pnpm dev**也可以运行对应的项目
+
+- 配置其他文件 ./ai-assistant
+  - .gitignore  git屏蔽文件
+  - .editorconfig  定义代码风格，跨碧娜机器代码一致性
+  - .npmrc   npm配置文件，配置镜像源，代理服务器等
+  - exlint.config.mjs   eslin语法检查、
+  - tsconfig.json   ts语法检查
+
+- 在apps项目中使用packages文件夹中的npm工具包
+  - 修改packages工具包时需要更改版本，但是不需要重新npm i 
+  - 在main.ts中export导出所有方法等供apps项目使用
+
+
+
+#### 云发布
+
+**CVM（Cloud Virtual machine）云服务器**
+
+- 云服务器类似于在云端租了一台电脑，可以在上面安装软件、运行程序，灵活，降低成本和提高性能
+
+- 云服务器类型：通用型、计算型、存储型、内存型、GPU型
+
+**CDN内容分发网络**
+
+- CDN是一种分布式网络架构，旨在加速用户对内容的访问速度和提高网站的稳定性，像是一群快递小哥，把网站内容传送到离用户最近的地方，让用户能够快速访问网站，加快网页打开速度，减轻服务器压力，是网站更加稳定。同时也会提供安全防护措施。
+
+- CDN类型
+
+  - 静态CDN
+
+    主要用于加速静态资源（如图片、CSS、JS等），缓存这些资源到全球各地的节点上
+
+  - 动态CDN
+
+    根据用户请求动态生成内容，并根据用户的地理位置和网络环境动态调整内容的分发策略，提供个性化服务和更快的响应速度
+
+  - 视频CDN
+
+    专门用于加速视频内容的传输和播放，通过优化视频流的传输路径和提供告诉的视频分发服务，提高视频播放的稳定性和流畅性
+
+**OSS对象存储**
+
+- 可扩展的、高可用的对象存储服务，用于存储和管理大规模的非结构化数据，像是一个大型仓库，可以存放文件、图片、视频登上护具，这个仓库是非常安全的，而且容量可以随时扩展，适应你不断增长的数据量。
+- 分为两种类型
+  - 标准存储：用于存储常规的非结构化数据，如文档、图片、视频等，用于网站或应用的资源加载，也适用于资源下载。
+  - 归档存储：用于存储不经常访问的长期数据备份，通常需要较长时间才能检索到数据。费用也会相对便宜，经常用于录像，医疗影像等。
+
+
+
+
+
+## 具体场景
 
 #### 如何进行多端适配
 
+
+
 #### 大文件上传，断点续传方式
 
-​		文件断点续传是一种上传或下载大文件时的技术，可以将大文件**分成多个块**进行传输，每个块都有一个唯一的**标识符，**例如块序号或块偏移量，在上传或下载文件时，发送的请求中包含了当前传输块的标识符，以及已经传输的字节数和总字节数等信息，服务器可以根据这些信息确定从哪个位置开始继续传输，避免重新传输整个文件。
+​	文件断点续传是一种上传或下载大文件时的技术，可以将大文件**分成多个块**进行传输，每个块都有一个唯一的**标识符，**例如块序号或块偏移量，在上传或下载文件时，发送的请求中包含了当前传输块的标识符，以及已经传输的字节数和总字节数等信息，服务器可以根据这些信息确定从哪个位置开始继续传输，避免重新传输整个文件。
 
-​		这个方式的话前端需要做的不多，主要是三个部分，**文件名，块序号，块哈希值**，就是把大文件分成1MB、2MB的块，再通过fetchAPI把这些块的原信息（块序号、大小等）上传到服务器，后端会把已经上传的块信息保存在临时文件夹中，后面就是通过块的哈希值、序号去进行匹配。具体实现断点续传的就是，假设这个大文件有100个块，上传了10个块，中断上传之后，再继续上传同一个文件，后端匹配到正在上传的块哈希值和存储在临时文件夹中的块哈希值是一样的，所以就跳过前面的10个块，从11块开始匹配不到了再开始存储，上传完100个块之后，再进行合并去校验，校验就是后端去计算收到的合并后的文件的哈希值，返回给客户端，客户端计算本地文件的哈希值去跟接收到的哈希值去比对，是否完整一致，如果校验不通过的话，就会重新上传，再走一遍流程。
+​	这个方式的话前端需要做的不多，主要是三个部分，**文件名，块序号，块哈希值**，就是把大文件分成1MB、2MB的块，再通过fetchAPI把这些块的原信息（块序号、大小等）上传到服务器，后端会把已经上传的块信息保存在临时文件夹中，后面就是通过块的哈希值、序号去进行匹配。具体实现断点续传的就是，假设这个大文件有100个块，上传了10个块，中断上传之后，再继续上传同一个文件，后端匹配到正在上传的块哈希值和存储在临时文件夹中的块哈希值是一样的，所以就跳过前面的10个块，从11块开始匹配不到了再开始存储，上传完100个块之后，再进行合并去校验，校验就是后端去计算收到的合并后的文件的哈希值，返回给客户端，客户端计算本地文件的哈希值去跟接收到的哈希值去比对，是否完整一致，如果校验不通过的话，就会重新上传，再走一遍流程。
 
-​		前端做的一些处理
+**前端做的一些处理**
 
 - 记录已上传的文件块，避免下次重复上传（localStorage）	
 - 文件校验
@@ -3301,7 +4994,28 @@ webpack打包体积分析：webpack-bundle-analyzer
 
 
 
-#### 浏览器快速加载页面
+#### 浏览器加载性能优化
+
+- **加载优化**（减少http请求次数）
+  
+  - 合并图片，使用css精灵图
+  - 预加载、按需加载
+  - 多使用缓存，使用长缓存
+  - 开启gzip压缩代码
+- **图片优化**
+  - 多使用PNG格式的图片，体积小
+  - 图片懒加载
+  - 避免src'属性为空
+  - 尽量避免使用 Data Url
+- SEO优化
+  -  标题字数不要太长
+  -  关键词优化
+- 渲染优化
+  - 尽量减少DOM节点
+  - 合理使用requestAnimationFrame动画代替setTimeout
+- 样式优化
+  - 避免在HTML中书写style
+  - 不滥用float
 
 - **缓存页面资源**
 
@@ -3325,15 +5039,7 @@ webpack打包体积分析：webpack-bundle-analyzer
 
 #### 对vue的理解
 
-​		Vue是一种JS的前端框架，基于HTML的模板语法，主要用于构建交互式的页面，它的开发模式是组件化的，能够将一个用户界面拆分为单独的复用性较强的单文件组件，从而以模块化的方式构建起页面。它通过响应式的数据绑定来管理web程序的一个状态，vue现在有着一个比较成熟稳定生态系统，有很多的第三方库、工具还有插件。	
-
-
-
-#### 微信登录的流程
-
-
-
-#### 扫码登录的实现
+​	Vue是一种JS的前端框架，基于HTML的模板语法，主要用于构建交互式的页面，它的开发模式是组件化的，能够将一个用户界面拆分为单独的复用性较强的单文件组件，从而以模块化的方式构建起页面。它通过响应式的数据绑定来管理web程序的一个状态，vue现在有着一个比较成熟稳定生态系统，有很多的第三方库、工具还有插件。
 
 
 
@@ -3344,8 +5050,6 @@ webpack打包体积分析：webpack-bundle-analyzer
 - **SPA（Singlge Page Application）：单页面应用程序**
 
   ​	所有的页面切换和内容更新都在单个页面中完成，只有初始页面加载时会获取完整的HTML、CSS和JavaScript文件，后面交互时，不需要加载整个页面。用户体验更好，页面切换和内容更新通常是通过Ajax请求获取数据
-
-  
 
 - **MPA（Mulit Page Application）：多页面应用程序**
 
@@ -3393,25 +5097,19 @@ webpack打包体积分析：webpack-bundle-analyzer
 <link href="https://static.nowcoder.com/fe/file/site/www-web/prod/1.0.277/lib/common.css" as="style" rel="preload">
 ```
 
-
-
 已经处理过的方法：
 
 前端和后端都使用no-cache策略，但是会遇到浏览器的兼容性问题，在有些浏览器上是还是在使用缓存，并不会使用新文件。
 
-
-
 **办法：**
 
-​		考虑到资源文件大小问题，不使用缓存机制，每次都去向浏览器重新请求资源。只需要在打包静态资源的时候，不使用自动引入，而是在html中引入一个自定义的js文件，通过这个文件去动态向index.html文件插入link静态资源。
+​	考虑到资源文件大小问题，不使用缓存机制，每次都去向浏览器重新请求资源。只需要在打包静态资源的时候，不使用自动引入，而是在html中引入一个自定义的js文件，通过这个文件去动态向index.html文件插入link静态资源。
 
 **操作：**
 
-​		新建一个js文件，主要作用是封装一个ajax请求，如果请求成功则去匹配静态资源，包括js文件、css文件，去动态的创建资源标签，在index文件中直接添加该js脚本，就能进行动态加载资源文件。还需要在vue.config.js中去更改一些打包的配置，在 webpack 构建完成后，收集打包后的 JS、CSS 文件，并将它们的 URL 写入到一个 JSON 文件modules.js中，可以用来判断是否打包成功。在modules导出的时候，通过HtmlWebpackPlugin在生成的 HTML 文件中，JS、CSS 文件的 URL 会自动插入到指定的位置，这里需要区分一下是开发环境还是生产环境，不同的环境导出的html文件不一样。
+​	新建一个js文件，主要作用是封装一个ajax请求，如果请求成功则去匹配静态资源，包括js文件、css文件，去动态的创建资源标签，在index文件中直接添加该js脚本，就能进行动态加载资源文件。还需要在vue.config.js中去更改一些打包的配置，在 webpack 构建完成后，收集打包后的 JS、CSS 文件，并将它们的 URL 写入到一个 JSON 文件modules.js中，可以用来判断是否打包成功。在modules导出的时候，通过HtmlWebpackPlugin在生成的 HTML 文件中，JS、CSS 文件的 URL 会自动插入到指定的位置，这里需要区分一下是开发环境还是生产环境，不同的环境导出的html文件不一样。
 
-
-
-步骤：
+**实现步骤：**
 
 1、在public文件夹下新建一个文件module-loader.js
 
@@ -3609,6 +5307,14 @@ module.exports = {
 
 
 
+#### ADB
+
+**概念**：
+
+ADB（Android Debug Bridge），是 Android 官方提供的命令行调试工具，用于电脑与 Android 设备之间通信。
+
+
+
 ## 开发思维
 
 #### 定位
@@ -3624,39 +5330,210 @@ module.exports = {
 
 
 
+#### 代码规范
+
+- 尽量避免使用中文字符进行比较
+- 使用 **===** 代替 **==**
+- 使用便于管理的枚举、类等定义类型
+- 尽量少使用内联样式，因为会阻塞渲染CSSOM树
 
 
-下面的图表展示了系统功能结构图：
 
-```markdown
-系统功能结构图
-├─ 系统功能
-│   ├─ 文本
-│   │   ├─ AI自然语言生成能力
-│   │   │   ├─ 营销推广文案
-│   │   │   ├─ 论文报告书写
-│   │   │   ├─ 多语言文本翻译
-│   │   │   ├─ 文案修改、缩写、扩写、续写等
-│   │   │   │   └─ 多种文案快捷输入配置表单
-│   │   │   │        └─ 快捷输入多类创作要求
-│   │   │   └─ 自由问答入口
-│   │   │        └─ 利用大语言模型精准解答用户疑问
-│   │   └─ 用户模块功能
-│   │        ├─ 注册用户
-│   │        ├─ 登录
-│   │        ├─ 收藏夹
-│   │        ├─ 保存历史记录
-│   │        └─ 生成周报
-│   ├─ 图像
-│   │   ├─ AI的图像整合技术
-│   │   │   ├─ 根据用户生成图像文字描述，生成一组与描述相关的图片
-│   │   │   ├─ 用户可提供图片，生成与用户图片相类似的一组图片
-│   │   │   ├─ 基于用户上传的图片，对图片进行文字解说
-│   │   │   └─ 为图像生成对应的诗歌、构造故事
-│   │   └─ 用户模块功能
-│   └─ 文档
-│        ├─ 基于用户上传的world文档
-│        │   ├─ 文档内容总结概述
-│        │   ├─ 基于文档的问答接口
-│        │   └─ 用户可为文档写摘要等内容
+#### 文档规范
+
+- 一般所有的文件夹下的  **index**  用于导出所有的模版文件
+
+  ```js
+  export * from './common';
+  ......
+  ```
+
+  与index同级的其他文件用途命名名字： user-list.ts
+
+
+
+#### 函数柯里化
+
+- **科里化**：指将有多个参数的函数变成只有一个参数的函数系列。
+
+```js
+function add(x,y) {         科里化之后： function add(x) {
+    return x + y;							return function(y) {
+}												return x + y
+											}
+                  						}
+//调用
+let add5Fn = add(5);
+console.log('5 + 3 的结果：',add5Fn(3) )
 ```
+
+- **柯里化原理**：利用闭包和递归
+
+```js
+//接受原函数并返回柯里化后的函数，curry是原函数，curried是科里化后的函数，在每次调用时哦按段传入的参数数量是否满足原函数的执行条件
+function curry(fn) {
+    return function curried(...args) {
+        if( fn.length <= args.length){
+            return fn.apply(this,args)
+        }else {
+            return function (...nextArgs) {
+                return curried.apply(this, args.concat(nextArgs));
+            }
+        }
+    }
+}
+```
+
+- **柯里化函数使用场景**
+
+组合函数：f1的函数执行结果是f2函数的参数。
+
+- **优缺点**
+
+  - 优点：
+
+    1、提高函数的复用性：创建更加通用的函数，根据需要传递函数
+
+  - 缺点：
+
+    1、难以理解和维护：柯里化使得函数变高阶（层级多），增加代码复杂性
+
+    2、影响性能：生成多个函数闭包，导致性能能消耗，每次柯里化都会创建一个函数，增加函数对象内存开销。
+
+
+
+## 常用函数封装
+
+#### 当前时间格式转化
+
+获取当前时间并将其转换为字符串格式"YYYY-MM-DD HH:mm:ss"
+
+```js
+export function getCurrentTime() {
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    var day = ('0' + currentDate.getDate()).slice(-2);
+    var hours = ('0' + currentDate.getHours()).slice(-2);
+    var minutes = ('0' + currentDate.getMinutes()).slice(-2);
+    var seconds = ('0' + currentDate.getSeconds()).slice(-2);
+    
+    var currentTimeString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+    return currentTimeString;
+}
+```
+
+
+
+#### 秒数转化成“时：分：秒”
+
+```js
+//传入数据为   xxxx 秒    转化成   00:00:00
+const formatTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const formattedHours = hours.toString().padStart(2, '0');
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+};
+```
+
+
+
+## 第三方库功能
+
+#### markDown编辑、解析
+
+1、安装组件库
+
+```js
+//第一种方法：使用npm安装整个组件
+cnpm i -S vue-meditor
+//第二种方法：当做公共组件使用
+```
+
+2、在项目中使用
+
+```js
+//简单版
+import Markdown from 'vue-meditor'  
+
+//专业版
+import { MarkdownPro } from 'vue-meditor'
+
+//预览组件
+import { MarkdownPreview } from 'vue-meditor'
+```
+
+3、在页面中使用
+
+```js
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -49,7 +49,7 @@
 
 ​	webpack本身只能处理js、json等资源，其他资源css等需要借助loader，webpack才能解析
 
-**4、plugins（插件）**、
+**4、plugins（插件）**
 
 ​	扩展webpack的功能
 

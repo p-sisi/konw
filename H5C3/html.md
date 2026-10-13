@@ -95,6 +95,9 @@ border-left/right/top/bottom: 10px dashed red   //单独设置某一边
 border-radius: 半径长度（决定边框有多弯）   //圆角边框
 
 border-collapse: collapse;   //合并相邻的边框
+
+border-left: 5px solid;
+border-image: linear-gradient(to bottom, #b545ee, rgba(#000,0.0)) 1; //边框背景色渐变
 ```
 
 设置圆形：基于正方形，圆角边框为边长的一半或50%
@@ -118,15 +121,44 @@ border-collapse: collapse;   //合并相邻的边框
 
 
 
+#### 标签
+
+**1、标签属性**
+
+- v-html
+
+  用于将数据做为HTML插入到DOM元素中。将数据解释为纯HTML而不是文本，更新元素的innerHTML，动态的渲染HTML内容。
+
+  ```vue
+  <div v-html="你好<br/>你也好"></div>
+  
+  //最后会展示为：（html内容会被解析出来）
+  你好
+  你也好
+  ```
+
+- v-text
+
+  用于将数据解释为纯文本，即使包含标签也会直接展示。（与v-html相反）
+
+
+
 #### 图片
 
 ##### 1、标签
 
 ```js
-<div><img alt="加载失败时显示的内容" title="光标移上去显示的内容"/><div/>   
-   该标签需要使用div等标签嵌套CIA生效
-想要给整个浏览器都设置上背景时，注意要将html和body的高度设为100%，才能在body中插入图片
+<div><img src="图片地址" alt="加载失败时显示的内容" title="光标移上去显示的内容"/ ><div/>   
+- 该标签需要使用div等标签嵌套CIA生效
+- 想要给整个浏览器都设置上背景时，注意要将html和body的高度设为100%，才能在body中插入图片
 ```
+
+- src要求：相对路径：相对于当前HTML文件的路径；绝对路径：完整的URL地址
+- 如果src值为空，浏览器将显示一个损坏的图像图标
+- 如果使用的是变量渲染src，则使用相对路径： ./src/assets/image/evaluate-0-selected.png
+- 如果使用的不是变量，则使用：../assets/image/evaluate-0-selected.png
+
+
 
 ##### 2、css样式
 
@@ -195,58 +227,99 @@ border-collapse: collapse;   //合并相邻的边框
   - (3)、在css文件中引入该字体文件，找到压缩包中的style.css文件，复制其中的代码从开头到block
   - (4)、在标签中输入字体图标，并在css中设置该字体图标的font-family为icomoon
 
-- 阿里矢量图标库使用步骤（重要！！！！）：
+- 阿里矢量图标库使用步骤（重要！！！！）
 
-- 一般使用阿里图标库，UI会将图标上传到公司的图标项目中，加入到该 项目中后，按照阿里图标库的使用方法
+  - 一般使用阿里图标库，UI会将图标上传到公司的图标项目中，加入到该 项目中后，按照阿里图标库的使用方法
 
-  - 在官方图标库中将想要的图标加入购物车 ,点击右侧购物车加入到项目中，
+    - 在官方图标库中将想要的图标加入购物车 ,点击右侧购物车加入到项目中，
 
-  - 在项目中选择合适的图标，若颜色不合适可以到购物车中编辑颜色，选择合适的图标加入购物车
+    - 在项目中选择合适的图标，若颜色不合适可以到购物车中编辑颜色，选择合适的图标加入购物车
 
-  - 点击购物车，将加入购物车中的图标下载至本地
+    - 点击购物车，将加入购物车中的图标下载至本地
 
-  - 解压好压缩包，有用的两个文件为 **iconfont.css** 和 **iconfont.ttf** ，将这两个文件复制到“**src/assets/font/**”下面
+    - 解压好压缩包，有用的两个文件为 **iconfont.css** 和 **iconfont.ttf** ，将这两个文件复制到“**src/assets/font/**”下面
 
-  - 在项目的**index.html**文件中引入字体图标样式表:    即   iconfont.css  文件，例如（地址是指在项目中该文件的位置）
+    - 在项目的**index.html**文件中引入字体图标样式表:    即   iconfont.css  文件，例如（地址是指在项目中该文件的位置）
 
-    <link rel="stylesheet" href="./src/assets/iconfont/iconfont.css"/>
+      <link rel="stylesheet" href="./src/assets/iconfont/iconfont.css"/>
 
-  - 在项目中调用图标，  在标签中设置合适的类名 ，
+    - 在项目中调用图标，  在标签中设置合适的类名 ，
 
-    <span class="iconfont icon_favorites-fill" >
-  
-    经常使用span标签来存着这个图标，第一个类名iconfont都一样必须要写，第二个类名用哪个图标，就用它的类名
-  
-  - 要是想修改小图标的样式，可以用类选择器.iconfont{ }来修改
-  
-  - ```css
-    //iconfont.css文件
-    @font-face {
-      font-family: "iconfont"; /* Project id  */
-      src: url('iconfont.ttf?t=1695622278285') format('truetype');
-    }
+      <span class="iconfont icon_favorites-fill" >
     
-    .ai-iconfont {   //一般会更改这里的ai-iconfont类名为自定义类名，可以避免不同项目图标产生冲突
-      font-family: "iconfont" !important;
-      font-size: 16px;
-      font-style: normal;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+      经常使用span标签来存着这个图标，第一个类名iconfont都一样必须要写，第二个类名用哪个图标，就用它的类名
     
-    .icon-icon-delete:before {  //icon-icon-delete 为图标的类名，可自定义更改，使用时同样更改
-      content: "\e7a5";
-    }
+    - 要是想修改小图标的样式，可以用类选择器.iconfont{ }来修改
     
-    .icon-icon-aiwriting:before {
-      content: "\e7a7";
-    }
-    
-    //在组件中使用图标
-    <i class="ai-iconfont icon-icon-aiwriting" style=""></i>
-    ```
+    - ```css
+      //iconfont.css文件
+      @font-face {
+        font-family: "iconfont"; /* Project id  */
+        src: url('iconfont.ttf?t=1695622278285') format('truetype');
+      }
+      
+      .ai-iconfont {   //一般会更改这里的ai-iconfont类名为自定义类名，可以避免不同项目图标产生冲突
+        font-family: "iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      .icon-icon-delete:before {  //icon-icon-delete 为图标的类名，可自定义更改，使用时同样更改
+        content: "\e7a5";
+      }
+      
+      .icon-icon-aiwriting:before {
+        content: "\e7a7";
+      }
+      
+      //在组件中使用图标
+      <i class="ai-iconfont icon-icon-aiwriting" style=""></i>
+      ```
+
+##### 6、SVG图片
+
+- 在阿里图标库中可以直接复制svg代码，该svg代码可以直接当成标签插入模板中
+
+- svg :  width   height  属性可以设置图标大小
+
+- path：   fill  属性设置图标颜色
+
+- 当成正常的标签来使用
+
+- 一般将svg代码放到静态资源文件夹中，在模板中当成img使用
+
+  ```vue
+  1、asset文件中，将svg代码复制到新建的文件中，命名为   xxxx.svg
+  2、模板中使用
+  <div class="clear-context-button" @click="$emit('clear')">
+      <img :src="CLEAR" alt="" class="normal-image">
+      <img :src="CLEAR_HOVER" alt="" class="hover-image">
+  </div>
   
-  - 
+  import CLEAR from '@/assets/image/clear.svg'
+  import CLEAR_HOVER from '@/assets/image/clear-hover.svg'
+  
+  3、如果有hover态，复制两个fill不同的svg照片，通过类名来控制显隐
+  .clear-context-button {
+      cursor: pointer;
+  
+      .hover-image {
+        display: none;
+      }
+      &:hover .hover-image {
+        display: block;
+      }
+      &:hover .normal-image {
+        display: none;
+      }
+  }
+  ```
+
+  
+
+
 
 
 
@@ -284,6 +357,22 @@ border-collapse: collapse;   //合并相邻的边框
   overflow: hidden; /* 溢出部分隐藏 */
 }
 ```
+
+**文字背景颜色**
+
+```js
+width: 100%;
+text-align: center; /* 文字水平居中 */
+font-size: 40px;
+background: linear-gradient(to bottom, #f89c84, #eee6df); /* 设置渐变背景 */
+-webkit-background-clip: text; /* 使背景仅在文字区域可见，适用于WebKit浏览器 */
+color: transparent; /* 使文字透明 */
+display: inline-block; /* 使渐变背景应用到文字 */
+```
+
+
+
+
 
 
 

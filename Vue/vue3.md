@@ -6,7 +6,8 @@
 
 ```js
 //使用vite构建工具
-npm init vite@latest
+方法一：npm init vite@latest  //在当前文件夹下新建文件夹创建vue3项目，需要创建目录文件
+方法二：vue create .    // 在当前文件夹下创建vue3项目，不创建新的目录
 //接下来按照提示输入项目名，选择vue、ts语言
 
 //创建完成后进入项目目录
@@ -257,9 +258,13 @@ setup(){
 
 ##### 6、watch
 
-作用：与vue2一样，监视某个属性，监视到它修改了之后进行一些操作。
+**作用：**监听数据变化并执行相应操作
 
-vue2中写法：
+​			可以监听数据对象、计算属性、ref对象等
+
+​           与vue2一样，监视某个属性，监视到它修改了之后进行一些操作。
+
+**vue2中写法：**
 
 ```js
 watch:{
@@ -269,21 +274,40 @@ watch:{
 }
 ```
 
-vue3中变成了组合式API
+**vue3中变成了组合式API**
+
+- 语法：
+
+  watch（
+
+  ​	surce，
+
+  ​	callback，
+
+  ​	options
+
+  ）
 
 ```js
 import {watch} from 'vue'
 set(){
-    //监视一个响应式基本数据
-    watch(sum,(newValue,oldVlaue) => {
-         console.log('sum的值变化了',newValue,oldValue)
-	},{immediate:true,deep:true}) //监听sum值，后面是回调
-    //第三个参数是配置项
+    const sum = ref();
+    //监视一个ref对象
+    watch(
+        sum,
+        (newValue,oldVlaue) => {    //监听sum值，变化时执行的回调
+         	console.log('sum的值变化了',newValue,oldValue)
+		},
+        { immediate:true, deep:true}     //是配置项：立即执行，深度监听.....
+    ) 
     
-    //监视多个响应式基本数据
-    watch([sum,msg],(newValue,oldVlaue) => {
-         console.log('sum的值变化了',newValue,oldValue)
-	})//newValue和oldValue是以数组的形式存在的，分别对应前面监听啥的属性
+    //监视多个响应式数据
+    watch(
+        [sum,msg],
+        (newValue,oldVlaue) => {
+         	console.log('sum的值变化了',newValue,oldValue)
+		} //newValue和oldValue是以数组的形式存在的，分别对应前面监听啥的属性
+    )
     
     //监试一个响应式对象数据的“全部属性"
     //注意：此处无法正确获取oldVlaue，强制开了深度监视（deep配置失效）
@@ -292,18 +316,24 @@ set(){
 	})
     
     //监视对象数据的某些属性
-     watch([()=>person.age,()=>person.name],(newValue,oldVlaue) => {
-         console.log('person的值变化了',newValue,oldValue)
-	})
+     watch(
+         [()=>person.age,()=>person.name],
+         (newValue,oldVlaue) => {
+         	console.log('person的值变化了',newValue,oldValue)
+		}
+     )
     
     //特殊情况  person{name，jib{}}
-     watch(()=>person.job,(newValue,oldVlaue) => {
-         console.log('sum的值变化了',newValue,oldValue)
-	},{deep:true})   //监视对象里面的对象，deep配置有效
-}
+     watch(
+         ()=>person.job,
+         (newValue,oldVlaue) => {
+         	console.log('sum的值变化了',newValue,oldValue)
+		 },{deep:true})   //监视对象里面的对象，deep配置有效
+	}
 ```
 
-
+- 注意：
+  - watch监听对象可以是一个属性，也可以监听一个函数的返回值，如果监听的是ref对象建议直接监听，而不是监听返回值，监听函数返回值可能会导致this指向问题
 
 
 
@@ -323,8 +353,6 @@ set(){
     })//immediate配置项默认为ture
 }
 ```
-
-
 
 
 
@@ -361,7 +389,7 @@ set(){
 ​	unmounted ======onUnmounted
 
 ```js
-import {mounte } from 'vue'  //所有组合式API都要引入，都在setup中写
+import { mounte } from 'vue'  //所有组合式API都要引入，都在setup中写
 setup(){
     mounte(( )=> {
         回调函数
