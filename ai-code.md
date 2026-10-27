@@ -1,22 +1,20 @@
 # 本文件将记录AI使用历程
 
+# CC Switch
 
-
-## CC Switch
-
-#### **作用**
+### **作用**
 
 CC-Switch 是一款桌面应用，用于管理 Claude Code 的 API 配置、MCP 服务器、Skills 和 Prompts。
 
-#### **下载**
+### **下载**
 
 https://github.com/farion1231/cc-switch/releases/tag/v3.11.0  
 
 
 
-## Claude Code
+# Claude Code
 
-#### **下载**
+### **下载**
 
 官方文档：https://code.claude.com/docs/zh-CN/quickstart
 
@@ -51,7 +49,7 @@ claude --version
 	claude --dangerously-skip-permissions --resume
 	```
 
-#### Skills
+### Skills
 
 1. 什么是skills
 
@@ -168,7 +166,7 @@ claude --version
    ...
    ```
 
-#### Agent
+### Agent
 
 1、理解
 
@@ -187,7 +185,7 @@ Agent是claude的子代理
 位置：项目根目录/.claude/skills/
 ```
 
-#### **MCP**
+### **MCP**
 
 1、理解
 
@@ -219,15 +217,15 @@ MCP 采用经典的**客户端-服务器架构**，主要由三个角色协同�
 		- 返回结果：GitHub MCP Server将issue数据返回给Claude Code
 		- 生成回答：Claude Code整合数据，最终生成我们可以理解的自然语言
 
-#### **Agent Skills 和 MCP 的本质区别**
+- **Agent Skills 和 MCP 的本质区别**
 
 MCP决定了AI“能做什么”（行动力），Skills决定了AI“知道怎么做得更好”（专业度）
 
-#### Everything Claude Code
+- **Everything Claude Code**
 
 生产级 agents、skills、hooks、commands、rules 和 MCP 配置
 
-### 获取claude最高权限的命令
+- **获取claude最高权限的命令**
 
 claude --dangerously-skip-permissions --resume
 
@@ -314,7 +312,7 @@ figma是个/make的AI生成的原型页面
 
 
 
-## Vibe-kanban
+# Vibe-kanban
 
 - **作用**
 
@@ -332,7 +330,7 @@ figma是个/make的AI生成的原型页面
 
 
 
-## Superpower
+# Superpower
 
 - **作用**
 
@@ -397,7 +395,7 @@ figma是个/make的AI生成的原型页面
 
     
 
-## Open Claw
+# Open Claw
 
 教程：https://cloud.tencent.com/developer/article/2624973
 
@@ -424,7 +422,7 @@ figma是个/make的AI生成的原型页面
   
   
   
-## open code
+# open code
 
 - **下载**
 
@@ -668,7 +666,7 @@ figma是个/make的AI生成的原型页面
 
 
 
-## AI优势和局限
+# AI优势和局限
 
 - 优势
   - 当你有一个简单的想法，AI能帮你快速验证
@@ -677,16 +675,6 @@ figma是个/make的AI生成的原型页面
 - 局限
   - AI生成的代码还是需要检查，不能完全盲目信任
   - 创造性工作欠缺：架构设计、技术选型、用户体验设计，还是得人来
-
-
-
-## AI应用
-
-
-
-
-
-# RAG
 
 
 
@@ -840,9 +828,9 @@ figma是个/make的AI生成的原型页面
 
 
 
-## 概念
+# 概念
 
-### 大模型
+## 大模型
 
 **大模型训练**
 
@@ -882,7 +870,7 @@ API地址(Anthropic格式): https://queue.starlightness.tech/api/anthropic/v1/me
 
 
 
-### LLM
+## LLM
 
 LLM（large language model），大语言模型。简单说，它就是一个**用海量文本训练出来的、能理解和生成自然语言的 AI 模型**。你输入一段文字（提示词），它预测并输出接下来最可能出现的文字，从而完成对话、写作、翻译、总结、编程等任务。
 
@@ -908,13 +896,13 @@ LLM（large language model），大语言模型。简单说，它就是一个**�
 
 
 
-### token
+## token
 
 **Token 是模型处理文本的最小单位**，不等于字，也不等于词。标点、空格、数字都可能单独成 token。
 
 
 
-### Temperature（温度）
+## Temperature（温度）
 
 Temperature 控制**采样时的随机性**，也就是“选下一个 token 时有多大胆”。
 
@@ -933,7 +921,15 @@ Temperature 控制**采样时的随机性**，也就是“选下一个 token 时
 
 
 
-### prompt
+## 提示词工程
+
+- N-gram
+
+
+
+
+
+## prompt
 
 deepseek的官方提示词库：https://api-docs.deepseek.com/zh-cn/prompt-library/
 
@@ -961,7 +957,7 @@ deepseek的官方提示词库：https://api-docs.deepseek.com/zh-cn/prompt-libra
 
 
 
-### 思维链（chain-of-thought，CoT）
+## 思维链（chain-of-thought，CoT）
 
 让模型把推理过程写出来，再给答案
 
@@ -998,7 +994,7 @@ Assistant:
 
 
 
-### Few-shot Prompting（少样本提示）
+## Few-shot Prompting（少样本提示）
 
 **在提示里给几个“输入 → 输出”的示例，让模型照着做。**
 
@@ -1041,7 +1037,7 @@ User: 判断下面评论的情感，输出 positive 或 negative。
 
 
 
-### Plan-and-Execute（计划与执行）
+## Plan-and-Execute（计划与执行）
 
 **核心逻辑**：先通盘规划，再逐步执行，把“思考”和“做事”拆开。
 
@@ -1060,7 +1056,45 @@ Plan-and-Execute 的解法是把任务拆成两个明确阶段：
 
 
 
-### Self-Ask（自问自答）
+
+
+# 先算 **番** 再算**单独加分**
+
+## 最低分
+
+- 鸡胡（没杠、有顺子）：**吃谁的谁给1**
+
+## 牌型的加番
+
+- 清一色：**2番**
+
+- 大对子（没有顺子）：**1番**
+
+- 七对（七个对子）：**1番**
+
+- 龙七对（六个对子，一个没打出来的杠）：**2番**
+- 天胡：**4番**
+
+### 单独加番
+- 杠上花、杠上炮（杠的人不能算杠分）：**2番**
+- 普通杠（胡牌时只要有四张一样的都算杠加番，但是不一定加分）：**1番**
+
+- 海底（牌库最后一张胡）：**1番**
+
+- 单吊（自己手里只有一张牌）：**1番**
+
+### 单独加分
+
+- 自摸：**场上人+1**
+
+- 暗杆（自己摸四张）：**场上人+2**
+
+- 普通杠（自己有三张，别人打一张）：**打的人＋2**
+- 碰杠（碰了三张，自己再摸一张）：**场上人+1**
+
+
+
+## Self-Ask（自问自答）
 
 **核心逻辑**：遇到复杂问题，先反问自己“要回答这个，我还需要知道什么？”，拆成子问题逐个查。
 
@@ -1078,7 +1112,7 @@ Self-Ask 解决的是**组合性鸿沟**问题：模型可能知道每个单独�
 
 
 
-### Thinking and Self-Reflection（思考与自我反思）
+## Thinking and Self-Reflection（思考与自我反思）
 
 **核心逻辑**：生成结果后，让 Agent 自己（或另一个 Agent）批评自己，然后根据批评改进，循环直到满意。
 
@@ -1096,7 +1130,7 @@ Self-Ask 解决的是**组合性鸿沟**问题：模型可能知道每个单独�
 
 
 
-### ReAct（Reasoning and Acting）
+## ReAct（Reasoning and Acting）
 
 Agent 架构（推理 + 行动循环），类似于Vue的地位。**ReAct 有明确的适用边界。** 它适合需要“边做边想”的任务：查询、检索、多步问答、需要工具交互的场景。
 
@@ -1113,7 +1147,7 @@ ReAct 的循环是：**Thought → Action → Observation → (重复) → Final
 
 **在生产环境中，ReAct 往往只是其中一层。** 企业级 Agent 通常采用混合架构：核心流程和红线规则用确定性代码写死，具体推理交给 ReAct 循环，再加上安全门（SafetyGate）、审计日志（WhyLog）、人在环路等生产级组件。微软的 Azure 架构评审也建议：用模块化的 ReAct 风格设计，但要在工具之间加入验证层和护栏。
 
-#### ReAct 的提示词格式
+### ReAct 的提示词格式
 
 这是最核心的“语法”。模型需要按照固定结构输出，控制器才能解析。标准格式是：
 
@@ -1148,7 +1182,7 @@ Final Answer: 最终回答
 
 
 
-### JSON Mode（JSON模式）
+## JSON Mode（JSON模式）
 
 **强制模型输出合法的 JSON，而不是一段自然语言。**
 
@@ -1202,7 +1236,7 @@ const completion = await openai.chat.completions.create({
 
 
 
-### chunking（文本分块）
+## chunking（文本分块）
 
 **把长文档切成一段段小文本，分别做 Embedding 存进向量库。**
 
@@ -1246,7 +1280,7 @@ const completion = await openai.chat.completions.create({
 
 
 
-### Embedding（嵌入）
+## Embedding（嵌入）
 
 把文本变成一串数字向量，让“语义相似”的文本在向量空间里距离也近。
 
@@ -1285,7 +1319,7 @@ Embedding 是 **RAG 的地基**。没有它，就没法做语义检索，模型�
 
 
 
-### 向量数据库基础
+## 向量数据库基础
 
 **专门用来存储向量、并快速找出“最相似向量”的数据库**
 
@@ -1316,7 +1350,7 @@ Embedding 是 **RAG 的地基**。没有它，就没法做语义检索，模型�
 
 
 
-### Function Calling/Tool use
+## Function Calling/Tool use
 
 **让模型能“决定调用哪个函数、传什么参数”，但真正执行函数的是你的代码。**
 
@@ -1434,7 +1468,7 @@ Planning 想错只是答案错，**Tool Use 想错是真的动了外部世界**�
 
 
 
-### Agent
+## Agent
 
 - **单 / 多 Agent 阶段会展开的高 star 项目**：
 
@@ -1514,7 +1548,7 @@ Planning 想错只是答案错，**Tool Use 想错是真的动了外部世界**�
 
   这是简化模型，真实系统还要处理记忆读写、工具失败重试等分支。
 
-#### 骨架示例（原生版）
+### 骨架示例（原生版）
 
 这个示例是标准的 ReAct 实现，
 
@@ -1641,7 +1675,7 @@ Thought: 我已经知道答案了
 Final Answer: 北京今天晴，25度，乘以2是50度。
 ```
 
-#### Agent骨架示例（框架版）
+### Agent骨架示例（框架版）
 
 LangChain 是构建 Agent 应用的主流框架，对多种语言都支持
 
@@ -1762,7 +1796,7 @@ LangChain 是构建 Agent 应用的主流框架，对多种语言都支持
   - **结构化输出**：用 Pydantic 定义输出格式，方便程序解析。
   - **人工审核**：在关键步骤加 `human_approval`，防止危险操作。
 
-#### 两者区别
+### 两者区别
 
 | 维度       | 我给你的手写版                              | 你贴的框架版                          |
 | :--------- | :------------------------------------------ | :------------------------------------ |
@@ -1787,7 +1821,7 @@ LangChain 是构建 Agent 应用的主流框架，对多种语言都支持
 | 循环思想         | 推理 + 行动交替           | 推理 + 行动交替（一样）          |
 | 是否叫 ReAct     | 是，论文原义              | 广义上叫，严格说不是             |
 
-### RAG
+## RAG
 
 - **概念**
 
@@ -1866,7 +1900,7 @@ LangChain 是构建 Agent 应用的主流框架，对多种语言都支持
 
 
 
-### 概念与前端类比
+## 概念与前端类比
 
 - **ReAct类比**
 
@@ -1910,7 +1944,7 @@ LangChain 是构建 Agent 应用的主流框架，对多种语言都支持
 
 
 
-### 流式输出(Streaming、SSE、WebSocket)
+## 流式输出(Streaming、SSE、WebSocket)
 
 流式输出（Streaming）是 Agent 产品体验的核心机制。没有它，用户要盯着空白屏幕等十几秒；有了它，字一个一个蹦出来，等待感大幅降低。
 
@@ -1984,7 +2018,7 @@ LangChain 是构建 Agent 应用的主流框架，对多种语言都支持
 
 
 
-## chat-demo
+# chat-demo
 
 - 准备
 
